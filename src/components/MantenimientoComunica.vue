@@ -1,60 +1,64 @@
 <template>
-  <div id="ManteComunicaciones">
+  <div>
+    <!--Contenedor del logo-->
     <div class="logo">
       <router-link to="/">
         <img src="../assets/logo.png" alt="logo.." />
       </router-link>
     </div>
-
-    <div class="contenedor_titulo">
-      <h1 class="titulo animate__animated animate__fadeInDown animate_faster">
-        Comunicaciones
-      </h1>
-    </div>
-    <div class="contenedor_formulario">
-      <form class="formulario" @submit.prevent="buscarActivo">
-        <div>
-          <input
-            v-model="id_seguridad"
-            type="text"
-            id="id_seguridad"
-            name="id_seguridad"
-            placeholder="ACTIVO"
-          />
-        </div>
-        <!--contenedor de la barra de navegacion-->
-        <div id="Pestañas">
-          <nav class="animate__animated animate__fadeInDown animate_faster">
-            <!--Enlaces de las diferentes pestañas de la pagina-->
-            <router-link to="/datosgenerales">Datos Grales.</router-link>
-            <router-link to="/datostecnicos">Datos Técnicos</router-link>
-            <router-link to="/serviceoffering">Service Offerings</router-link>
-            <router-link to="/instancias">Instancias</router-link>
-            <router-link to="/comunicaciones">Comunicaciones</router-link>
-            <router-link to="/seguridad">Seguridad</router-link>
-            <router-link to="/micro">Micro</router-link>
-            <router-link to="/software">Software</router-link>
-          </nav>
-        </div>
-        <div>
-          <label for="ip">IP:</label>
-          <input v-model="formData.ip" type="text" id="ip" name="ip" />
-        </div>
-        <div>
-          <label for="vlan">VLAN:</label>
-          <input v-model="formData.vlan" type="text" id="vlan" name="vlan" />
-        </div>
-        <div>
-          <label for="tipo_ip">Tipo IP:</label>
-          <input
-            v-model="formData.tipo_ip"
-            type="text"
-            id="tipo_ip"
-            name="tipo_ip"
-          />
-        </div>
-        <button type="submit">Cargar Información</button>
-      </form>
+    <div class="contenedor_global">
+      <!--Contenedor de titulo-->
+      <div class="contenedor_titulo">
+        <h1 class="titulo animate__animated animate__fadeInDown animate_faster">
+          Comunicaciones
+        </h1>
+      </div>
+      <!--Contenedor del formulario-->
+      <div class="contenedor_formulario">
+        <form class="formulario" @submit.prevent="buscarActivo">
+          <div>
+            <input
+              v-model="id_seguridad"
+              type="text"
+              id="id_seguridad"
+              name="id_seguridad"
+              placeholder="ACTIVO"
+            />
+          </div>
+          <!--contenedor de la barra de navegacion-->
+          <div id="Pestañas">
+            <nav class="animate__animated animate__fadeInDown animate_faster">
+              <!--Enlaces de las diferentes pestañas de la pagina-->
+              <router-link to="/datosgenerales">Datos Grales.</router-link>
+              <router-link to="/datostecnicos">Datos Técnicos</router-link>
+              <router-link to="/serviceoffering">Service Offerings</router-link>
+              <router-link to="/instancias">Instancias</router-link>
+              <router-link to="/comunicaciones">Comunicaciones</router-link>
+              <router-link to="/seguridad">Seguridad</router-link>
+              <router-link to="/micro">Micro</router-link>
+              <router-link to="/software">Software</router-link>
+            </nav>
+          </div>
+          <div>
+            <label for="ip">IP:</label>
+            <input v-model="formData.ip" type="text" id="ip" name="ip" />
+          </div>
+          <div>
+            <label for="vlan">VLAN:</label>
+            <input v-model="formData.vlan" type="text" id="vlan" name="vlan" />
+          </div>
+          <div>
+            <label for="tipo_ip">Tipo IP:</label>
+            <input
+              v-model="formData.tipo_ip"
+              type="text"
+              id="tipo_ip"
+              name="tipo_ip"
+            />
+          </div>
+          <button type="submit">Cargar Información</button>
+        </form>
+      </div>
     </div>
   </div>
 </template>
@@ -121,6 +125,14 @@ body {
   width: 100%;
   height: auto;
 }
+/* Fondo */
+.contenedor_global {
+  background-color: #ffffff;
+  background-image: url("../assets/water-splash.png");
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  background-size: 100% auto;
+}
 /* Títulos */
 .contenedor_titulo {
   padding: 30px;
@@ -139,7 +151,7 @@ body {
   padding: 20px;
 }
 .contenedor_formulario {
-  padding: 25px 50px 50px 100px;
+  padding: 25px 50px 190px 100px;
 }
 .formulario {
   background: #fff;

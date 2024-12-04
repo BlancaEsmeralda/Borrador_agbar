@@ -1,196 +1,204 @@
 <template>
   <div>
+    <!--Contenedor del logo-->
     <div class="logo">
       <router-link to="/">
         <img src="../assets/logo.png" alt="logo de aguas de barcelona" />
       </router-link>
     </div>
-    <div class="contenedor_titulo">
-      <h1 class="titulo animate__animated animate__fadeInDown animate_faster">
-        Instancias
-      </h1>
-    </div>
-    <div class="contenedor_formulario">
-      <form class="formulario" @submit.prevent="buscarActivo">
-        <div>
-          <input
-            v-model="id_seguridad"
-            type="text"
-            id="id_seguridad"
-            name="id_seguridad"
-            placeholder="ACTIVO"
-          />
-        </div>
-        <button type="submit">Cargar Datos</button>
-        <div id="Pestañas">
-          <nav class="animate__animated animate__fadeInDown animate_faster">
-            <router-link to="/datosgenerales">Datos Grales.</router-link>
-            <router-link to="/datostecnicos">Datos Técnicos</router-link>
-            <router-link to="/serviceoffering">Service Offerings</router-link>
-            <router-link to="/instancias">Instancias</router-link>
-            <router-link to="/comunicaciones">Comunicaciones</router-link>
-            <router-link to="/seguridad">Seguridad</router-link>
-            <router-link to="/micro">Micro</router-link>
-            <router-link to="/software">Software</router-link>
-          </nav>
-        </div>
-        <!--Contenedor de nombre-->
-        <div>
-          <label for="nombre_instancia">Nombre:</label>
-          <input
-            v-model="formData.nombre_instancia"
-            type="text"
-            id="nombre_instancia"
-            name="nombre_insatncia"
-          />
-        </div>
-        <!--contendro entorno-->
-        <div>
-          <label for="entorno_instancia">Entorno:</label>
-          <input
-            v-model="formData.entorno_instancia"
-            type="text"
-            id="entorno_instancia"
-            name="entorno_instancia"
-          />
-        </div>
-        <!--Contendor de citricidad-->
-        <div>
-          <label for="citricidad_intancia">Citricidad:</label>
-          <input
-            v-model="formData.citricidad_intancia"
-            type="text"
-            id="citricidad_intancia"
-            name="citricidad_intancia"
-          />
-        </div>
-        <!--Contendor de aplic-->
-        <div>
-          <label for="aplic_intancia">Aplic:</label>
-          <input
-            v-model="formData.aplic_intancia"
-            type="text"
-            id="aplic_intancia"
-            name="aplic_intancia"
-          />
-        </div>
-        <div>
-          <label for="aplicacion_instancia">Aplicación:</label>
-          <select
-            v-model="formData.aplicacion_instancia"
-            id="aplicacion_instancia"
-            name="aplicacion_instancia"
-          >
-            <option
-              v-for="option in aplicacionOpciones"
-              :key="option.id"
-              :value="option.id"
+    <div class="contenedor_global">
+      <!--Contenedor de titulo-->
+      <div class="contenedor_titulo">
+        <h1 class="titulo animate__animated animate__fadeInDown animate_faster">
+          Instancias
+        </h1>
+      </div>
+      <!--Contenedor del formulario-->
+      <div class="contenedor_formulario">
+        <form class="formulario" @submit.prevent="buscarActivo">
+          <div>
+            <input
+              v-model="id_seguridad"
+              type="text"
+              id="id_seguridad"
+              name="id_seguridad"
+              placeholder="ACTIVO"
+            />
+          </div>
+          <button type="submit">Cargar Datos</button>
+          <!--contenedor de la barra de navegacion-->
+          <div id="Pestañas">
+            <nav class="animate__animated animate__fadeInDown animate_faster">
+              <!--Enlaces de las diferentes pestañas de la pagina-->
+              <router-link to="/datosgenerales">Datos Grales.</router-link>
+              <router-link to="/datostecnicos">Datos Técnicos</router-link>
+              <router-link to="/serviceoffering">Service Offerings</router-link>
+              <router-link to="/instancias">Instancias</router-link>
+              <router-link to="/comunicaciones">Comunicaciones</router-link>
+              <router-link to="/seguridad">Seguridad</router-link>
+              <router-link to="/micro">Micro</router-link>
+              <router-link to="/software">Software</router-link>
+            </nav>
+          </div>
+          <!--Contenedor de nombre-->
+          <div>
+            <label for="nombre_instancia">Nombre:</label>
+            <input
+              v-model="formData.nombre_instancia"
+              type="text"
+              id="nombre_instancia"
+              name="nombre_insatncia"
+            />
+          </div>
+          <!--contendro entorno-->
+          <div>
+            <label for="entorno_instancia">Entorno:</label>
+            <input
+              v-model="formData.entorno_instancia"
+              type="text"
+              id="entorno_instancia"
+              name="entorno_instancia"
+            />
+          </div>
+          <!--Contendor de citricidad-->
+          <div>
+            <label for="citricidad_intancia">Citricidad:</label>
+            <input
+              v-model="formData.citricidad_intancia"
+              type="text"
+              id="citricidad_intancia"
+              name="citricidad_intancia"
+            />
+          </div>
+          <!--Contendor de aplic-->
+          <div>
+            <label for="aplic_intancia">Aplic:</label>
+            <input
+              v-model="formData.aplic_intancia"
+              type="text"
+              id="aplic_intancia"
+              name="aplic_intancia"
+            />
+          </div>
+          <div>
+            <label for="aplicacion_instancia">Aplicación:</label>
+            <select
+              v-model="formData.aplicacion_instancia"
+              id="aplicacion_instancia"
+              name="aplicacion_instancia"
             >
-              {{ option.nombre }}
-            </option>
-          </select>
-        </div>
-        <!--contenedor de it o ot-->
-        <div>
-          <label for="it_ot_instancia">ES IT/OT</label>
-          <input
-            v-model="formData.it_ot_instancia"
-            type="text"
-            name="it_ot_instancia"
-            id="it_ot_instancia"
-          />
-        </div>
+              <option
+                v-for="option in aplicacionOpciones"
+                :key="option.id"
+                :value="option.id"
+              >
+                {{ option.nombre }}
+              </option>
+            </select>
+          </div>
+          <!--contenedor de it o ot-->
+          <div>
+            <label for="it_ot_instancia">ES IT/OT</label>
+            <input
+              v-model="formData.it_ot_instancia"
+              type="text"
+              name="it_ot_instancia"
+              id="it_ot_instancia"
+            />
+          </div>
 
-        <!--contenedor de los checks-->
-        <div class="full-width">
-          <div class="checkboxes">
-            <!--Contenedor de view-->
-            <div>
-              <label for="esviewnex_instancia">Es Viewnex</label>
-              <input
-                v-model="formData.esviewnex_instancia"
-                type="checkbox"
-                name="esviewnex_instancia"
-                id="checkbox"
-              />
-            </div>
-            <!--contenedor de es azure-->
-            <div>
-              <label for="esdeazure_instancia">Es de azure</label>
-              <input
-                v-model="formData.esdeazure_instancia"
-                type="checkbox"
-                name="esdeazure_instancia"
-                id="esdeazure_instancia"
-              />
+          <!--contenedor de los checks-->
+          <div class="full-width">
+            <div class="checkboxes">
+              <!--Contenedor de view-->
+              <div>
+                <label for="esviewnex_instancia">Es Viewnex</label>
+                <input
+                  v-model="formData.esviewnex_instancia"
+                  type="checkbox"
+                  name="esviewnex_instancia"
+                  id="checkbox"
+                />
+              </div>
+              <!--contenedor de es azure-->
+              <div>
+                <label for="esdeazure_instancia">Es de azure</label>
+                <input
+                  v-model="formData.esdeazure_instancia"
+                  type="checkbox"
+                  name="esdeazure_instancia"
+                  id="esdeazure_instancia"
+                />
+              </div>
             </div>
           </div>
-        </div>
-        <!--Contendor de tarifas mes-->
-        <div>
-          <label for="tarifames_intancia">Tarifa mes(€)</label>
-          <input
-            v-model="formData.tarifames_intancia"
-            type="text"
-            name="tarifames_intancia"
-            id="tarifames_intancia"
-          />
-        </div>
-        <!--Contendor de altagestion-->
-        <div>
-          <label for="altagestion_instancia">Alta Gestion</label>
-          <input
-            v-model="formData.altagestion_instancia"
-            type="text"
-            id="altagestion_instancia"
-            name="altagestion_instancia"
-          />
-        </div>
-        <!--Contenedor de baja gestion-->
-        <div>
-          <label for="bajagestion_instancia">Baja Gestión</label>
-          <input
-            v-model="formData.bajagestion_instancia"
-            type="date"
-            id="bajagestion_instancia"
-            name="bajagestion_instancia"
-          />
-        </div>
-        <!--Contenedor de detalle-->
-        <div>
-          <label for="detalle_instancia">DETALLE</label>
-          <input
-            v-model="formData.detalle_instancia"
-            type="text"
-            id="detalle_instancia"
-            name="detalle_instancia"
-          />
-        </div>
-        <!--Contendor de motivo no festion de it-->
-        <div>
-          <label for="motivo_no_gestion_it">Motivo No gestión IT</label>
-          <input
-            v-model="formData.motivo_no_gestion_it"
-            type="text"
-            id="motivo_no_gestion_it"
-            name="motivo_no_gestion_it"
-          />
-        </div>
+          <!--Contendor de tarifas mes-->
+          <div>
+            <label for="tarifames_intancia">Tarifa mes(€)</label>
+            <input
+              v-model="formData.tarifames_intancia"
+              type="text"
+              name="tarifames_intancia"
+              id="tarifames_intancia"
+            />
+          </div>
+          <!--Contendor de altagestion-->
+          <div>
+            <label for="altagestion_instancia">Alta Gestion</label>
+            <input
+              v-model="formData.altagestion_instancia"
+              type="text"
+              id="altagestion_instancia"
+              name="altagestion_instancia"
+            />
+          </div>
+          <!--Contenedor de baja gestion-->
+          <div>
+            <label for="bajagestion_instancia">Baja Gestión</label>
+            <input
+              v-model="formData.bajagestion_instancia"
+              type="date"
+              id="bajagestion_instancia"
+              name="bajagestion_instancia"
+            />
+          </div>
+          <!--Contenedor de detalle-->
+          <div>
+            <label for="detalle_instancia">DETALLE</label>
+            <input
+              v-model="formData.detalle_instancia"
+              type="text"
+              id="detalle_instancia"
+              name="detalle_instancia"
+            />
+          </div>
+          <!--Contendor de motivo no festion de it-->
+          <div>
+            <label for="motivo_no_gestion_it">Motivo No gestión IT</label>
+            <input
+              v-model="formData.motivo_no_gestion_it"
+              type="text"
+              id="motivo_no_gestion_it"
+              name="motivo_no_gestion_it"
+            />
+          </div>
 
-        <!--Contenedor comentarios-->
-        <div class="full-width">
-          <label for="comentarios">Comentarios</label>
-          <input
-            v-model="formData.comentarios"
-            type="text"
-            name="comentarios"
-            id="comentarios"
-          />
-        </div>
-      </form>
+          <!--Contenedor comentarios-->
+          <div class="full-width">
+            <label for="comentarios">Comentarios</label>
+            <input
+              v-model="formData.comentarios"
+              type="text"
+              name="comentarios"
+              id="comentarios"
+            />
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </template>
+
 <script>
 import axios from "axios";
 export default {
@@ -308,6 +316,14 @@ body {
 .logo img {
   width: 100%;
   height: auto;
+}
+/* Fondo */
+.contenedor_global {
+  background-color: #ffffff;
+  background-image: url("../assets/water-splash.png");
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  background-size: 100% auto;
 }
 /* Títulos */
 .contenedor_titulo {

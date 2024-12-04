@@ -1,219 +1,223 @@
 <template>
   <div>
+    <!--Contenedor del logo-->
     <div class="logo">
       <router-link to="/">
         <img src="../assets/logo.png" alt="logo " />
       </router-link>
     </div>
-    <div class="contenedor_titulo">
-      <h1 class="titulo animate__animated animate__fadeInDown animate_faster">
-        Datos Técnicos
-      </h1>
-    </div>
-    <!--Contenedor del formulario externo-->
-    <div class="contenedor_formulario_dTecnicos">
-      <!--Contenedor del formulario-->
-      <form class="formulario_dTecnicos" @submit.prevent="buscarActivo">
-        <!--Input del nombre del activo-->
-        <input
-          v-model="id_seguridad"
-          type="text"
-          id="id_seguridad"
-          name="id_seguridad"
-          placeholder="ACTIVO"
-        />
-        <button type="submit">Prueba con la api</button>
-        <!--contenedor de la barra de navegación-->
-        <div id="Pestañas">
-          <nav class="animate__animated animate__fadeInDown animate_faster">
-            <!--Enlaces de las diferentes pestañas de la pagina-->
-            <router-link to="/datosgenerales">Datos Grales.</router-link>
-            <router-link to="/datostecnicos">Datos Técnicos</router-link>
-            <router-link to="/serviceoffering">Service Offerings</router-link>
-            <router-link to="/instancias">Instancias</router-link>
-            <router-link to="/comunicaciones">Comunicaciones</router-link>
-            <router-link to="/seguridad">Seguridad</router-link>
-            <router-link to="/micro">Micro</router-link>
-            <router-link to="/software">Software</router-link>
-          </nav>
-        </div>
-        <!--Contenedor de modelo-->
-        <div>
-          <label for="modelo">Modelo:</label>
-          <select v-model="formData.modelo" id="opcionesModelo" name="modelo">
-            <option
-              v-for="option in opcionesModelo"
-              :key="option.id"
-              :value="option.id"
+    <div class="contenedor_global">
+      <!--Contenedor del titulo-->
+      <div class="contenedor_titulo">
+        <h1 class="titulo animate__animated animate__fadeInDown animate_faster">
+          Datos Técnicos
+        </h1>
+      </div>
+      <!--Contenedor del formulario externo-->
+      <div class="contenedor_formulario_dTecnicos">
+        <!--Contenedor del formulario-->
+        <form class="formulario_dTecnicos" @submit.prevent="buscarActivo">
+          <!--Input del nombre del activo-->
+          <input
+            v-model="id_seguridad"
+            type="text"
+            id="id_seguridad"
+            name="id_seguridad"
+            placeholder="ACTIVO"
+          />
+          <button type="submit">Prueba con la api</button>
+          <!--contenedor de la barra de navegación-->
+          <div id="Pestañas">
+            <nav class="animate__animated animate__fadeInDown animate_faster">
+              <!--Enlaces de las diferentes pestañas de la pagina-->
+              <router-link to="/datosgenerales">Datos Grales.</router-link>
+              <router-link to="/datostecnicos">Datos Técnicos</router-link>
+              <router-link to="/serviceoffering">Service Offerings</router-link>
+              <router-link to="/instancias">Instancias</router-link>
+              <router-link to="/comunicaciones">Comunicaciones</router-link>
+              <router-link to="/seguridad">Seguridad</router-link>
+              <router-link to="/micro">Micro</router-link>
+              <router-link to="/software">Software</router-link>
+            </nav>
+          </div>
+          <!--Contenedor de modelo-->
+          <div>
+            <label for="modelo">Modelo:</label>
+            <select v-model="formData.modelo" id="opcionesModelo" name="modelo">
+              <option
+                v-for="option in opcionesModelo"
+                :key="option.id"
+                :value="option.id"
+              >
+                {{ option.nombre }}
+              </option>
+            </select>
+          </div>
+          <!--Contenedor de fabricante-->
+          <div>
+            <label for="fabricante">Fabricante:</label>
+            <input
+              v-model="formData.fabricante"
+              type="text"
+              id="fabricante"
+              name="fabricante"
+            />
+          </div>
+          <!--Contenedor de numero de serie-->
+          <div>
+            <label for="numserie"> Número de serie:</label>
+            <input
+              v-model="formData.numserie"
+              type="text"
+              id="numserie"
+              name="numserie"
+            />
+          </div>
+          <!--Contenedor de modelo antiguo-->
+          <div class="modelo_antiguo">
+            <label for="modelo_antiguo">Modelo(campo antiguo):</label>
+            <input
+              v-model="formData.modelo_antiguo"
+              type="text"
+              id="modeloantiguo"
+              name="modeloantiguo"
+            />
+          </div>
+          <!--Contenedor de RAM-->
+          <div class="ram-sockets">
+            <label for="ram">RAM(GB):</label>
+            <input v-model="formData.ram" type="text" id="ram" name="ram" />
+          </div>
+          <!--Contenedor de Sockets-->
+          <div>
+            <label for="core-sockets">Sockets:</label>
+            <input
+              v-model="formData.sockets"
+              type="text"
+              id="sockets"
+              name="sockets"
+            />
+          </div>
+          <!--Contenedor de cores por socket-->
+          <div>
+            <label for="coresocket">Cores por Socket:</label>
+            <input
+              v-model="formData.coresocket"
+              type="text"
+              id="coresocket"
+              name="coresocket"
+            />
+          </div>
+
+          <!--Seccion del sistema operativo-->
+          <div class="full-width">
+            <h2 class="subtitulos">Sistema operativo</h2>
+          </div>
+          <div>
+            <label for="sis_operativo">Sistema_operativo(Versión):</label>
+            <select
+              v-model="formData.sis_operativo"
+              id="sis_operativo"
+              name="sis_operativo"
             >
-              {{ option.nombre }}
-            </option>
-          </select>
-        </div>
-        <!--Contenedor de fabricante-->
-        <div>
-          <label for="fabricante">Fabricante:</label>
-          <input
-            v-model="formData.fabricante"
-            type="text"
-            id="fabricante"
-            name="fabricante"
-          />
-        </div>
-        <!--Contenedor de numero de serie-->
-        <div>
-          <label for="numserie"> Número de serie:</label>
-          <input
-            v-model="formData.numserie"
-            type="text"
-            id="numserie"
-            name="numserie"
-          />
-        </div>
-        <!--Contenedor de modelo antiguo-->
-        <div class="modelo_antiguo">
-          <label for="modelo_antiguo">Modelo(campo antiguo):</label>
-          <input
-            v-model="formData.modelo_antiguo"
-            type="text"
-            id="modeloantiguo"
-            name="modeloantiguo"
-          />
-        </div>
-        <!--Contenedor de RAM-->
-        <div class="ram-sockets">
-          <label for="ram">RAM(GB):</label>
-          <input v-model="formData.ram" type="text" id="ram" name="ram" />
-        </div>
-        <!--Contenedor de Sockets-->
-        <div>
-          <label for="core-sockets">Sockets:</label>
-          <input
-            v-model="formData.sockets"
-            type="text"
-            id="sockets"
-            name="sockets"
-          />
-        </div>
-        <!--Contenedor de cores por socket-->
-        <div>
-          <label for="coresocket">Cores por Socket:</label>
-          <input
-            v-model="formData.coresocket"
-            type="text"
-            id="coresocket"
-            name="coresocket"
-          />
-        </div>
+              <option
+                v-for="option in opciones_sis_operativo"
+                :key="option.id"
+                :value="option.id"
+              >
+                {{ option.nombre }}
+              </option>
+            </select>
+          </div>
+          <div>
+            <label for="generacion_so">Generación S.O</label>
+            <input
+              v-model="formData.generacion_so"
+              type="text"
+              id="generacion_so"
+              name="generacion_so"
+            />
+          </div>
 
-        <!--Seccion del sistema operativo-->
-        <div class="full-width">
-          <h2 class="subtitulos">Sistema operativo</h2>
-        </div>
-        <div>
-          <label for="sis_operativo">Sistema_operativo(Versión):</label>
-          <select
-            v-model="formData.sis_operativo"
-            id="sis_operativo"
-            name="sis_operativo"
-          >
-            <option
-              v-for="option in opciones_sis_operativo"
-              :key="option.id"
-              :value="option.id"
+          <div>
+            <label for="sis_Operativo_pla">Sistema Operativo(Plataforma)</label>
+            <select
+              v-model="formData.sis_Operativo_pla"
+              name="sis_Operativo_pla"
+              id="sis_Operativo_pla"
             >
-              {{ option.nombre }}
-            </option>
-          </select>
-        </div>
-        <div>
-          <label for="generacion_so">Generación S.O</label>
-          <input
-            v-model="formData.generacion_so"
-            type="text"
-            id="generacion_so"
-            name="generacion_so"
-          />
-        </div>
+              <option
+                v-for="option in opciones_sis_Operativo_pla"
+                :key="option.id"
+                value="option.id"
+              >
+                {{ option.nombre }}
+              </option>
+            </select>
+          </div>
 
-        <div>
-          <label for="sis_Operativo_pla">Sistema Operativo(Plataforma)</label>
-          <select
-            v-model="formData.sis_Operativo_pla"
-            name="sis_Operativo_pla"
-            id="sis_Operativo_pla"
-          >
-            <option
-              v-for="option in opciones_sis_Operativo_pla"
-              :key="option.id"
-              value="option.id"
-            >
-              {{ option.nombre }}
-            </option>
-          </select>
-        </div>
+          <div>
+            <label for="servicePack">Service Pack:</label>
+            <input
+              v-model="formData.servicePack"
+              type="text"
+              id="servicePack"
+              name="servicePack"
+            />
+          </div>
+          <div class="full-width">
+            <h2 class="subtitulos">Identificación de la red</h2>
+          </div>
 
-        <div>
-          <label for="servicePack">Service Pack:</label>
-          <input
-            v-model="formData.servicePack"
-            type="text"
-            id="servicePack"
-            name="servicePack"
-          />
-        </div>
-        <div class="full-width">
-          <h2 class="subtitulos">Identificación de la red</h2>
-        </div>
+          <!--Nombre de del dominio y el nombre del dns-->
+          <div>
+            <label for="dominio">Dominio:</label>
+            <select v-model="formData.dominio" name="dominio" id="dominio">
+              <option
+                v-for="option in opcionDominio"
+                :key="option.id"
+                value="option.id"
+              >
+                {{ option.nombre }}
+              </option>
+            </select>
+          </div>
+          <div>
+            <label for="nombre_dns_NetBios">Nombre DNS/NetBIOS:</label>
+            <input
+              v-model="formData.nombre_dns_NetBios"
+              type="text"
+              id="nombre_dns_NetBios"
+              name="nombre_dns_NetBios"
+            />
+          </div>
 
-        <!--Nombre de del dominio y el nombre del dns-->
-        <div>
-          <label for="dominio">Dominio:</label>
-          <select v-model="formData.dominio" name="dominio" id="dominio">
-            <option
-              v-for="option in opcionDominio"
-              :key="option.id"
-              value="option.id"
-            >
-              {{ option.nombre }}
-            </option>
-          </select>
-        </div>
-        <div>
-          <label for="nombre_dns_NetBios">Nombre DNS/NetBIOS:</label>
-          <input
-            v-model="formData.nombre_dns_NetBios"
-            type="text"
-            id="nombre_dns_NetBios"
-            name="nombre_dns_NetBios"
-          />
-        </div>
-
-        <!--IP-->
-        <div>
-          <label for="ip_principal">IP Principal</label>
-          <input
-            v-model="formData.ip_principal"
-            type="text"
-            id="ip_principal"
-            name="ip_principal"
-          />
-          <label for="ip_nat">IP NAT</label>
-          <input
-            v-model="formData.ip_nat"
-            type="text"
-            id="ip_nat"
-            name="ip_nat"
-          />
-          <label for="ip_backup">IP Backup</label>
-          <input
-            v-model="formData.ip_backup"
-            type="text"
-            id="ip_backup"
-            name="ip_backup"
-          />
-        </div>
-      </form>
+          <!--IP-->
+          <div>
+            <label for="ip_principal">IP Principal</label>
+            <input
+              v-model="formData.ip_principal"
+              type="text"
+              id="ip_principal"
+              name="ip_principal"
+            />
+            <label for="ip_nat">IP NAT</label>
+            <input
+              v-model="formData.ip_nat"
+              type="text"
+              id="ip_nat"
+              name="ip_nat"
+            />
+            <label for="ip_backup">IP Backup</label>
+            <input
+              v-model="formData.ip_backup"
+              type="text"
+              id="ip_backup"
+              name="ip_backup"
+            />
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </template>
@@ -355,6 +359,14 @@ body {
 .logo img {
   width: 100%;
   height: auto;
+}
+/* Fondo */
+.contenedor_global {
+  background-color: #ffffff;
+  background-image: url("../assets/water-splash.png");
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  background-size: 100% auto;
 }
 /* Títulos */
 .contenedor_titulo {

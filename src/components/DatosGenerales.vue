@@ -6,411 +6,427 @@
         <img src="../assets/logo.png" alt="Logo de aguas de barcelona" />
       </router-link>
     </div>
-    <!--Contenedor del titulo datos generales-->
-    <div class="contenedor_titulo">
-      <h1 class="Titulo1 animate__animated animate__fadeInDown animate_faster">
-        Datos Generales
-      </h1>
-    </div>
-    <!--Contenedor del formulario-->
-    <div class="contenedor_formulario">
-      <form class="formulario" @submit.prevent="buscarActivo">
-        <div class="identificador">
-          <input
-            v-model="id_seguridad"
-            type="text"
-            id="id_seguridad"
-            name="id_seguridad"
-            placeholder="ACTIVO"
-          />
-        </div>
-        <!--ESTE BUTTON ES PARA HACER PRUEBAS DE CARGAR JSON ATRAVES DE UNA API-->
-        <button type="submit">Pruebas conexion api</button>
-        <!--Barra del menú de navegación-->
-        <div id="Pestañas">
-          <nav class="animate__animated animate__fadeInDown">
-            <router-link to="/datosgenerales">Datos Grales.</router-link>
-            <router-link to="/datostecnicos">Datos Técnicos</router-link>
-            <router-link to="/serviceoffering">Service Offerings</router-link>
-            <router-link to="/instancias">Instancias</router-link>
-            <router-link to="/comunicaciones">Comunicaciones</router-link>
-            <router-link to="/seguridad">Seguridad</router-link>
-            <router-link to="/micro">Micro</router-link>
-            <router-link to="/software">Software</router-link>
-          </nav>
-        </div>
-        <!--Contenedor del tipo Activo-->
-        <div>
-          <label for="tipoActivo">Tipo Activo:</label>
-          <select
-            v-model="formData.tipoActivo"
-            id="tipoActivo"
-            name="tipoActivo"
-          >
-            <option
-              v-for="opcion in tipoActivoOpciones"
-              :key="opcion.id"
-              :value="opcion.id"
-            >
-              {{ opcion.nombre }}
-            </option>
-          </select>
-        </div>
-        <!--Contenedor del tipo Activo IT-->
-        <div>
-          <label for="tipoActivoIt">Tipo Activo It :</label>
-          <select
-            v-model="formData.tipoActivoIt"
-            id="tipoActivoIT"
-            name="tipoActivoIT"
-          >
-            <option
-              v-for="opcion in tipoActivoItOpciones"
-              :key="opcion.id"
-              :value="opcion.id"
-            >
-              {{ opcion.nombre }}
-            </option>
-          </select>
-        </div>
-        <!--Contenedor del textarea con la clase largo completo-->
-        <div class="full-width">
-          <textarea
-            v-model="formData.textDescripcion"
-            id="textDescripcion"
-            name="textDescripcion"
-            placeholder="Descripción"
-          ></textarea>
-        </div>
-        <!--Contenedor de es IT/OT-->
-        <div>
-          <label for="esITesOT">ES IT/ ES OT:</label>
-          <select v-model="formData.esITesOT" id="esITesOT" name="esITesOT">
-            <option
-              v-for="opcion in esITesOTOpciones"
-              :key="opcion.id"
-              :value="opcion.id"
-            >
-              {{ opcion.nombre }}
-            </option>
-          </select>
-        </div>
-        <!--Contenedor de Entorno-->
-        <div>
-          <label for="entorno">Entorno:</label>
-          <select v-model="formData.entorno" id="entorno" name="entorno">
-            <option
-              v-for="opcion in entornoOpciones"
-              :key="opcion.id"
-              :value="opcion.id"
-            >
-              {{ opcion.nombre }}
-            </option>
-          </select>
-        </div>
-        <!--Contenedor de Categoria-->
-        <div>
-          <label for="categoria">Categoria:</label>
-          <select v-model="formData.categoria" id="categoria" name="categoria">
-            <option
-              v-for="opcion in categoriaOpciones"
-              :key="opcion.id"
-              :value="opcion.id"
-            >
-              {{ opcion.nombre }}
-            </option>
-          </select>
-        </div>
-        <!--Contenedor de Tarifa Mensual Servicio-->
-        <div>
-          <label for="tarifaMensual">Tarifa Mensual Servicio:</label>
-          <input
-            v-model="formData.tarifaMensual"
-            type="text"
-            id="tarifaMensual"
-            name="tarifaMensual"
-          />
-          <span>€/mes</span>
-        </div>
-        <!--Contenedor de Ubicacion-->
-        <div>
-          <label for="ubicacion">Ubicacion:</label>
-          <select v-model="formData.ubicacion" id="ubicacion" name="ubicacion">
-            <option
-              v-for="option in ubicacionOpciones"
-              :key="option.id"
-              :value="option.id"
-            >
-              {{ option.nombre }}
-            </option>
-          </select>
-        </div>
-        <!--Contenedor de Sububicacion-->
-        <div>
-          <label for="sububicacion">Sububicación:</label>
-          <select
-            v-model="formData.sububicacion"
-            id="sububicacion"
-            name="sububicacion"
-          >
-            <option
-              v-for="option in sububicacionOpciones"
-              :key="option.id"
-              :value="option.id"
-            >
-              {{ option.nombre }}
-            </option>
-          </select>
-        </div>
-        <!--Contenedor de comentarios-->
-        <div class="full-width">
-          <label for="comentarios">Comentarios:</label>
-          <textarea
-            v-model="formData.comentarios"
-            id="comentarios"
-            name="comentarios"
-          ></textarea>
-        </div>
-        <!--Contenedor de Rack-->
-        <div>
-          <label for="rack">Rack:</label>
-          <input v-model="formData.rack" type="text" id="rack" name="rack" />
-        </div>
-        <!--Contenedor de Posicion-->
-        <div>
-          <label for="posicion">Posicion:</label>
-          <input
-            v-model="formData.posicion"
-            type="text"
-            id="posicion"
-            name="posicion"
-          />
-        </div>
-        <!--Contenedor de Unidad-->
-        <div>
-          <label for="unidad">Unidad:</label>
-          <input
-            v-model="formData.unidad"
-            type="text"
-            id="unidad"
-            name="unidad"
-          />
-        </div>
-        <!--Contenedor de Empres-->
-        <div>
-          <label for="empresa">Empresa:</label>
-          <select v-model="formData.empresa" id="empresa" name="empresa">
-            <option
-              v-for="option in empresaOpciones"
-              :key="option.id"
-              :value="option.id"
-            >
-              {{ option.nombre }}
-            </option>
-          </select>
-        </div>
-        <!--Contenedor de los checkboxes-->
-        <div class="checkbox-container">
-          <!--Contenedor del primer checkbox-item con gestionadoProveedorOT-->
-          <div class="checkbox-item">
+    <div class="contenedor_global">
+      <!--Contenedor del titulo datos generales-->
+      <div class="contenedor_titulo">
+        <h1
+          class="Titulo1 animate__animated animate__fadeInDown animate_faster"
+        >
+          Datos Generales
+        </h1>
+      </div>
+      <!--Contenedor del formulario-->
+      <div class="contenedor_formulario">
+        <form class="formulario" @submit.prevent="buscarActivo">
+          <div class="identificador">
             <input
-              v-model="formData.gestionadoProveedorOT"
-              type="checkbox"
-              id="gestionadoProveedorOT"
-              name="gestionadoProveedorOT"
+              v-model="id_seguridad"
+              type="text"
+              id="id_seguridad"
+              name="id_seguridad"
+              placeholder="ACTIVO"
             />
-            <label for="gestionadoProveedorOT"
-              >Gestionado por Proveedor OT</label
-            >
           </div>
-          <!--Contenedor del segundo checkbox-item con gestionadoProveedorIT-->
-          <div class="checkbox-item">
+          <!--ESTE BUTTON ES PARA HACER PRUEBAS DE CARGAR JSON ATRAVES DE UNA API-->
+          <button type="submit">Pruebas conexion api</button>
+          <!--Barra del menú de navegación-->
+          <div id="Pestañas">
+            <nav class="animate__animated animate__fadeInDown">
+              <router-link to="/datosgenerales">Datos Grales.</router-link>
+              <router-link to="/datostecnicos">Datos Técnicos</router-link>
+              <router-link to="/serviceoffering">Service Offerings</router-link>
+              <router-link to="/instancias">Instancias</router-link>
+              <router-link to="/comunicaciones">Comunicaciones</router-link>
+              <router-link to="/seguridad">Seguridad</router-link>
+              <router-link to="/micro">Micro</router-link>
+              <router-link to="/software">Software</router-link>
+            </nav>
+          </div>
+          <!--Contenedor del tipo Activo-->
+          <div>
+            <label for="tipoActivo">Tipo Activo:</label>
+            <select
+              v-model="formData.tipoActivo"
+              id="tipoActivo"
+              name="tipoActivo"
+            >
+              <option
+                v-for="opcion in tipoActivoOpciones"
+                :key="opcion.id"
+                :value="opcion.id"
+              >
+                {{ opcion.nombre }}
+              </option>
+            </select>
+          </div>
+          <!--Contenedor del tipo Activo IT-->
+          <div>
+            <label for="tipoActivoIt">Tipo Activo It :</label>
+            <select
+              v-model="formData.tipoActivoIt"
+              id="tipoActivoIT"
+              name="tipoActivoIT"
+            >
+              <option
+                v-for="opcion in tipoActivoItOpciones"
+                :key="opcion.id"
+                :value="opcion.id"
+              >
+                {{ opcion.nombre }}
+              </option>
+            </select>
+          </div>
+          <!--Contenedor del textarea con la clase largo completo-->
+          <div class="full-width">
+            <textarea
+              v-model="formData.textDescripcion"
+              id="textDescripcion"
+              name="textDescripcion"
+              placeholder="Descripción"
+            ></textarea>
+          </div>
+          <!--Contenedor de es IT/OT-->
+          <div>
+            <label for="esITesOT">ES IT/ ES OT:</label>
+            <select v-model="formData.esITesOT" id="esITesOT" name="esITesOT">
+              <option
+                v-for="opcion in esITesOTOpciones"
+                :key="opcion.id"
+                :value="opcion.id"
+              >
+                {{ opcion.nombre }}
+              </option>
+            </select>
+          </div>
+          <!--Contenedor de Entorno-->
+          <div>
+            <label for="entorno">Entorno:</label>
+            <select v-model="formData.entorno" id="entorno" name="entorno">
+              <option
+                v-for="opcion in entornoOpciones"
+                :key="opcion.id"
+                :value="opcion.id"
+              >
+                {{ opcion.nombre }}
+              </option>
+            </select>
+          </div>
+          <!--Contenedor de Categoria-->
+          <div>
+            <label for="categoria">Categoria:</label>
+            <select
+              v-model="formData.categoria"
+              id="categoria"
+              name="categoria"
+            >
+              <option
+                v-for="opcion in categoriaOpciones"
+                :key="opcion.id"
+                :value="opcion.id"
+              >
+                {{ opcion.nombre }}
+              </option>
+            </select>
+          </div>
+          <!--Contenedor de Tarifa Mensual Servicio-->
+          <div>
+            <label for="tarifaMensual">Tarifa Mensual Servicio:</label>
             <input
-              v-model="formData.gestionadoProveedorIT"
-              type="checkbox"
-              id="gestionadoProveedorIT"
-              name="gestionadoProveedorIT"
+              v-model="formData.tarifaMensual"
+              type="text"
+              id="tarifaMensual"
+              name="tarifaMensual"
             />
-            <label for="gestionadoProveedorIT"
-              >Gestionado por Proveedor IT</label
-            >
+            <span>€/mes</span>
           </div>
-          <!--Contenedor del tercer checkbox-item con esAzure-->
-          <div class="checkbox-item">
+          <!--Contenedor de Ubicacion-->
+          <div>
+            <label for="ubicacion">Ubicacion:</label>
+            <select
+              v-model="formData.ubicacion"
+              id="ubicacion"
+              name="ubicacion"
+            >
+              <option
+                v-for="option in ubicacionOpciones"
+                :key="option.id"
+                :value="option.id"
+              >
+                {{ option.nombre }}
+              </option>
+            </select>
+          </div>
+          <!--Contenedor de Sububicacion-->
+          <div>
+            <label for="sububicacion">Sububicación:</label>
+            <select
+              v-model="formData.sububicacion"
+              id="sububicacion"
+              name="sububicacion"
+            >
+              <option
+                v-for="option in sububicacionOpciones"
+                :key="option.id"
+                :value="option.id"
+              >
+                {{ option.nombre }}
+              </option>
+            </select>
+          </div>
+          <!--Contenedor de comentarios-->
+          <div class="full-width">
+            <label for="comentarios">Comentarios:</label>
+            <textarea
+              v-model="formData.comentarios"
+              id="comentarios"
+              name="comentarios"
+            ></textarea>
+          </div>
+          <!--Contenedor de Rack-->
+          <div>
+            <label for="rack">Rack:</label>
+            <input v-model="formData.rack" type="text" id="rack" name="rack" />
+          </div>
+          <!--Contenedor de Posicion-->
+          <div>
+            <label for="posicion">Posicion:</label>
             <input
-              v-model="formData.esAzure"
-              type="checkbox"
-              id="Esazure"
-              name="Esazure"
+              v-model="formData.posicion"
+              type="text"
+              id="posicion"
+              name="posicion"
             />
-            <label for="Esazure">Es Azure</label>
           </div>
-          <!--Contenedor del tercer checkbox-item con esSeguridad-->
-          <div class="checkbox-item">
+          <!--Contenedor de Unidad-->
+          <div>
+            <label for="unidad">Unidad:</label>
             <input
-              v-model="formData.esSeguridad"
-              type="checkbox"
-              id="esSeguridad"
-              name="esSeguridad"
+              v-model="formData.unidad"
+              type="text"
+              id="unidad"
+              name="unidad"
             />
-            <label for="esSeguridad">Es de Seguridad</label>
           </div>
-        </div>
-        <!--Contenedor del altaActivo-->
-        <div>
-          <label for="altaActivo">Alta Activo:</label>
-          <input
-            v-model="formData.altaActivo"
-            type="date"
-            id="altaActivo"
-            name="altaActivo"
-          />
-        </div>
-        <!--Contenedor del altaGestion-->
-        <div>
-          <label for="altaGestion">Alta Gestión:</label>
-          <input
-            v-model="formData.altaGestion"
-            type="date"
-            id="altaGestion"
-            name="altaGestion"
-          />
-        </div>
-        <!--Contenedor del mesAltaGestion-->
-        <div>
-          <label for="mesAltaGestion">Mes alta Gestión:</label>
-          <input
-            v-model="formData.mesAltaGestion"
-            type="text"
-            id="mesAltaGestion"
-            name="mesAltaGestion"
-          />
-        </div>
-        <!--Contenedor del bajaActivo-->
-        <div>
-          <label for="bajaActivo">Baja Activo:</label>
-          <input
-            v-model="formData.bajaActivo"
-            type="date"
-            id="bajaActivo"
-            name="bajaActivo"
-          />
-        </div>
-        <!--Contenedor del bajaGestion-->
-        <div>
-          <label for="bajaGestion">Baja Gestión:</label>
-          <input
-            v-model="formData.bajaGestion"
-            type="date"
-            id="bajaGestion"
-            name="bajaGestion"
-          />
-        </div>
-        <!--Contenedor del citricidad-->
-        <div>
-          <label for="citricidad">Citricidad:</label>
-          <select
-            v-model="formData.citricidad"
-            id="citricidad"
-            name="citricidad"
-          >
-            <option
-              v-for="option in citricidadOpciones"
-              :key="option.id"
-              :value="option.id"
+          <!--Contenedor de Empres-->
+          <div>
+            <label for="empresa">Empresa:</label>
+            <select v-model="formData.empresa" id="empresa" name="empresa">
+              <option
+                v-for="option in empresaOpciones"
+                :key="option.id"
+                :value="option.id"
+              >
+                {{ option.nombre }}
+              </option>
+            </select>
+          </div>
+          <!--Contenedor de los checkboxes-->
+          <div class="checkbox-container">
+            <!--Contenedor del primer checkbox-item con gestionadoProveedorOT-->
+            <div class="checkbox-item">
+              <input
+                v-model="formData.gestionadoProveedorOT"
+                type="checkbox"
+                id="gestionadoProveedorOT"
+                name="gestionadoProveedorOT"
+              />
+              <label for="gestionadoProveedorOT"
+                >Gestionado por Proveedor OT</label
+              >
+            </div>
+            <!--Contenedor del segundo checkbox-item con gestionadoProveedorIT-->
+            <div class="checkbox-item">
+              <input
+                v-model="formData.gestionadoProveedorIT"
+                type="checkbox"
+                id="gestionadoProveedorIT"
+                name="gestionadoProveedorIT"
+              />
+              <label for="gestionadoProveedorIT"
+                >Gestionado por Proveedor IT</label
+              >
+            </div>
+            <!--Contenedor del tercer checkbox-item con esAzure-->
+            <div class="checkbox-item">
+              <input
+                v-model="formData.esAzure"
+                type="checkbox"
+                id="Esazure"
+                name="Esazure"
+              />
+              <label for="Esazure">Es Azure</label>
+            </div>
+            <!--Contenedor del tercer checkbox-item con esSeguridad-->
+            <div class="checkbox-item">
+              <input
+                v-model="formData.esSeguridad"
+                type="checkbox"
+                id="esSeguridad"
+                name="esSeguridad"
+              />
+              <label for="esSeguridad">Es de Seguridad</label>
+            </div>
+          </div>
+          <!--Contenedor del altaActivo-->
+          <div>
+            <label for="altaActivo">Alta Activo:</label>
+            <input
+              v-model="formData.altaActivo"
+              type="date"
+              id="altaActivo"
+              name="altaActivo"
+            />
+          </div>
+          <!--Contenedor del altaGestion-->
+          <div>
+            <label for="altaGestion">Alta Gestión:</label>
+            <input
+              v-model="formData.altaGestion"
+              type="date"
+              id="altaGestion"
+              name="altaGestion"
+            />
+          </div>
+          <!--Contenedor del mesAltaGestion-->
+          <div>
+            <label for="mesAltaGestion">Mes alta Gestión:</label>
+            <input
+              v-model="formData.mesAltaGestion"
+              type="text"
+              id="mesAltaGestion"
+              name="mesAltaGestion"
+            />
+          </div>
+          <!--Contenedor del bajaActivo-->
+          <div>
+            <label for="bajaActivo">Baja Activo:</label>
+            <input
+              v-model="formData.bajaActivo"
+              type="date"
+              id="bajaActivo"
+              name="bajaActivo"
+            />
+          </div>
+          <!--Contenedor del bajaGestion-->
+          <div>
+            <label for="bajaGestion">Baja Gestión:</label>
+            <input
+              v-model="formData.bajaGestion"
+              type="date"
+              id="bajaGestion"
+              name="bajaGestion"
+            />
+          </div>
+          <!--Contenedor del citricidad-->
+          <div>
+            <label for="citricidad">Citricidad:</label>
+            <select
+              v-model="formData.citricidad"
+              id="citricidad"
+              name="citricidad"
             >
-              {{ option.nombre }}
-            </option>
-          </select>
-        </div>
-        <!--Contenedor del estado-->
-        <div>
-          <label for="estado">Estado:</label>
-          <select v-model="formData.estado" id="estado" name="estado">
-            <option
-              v-for="option in estadoOpciones"
-              :key="option.id"
-              :value="option.id"
-            >
-              {{ option.nombre }}
-            </option>
-          </select>
-        </div>
-        <!--Contenedor de anotaciones-->
-        <div class="full-width">
-          <label for="anotaciones">Anotaciones:</label>
-          <textarea
-            v-model="formData.anotaciones"
-            id="anotaciones"
-            name="anotaciones"
-          ></textarea>
-        </div>
-        <!--Contenedor del segundo titulo con la clase largo completo-->
-        <div class="full-width">
-          <h2 class="Titulo2">Datos Administrativos</h2>
-        </div>
+              <option
+                v-for="option in citricidadOpciones"
+                :key="option.id"
+                :value="option.id"
+              >
+                {{ option.nombre }}
+              </option>
+            </select>
+          </div>
+          <!--Contenedor del estado-->
+          <div>
+            <label for="estado">Estado:</label>
+            <select v-model="formData.estado" id="estado" name="estado">
+              <option
+                v-for="option in estadoOpciones"
+                :key="option.id"
+                :value="option.id"
+              >
+                {{ option.nombre }}
+              </option>
+            </select>
+          </div>
+          <!--Contenedor de anotaciones-->
+          <div class="full-width">
+            <label for="anotaciones">Anotaciones:</label>
+            <textarea
+              v-model="formData.anotaciones"
+              id="anotaciones"
+              name="anotaciones"
+            ></textarea>
+          </div>
+          <!--Contenedor del segundo titulo con la clase largo completo-->
+          <div class="full-width">
+            <h2 class="Titulo2">Datos Administrativos</h2>
+          </div>
 
-        <!--Contenedor del proveedor-->
-        <div>
-          <label for="proveedor">Proveedor:</label>
-          <select v-model="formData.proveedor" id="proveedor" name="proveedor">
-            <option
-              v-for="option in proveedorOpciones"
-              :key="option.id"
-              :value="option.id"
+          <!--Contenedor del proveedor-->
+          <div>
+            <label for="proveedor">Proveedor:</label>
+            <select
+              v-model="formData.proveedor"
+              id="proveedor"
+              name="proveedor"
             >
-              {{ option.nombre }}
-            </option>
-          </select>
-        </div>
-        <!--Contenedor del fechaCompra-->
-        <div>
-          <label for="fechaCompra">Fecha de Compra:</label>
-          <input
-            v-model="formData.fechaCompra"
-            type="date"
-            id="fechaCompra"
-            name="fechaCompra"
-          />
-        </div>
-        <!--Contenedor del finGarantia-->
-        <div>
-          <label for="finGarantia">Fin de Garantia (Fabricante):</label>
-          <input
-            v-model="formData.finGarantia"
-            type="date"
-            id="finGarantia"
-            name="finGarantia"
-          />
-        </div>
-        <!--Contenedor del proveedorMant-->
-        <div>
-          <label for="proveedorMant">Prov. Mant. Hardware:</label>
-          <select
-            v-model="formData.proveedorMant"
-            id="proveedorMant"
-            name="proveedorMant"
-          >
-            <option
-              v-for="option in proveedorMantOpciones"
-              :key="option.id"
-              :value="option.id"
+              <option
+                v-for="option in proveedorOpciones"
+                :key="option.id"
+                :value="option.id"
+              >
+                {{ option.nombre }}
+              </option>
+            </select>
+          </div>
+          <!--Contenedor del fechaCompra-->
+          <div>
+            <label for="fechaCompra">Fecha de Compra:</label>
+            <input
+              v-model="formData.fechaCompra"
+              type="date"
+              id="fechaCompra"
+              name="fechaCompra"
+            />
+          </div>
+          <!--Contenedor del finGarantia-->
+          <div>
+            <label for="finGarantia">Fin de Garantia (Fabricante):</label>
+            <input
+              v-model="formData.finGarantia"
+              type="date"
+              id="finGarantia"
+              name="finGarantia"
+            />
+          </div>
+          <!--Contenedor del proveedorMant-->
+          <div>
+            <label for="proveedorMant">Prov. Mant. Hardware:</label>
+            <select
+              v-model="formData.proveedorMant"
+              id="proveedorMant"
+              name="proveedorMant"
             >
-              {{ option.nombre }}
-            </option>
-          </select>
-        </div>
-        <!--Contenedor checkbox-item del pertet-->
-        <div class="checkbox-item">
-          <input
-            v-model="formData.pertet"
-            type="checkbox"
-            id="pertet"
-            name="pertet"
-          />
-          <label for="pertet">PERTET?</label>
-        </div>
-      </form>
+              <option
+                v-for="option in proveedorMantOpciones"
+                :key="option.id"
+                :value="option.id"
+              >
+                {{ option.nombre }}
+              </option>
+            </select>
+          </div>
+          <!--Contenedor checkbox-item del pertet-->
+          <div class="checkbox-item">
+            <input
+              v-model="formData.pertet"
+              type="checkbox"
+              id="pertet"
+              name="pertet"
+            />
+            <label for="pertet">PERTET?</label>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </template>
@@ -634,7 +650,14 @@ body {
   width: 100%;
   height: auto;
 }
-
+/* Fondo */
+.contenedor_global {
+  background-color: #ffffff;
+  background-image: url("../assets/water-splash.png");
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  background-size: 100% auto;
+}
 /* Títulos */
 .contenedor_titulo {
   padding: 30px;

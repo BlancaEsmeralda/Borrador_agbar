@@ -1,214 +1,218 @@
 <template>
   <div>
+    <!--Contenedor del logo-->
     <div class="logo">
       <router-link to="/">
         <img src="../assets/logo.png" alt="logo de aguas de barcelona" />
       </router-link>
     </div>
-    <div class="contenedor_titulo">
-      <h1 class="titulo animate__animated animate__fadeInDown animate_faster">
-        Seguridad
-      </h1>
-    </div>
-
-    <div class="contenedor_formulario">
-      <form class="formulario" @submit.prevent="buscarActivo">
-        <div>
-          <input
-            v-model="id_seguridad"
-            type="text"
-            id="id_seguridad"
-            name="id_seguridad"
-            placeholder="Activo"
-          />
-        </div>
-        <button type="submit">Cargar Datos</button>
-        <!--contenedor de la barra de navegacion-->
-        <div id="Pestañas">
-          <nav class="animate__animated animate__fadeInDown animate_faster">
-            <!--Enlaces de las diferentes pestañas de la pagina-->
-            <router-link to="/datosgenerales">Datos Grales.</router-link>
-            <router-link to="/datostecnicos">Datos Técnicos</router-link>
-            <router-link to="/serviceoffering">Service Offerings</router-link>
-            <router-link to="/instancias">Instancias</router-link>
-            <router-link to="/comunicaciones">Comunicaciones</router-link>
-            <router-link to="/seguridad">Seguridad</router-link>
-            <router-link to="/micro">Micro</router-link>
-            <router-link to="/software">Software</router-link>
-          </nav>
-        </div>
-        <div class="checkbox">
+    <div class="contenedor_global">
+      <!--Contenedor de titulo-->
+      <div class="contenedor_titulo">
+        <h1 class="titulo animate__animated animate__fadeInDown animate_faster">
+          Seguridad
+        </h1>
+      </div>
+      <!--Contenedor del formulario-->
+      <div class="contenedor_formulario">
+        <form class="formulario" @submit.prevent="buscarActivo">
           <div>
             <input
-              v-model="formData.av_activo"
-              type="checkbox"
-              id="AV_activo"
+              v-model="id_seguridad"
+              type="text"
+              id="id_seguridad"
+              name="id_seguridad"
+              placeholder="Activo"
             />
-            <label for="av_activo">AV Activo</label>
           </div>
-        </div>
-
-        <div>
-          <label for="antivirus">Antivirus:</label>
-          <input v-model="formData.antivirus" type="text" id="antivirus" />
-        </div>
-        <div>
-          <label for="version">Version:</label>
-          <input
-            v-model="formData.version"
-            type="text"
-            id="version"
-            name="version"
-          />
-        </div>
-        <div class="checkbox">
-          <div>
-            <input
-              v-model="formData.DLP_activo"
-              type="checkbox"
-              id="DLP_activo"
-              name="DLP_activo"
-            />
-            <label for="DLP_activo">DLP Activo</label>
+          <button type="submit">Cargar Datos</button>
+          <!--contenedor de la barra de navegacion-->
+          <div id="Pestañas">
+            <nav class="animate__animated animate__fadeInDown animate_faster">
+              <!--Enlaces de las diferentes pestañas de la pagina-->
+              <router-link to="/datosgenerales">Datos Grales.</router-link>
+              <router-link to="/datostecnicos">Datos Técnicos</router-link>
+              <router-link to="/serviceoffering">Service Offerings</router-link>
+              <router-link to="/instancias">Instancias</router-link>
+              <router-link to="/comunicaciones">Comunicaciones</router-link>
+              <router-link to="/seguridad">Seguridad</router-link>
+              <router-link to="/micro">Micro</router-link>
+              <router-link to="/software">Software</router-link>
+            </nav>
           </div>
-        </div>
-
-        <div>
-          <label for="version_dlp">Version DLP:</label>
-          <input
-            v-model="formData.version_dlp"
-            type="text"
-            id="version_dlp"
-            name="version_dlp"
-          />
-        </div>
-
-        <div>
-          <label for="ver_agente_seguridad"> Versión Agente Seguridad:</label>
-          <input
-            v-model="formData.ver_agente_seguridad"
-            type="text"
-            id="ver_agente_seguridad"
-            name="ver_agente_seguridad"
-          />
-        </div>
-        <!--contenedor del solid activo-->
-        <div class="checkbox">
-          <div>
-            <input
-              v-model="formData.solid_activo"
-              type="checkbox"
-              name="solid_activo"
-              id="soliid_activo"
-            />
-            <label for="solid_activo">SOLID Activo</label>
-          </div>
-        </div>
-
-        <div class="checkbox">
-          <label for="version_solid">Version SOLID:</label>
-          <input v-model="formData.version_solid" type="text" />
-        </div>
-        <!--contenedor de fire eye activo-->
-        <div class="chekbox">
-          <div>
-            <input
-              v-model="formData.FireEyeActivo"
-              type="checkbox"
-              name="FireEyeActivo"
-              id="FireEyeActivo"
-            />
-            <label for="FireEyeActivo">FireEye Activo</label>
-          </div>
-        </div>
-
-        <div>
-          <label for="version_FireEye">Version FireEye:</label>
-          <input
-            v-model="formData.version_FireEye"
-            type="text"
-            id="version_FireEye"
-            name="version_FireEye"
-          />
-        </div>
-        <!--Checkboxes---->
-        <div class="full-width">
-          <h2 class="subtitulo">Obsolencias</h2>
-        </div>
-        <!--Primera fila de checboxes-->
-        <div class="checkbox">
-          <div>
-            <input
-              v-model="formData.samba"
-              type="checkbox"
-              name="samba"
-              id="samba"
-            />
-            <label for="samba">SAMBA v1 Activo</label>
-          </div>
-          <div>
-            <input
-              v-model="formData.win_fuera_sop"
-              type="checkbox"
-              name="win_fuera_sop"
-              id="win_fuera_sop"
-            />
-            <label for="win_fuera_sop"> Windows fuera de soporte</label>
+          <div class="checkbox">
+            <div>
+              <input
+                v-model="formData.av_activo"
+                type="checkbox"
+                id="AV_activo"
+              />
+              <label for="av_activo">AV Activo</label>
+            </div>
           </div>
 
           <div>
+            <label for="antivirus">Antivirus:</label>
+            <input v-model="formData.antivirus" type="text" id="antivirus" />
+          </div>
+          <div>
+            <label for="version">Version:</label>
             <input
-              v-model="formData.ora_fuera_sop"
-              type="checkbox"
-              name="ora_fuera_sop"
-              id="ora_fuera_sop"
+              v-model="formData.version"
+              type="text"
+              id="version"
+              name="version"
             />
-            <label for="ora_fuera_sop">Oracle fuera de sporte</label>
+          </div>
+          <div class="checkbox">
+            <div>
+              <input
+                v-model="formData.DLP_activo"
+                type="checkbox"
+                id="DLP_activo"
+                name="DLP_activo"
+              />
+              <label for="DLP_activo">DLP Activo</label>
+            </div>
           </div>
 
           <div>
+            <label for="version_dlp">Version DLP:</label>
             <input
-              v-model="formData.tls_10_activo"
-              type="checkbox"
-              id="tls_10_activo"
-              name="tls_10_activo"
+              v-model="formData.version_dlp"
+              type="text"
+              id="version_dlp"
+              name="version_dlp"
             />
-            <label for="tls_10_activo">TLS 1.0 Activo</label>
           </div>
 
           <div>
+            <label for="ver_agente_seguridad"> Versión Agente Seguridad:</label>
             <input
-              v-model="formData.sop_es_activado"
-              type="checkbox"
-              id="sop_ex_activo"
-              name="sop_ex_activo"
+              v-model="formData.ver_agente_seguridad"
+              type="text"
+              id="ver_agente_seguridad"
+              name="ver_agente_seguridad"
             />
-            <label for="sop_ex_activo">Soprte extendido activado</label>
+          </div>
+          <!--contenedor del solid activo-->
+          <div class="checkbox">
+            <div>
+              <input
+                v-model="formData.solid_activo"
+                type="checkbox"
+                name="solid_activo"
+                id="soliid_activo"
+              />
+              <label for="solid_activo">SOLID Activo</label>
+            </div>
+          </div>
+
+          <div class="checkbox">
+            <label for="version_solid">Version SOLID:</label>
+            <input v-model="formData.version_solid" type="text" />
+          </div>
+          <!--contenedor de fire eye activo-->
+          <div class="chekbox">
+            <div>
+              <input
+                v-model="formData.FireEyeActivo"
+                type="checkbox"
+                name="FireEyeActivo"
+                id="FireEyeActivo"
+              />
+              <label for="FireEyeActivo">FireEye Activo</label>
+            </div>
           </div>
 
           <div>
+            <label for="version_FireEye">Version FireEye:</label>
             <input
-              v-model="formData.sql_fuera_sop"
-              type="checkbox"
-              id="sql_fuera_sop"
-              name="sql_fuera_sop"
+              v-model="formData.version_FireEye"
+              type="text"
+              id="version_FireEye"
+              name="version_FireEye"
             />
-            <label for="sql_fuera_sop">SQL Server fuera de soporte</label>
           </div>
+          <!--Checkboxes---->
+          <div class="full-width">
+            <h2 class="subtitulo">Obsolencias</h2>
+          </div>
+          <!--Primera fila de checboxes-->
+          <div class="checkbox">
+            <div>
+              <input
+                v-model="formData.samba"
+                type="checkbox"
+                name="samba"
+                id="samba"
+              />
+              <label for="samba">SAMBA v1 Activo</label>
+            </div>
+            <div>
+              <input
+                v-model="formData.win_fuera_sop"
+                type="checkbox"
+                name="win_fuera_sop"
+                id="win_fuera_sop"
+              />
+              <label for="win_fuera_sop"> Windows fuera de soporte</label>
+            </div>
 
-          <div>
-            <input
-              v-model="formData.tls_11_activo"
-              type="checkbox"
-              id="tls_11_activo"
-              name="tls_11_activo"
-            />
-            <label for="tls_11_activo" id="tls_11_activo" name="tls_11_activo"
-              >TLS 1.1 Activo</label
-            >
+            <div>
+              <input
+                v-model="formData.ora_fuera_sop"
+                type="checkbox"
+                name="ora_fuera_sop"
+                id="ora_fuera_sop"
+              />
+              <label for="ora_fuera_sop">Oracle fuera de sporte</label>
+            </div>
+
+            <div>
+              <input
+                v-model="formData.tls_10_activo"
+                type="checkbox"
+                id="tls_10_activo"
+                name="tls_10_activo"
+              />
+              <label for="tls_10_activo">TLS 1.0 Activo</label>
+            </div>
+
+            <div>
+              <input
+                v-model="formData.sop_es_activado"
+                type="checkbox"
+                id="sop_ex_activo"
+                name="sop_ex_activo"
+              />
+              <label for="sop_ex_activo">Soprte extendido activado</label>
+            </div>
+
+            <div>
+              <input
+                v-model="formData.sql_fuera_sop"
+                type="checkbox"
+                id="sql_fuera_sop"
+                name="sql_fuera_sop"
+              />
+              <label for="sql_fuera_sop">SQL Server fuera de soporte</label>
+            </div>
+
+            <div>
+              <input
+                v-model="formData.tls_11_activo"
+                type="checkbox"
+                id="tls_11_activo"
+                name="tls_11_activo"
+              />
+              <label for="tls_11_activo" id="tls_11_activo" name="tls_11_activo"
+                >TLS 1.1 Activo</label
+              >
+            </div>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   </div>
 </template>
@@ -326,6 +330,14 @@ body {
 .logo img {
   width: 100%;
   height: auto;
+}
+/* Fondo */
+.contenedor_global {
+  background-color: #ffffff;
+  background-image: url("../assets/water-splash.png");
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  background-size: 100% auto;
 }
 /* Títulos */
 .contenedor_titulo {
