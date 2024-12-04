@@ -2,7 +2,7 @@
   <!--div principal de la pgina-->
   <div>
     <div class="logo">
-      <img src="../assets/logo.png" alt="Lod de agus de Barcelona" />
+      <img src="../assets/logo.png" alt="Logo" />
     </div>
     <div class="contenedor_titulo">
       <h1 class="titulo animate__animated animate__fadeInDown animate_faster">
@@ -94,7 +94,7 @@
               :key="option.id"
               :value="option.id"
             >
-              {{ opcion.nombre }}
+              {{ option.nombre }}
             </option>
           </select>
         </div>
@@ -117,7 +117,7 @@
               :key="option.id"
               :value="option.id"
             >
-              {{ opcion.nombre }}
+              {{ option.nombre }}
             </option>
           </select>
         </div>
@@ -173,7 +173,7 @@
               :key="option.id"
               :value="option.id"
             >
-              {{ opcion.nombre }}
+              {{ option.nombre }}
             </option>
           </select>
         </div>
