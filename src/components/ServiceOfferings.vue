@@ -12,13 +12,13 @@
     </div>
 
     <div class="contenedor_formulario">
-      <form class="formulario" @submit.prevent="guardarDatos">
+      <form class="formulario" @submit.prevent="buscarActivo">
         <div>
           <input
-            v-model="identificador"
+            v-model="id_seguridad"
             type="text"
-            id="identificador"
-            name="identificador"
+            id="id_seguridad"
+            name="id_seguridad"
             placeholder="ACTIVO"
           />
         </div>
@@ -39,12 +39,12 @@
         <div>
           <label for="service_offering">Service Offering</label>
           <select
-            v-model="service_offering"
+            v-model="formData.service_offering"
             name="service_offering"
             id="service_offering"
           >
             <option
-              v-for="option in service_offerings"
+              v-for="option in opciones_service_offering"
               :key="option.id"
               :value="option.id"
             >
@@ -55,7 +55,7 @@
         <div>
           <label for="porcentaje_SO"> %S.O:</label>
           <input
-            v-model="porcentaje_SO"
+            v-model="formData.porcentaje_SO"
             type="text"
             id="porcentaje_SO"
             name="porcentaje_SO"
@@ -65,7 +65,7 @@
         <div class="checkboxes">
           <div>
             <input
-              v-model="SO_principal"
+              v-model="formData.SO_principal"
               type="checkbox"
               id="SO_principal"
               name="SO_principal"
@@ -73,7 +73,7 @@
           </div>
           <div>
             <input
-              v-model="Escritico"
+              v-model="formData.Escritico"
               type="checkbox"
               id="Escritico"
               name="EScritico"
@@ -84,7 +84,7 @@
         <div>
           <label for="responsable1">Responsable:</label>
           <input
-            v-model="responsable"
+            v-model="formData.responsable"
             type="text"
             id="responsable"
             name="responsable"
@@ -93,7 +93,7 @@
         <div>
           <label for="responsable2">Segundo Responsable:</label>
           <input
-            v-model="responsable2"
+            v-model="formData.responsable2"
             type="text"
             id="responsable2"
             name="responsable2"
@@ -102,7 +102,7 @@
         <div>
           <label for="categoria">Categoria:</label>
           <input
-            v-model="categoria"
+            v-model="formData.categoria"
             type="text"
             id="categoria"
             name="categoria"
@@ -111,18 +111,87 @@
         <div>
           <label for="subcategoria">Subcategoria:</label>
           <input
-            v-model="subcategoria"
+            v-model="formData.subcategoria"
             type="text"
             id="subcategoria"
             name="subcategoria"
           />
         </div>
+        <button type="submit">Cargar Datos</button>
       </form>
     </div>
   </div>
 </template>
 
-<script></script>
+<script>
+import axios from "axios";
+
+export default {
+  name: "ServiceOffe",
+  data() {
+    return {
+      id_seguridad: "",
+      formData: {
+        service_offering: "",
+        porcentaje_SO: "",
+
+        SO_principal: "",
+        Escritico: "",
+
+        responsable: "",
+        responsable2: "",
+        categoria: "",
+        subcategoria: "",
+      },
+      opciones_service_offering: [],
+    };
+  },
+  methods: {
+    buscarActivo() {
+      if (!this.id_seguridad) {
+        alert("Por favor, introduce un Id válido");
+        return;
+      }
+      axios
+        .get(`https://jsonplaceholder.typicode.com/todos/${this.id_seguridad}`)
+        .then((response) => {
+          const data = response.data;
+          this.formData.porcentaje_SO = data.title;
+          this.formData.responsable = data.title;
+          this.formData.responsable2 = data.title;
+          this.formData.categoria = data.title;
+          this.formData.subcategoria = data.title;
+        });
+      axios
+        .get("https://jsonplaceholder.typicode.com/users")
+        .then((response) => {
+          this.opciones_service_offering = response.data.map((user) => ({
+            id: user.id,
+            nombre: user.name,
+          }));
+        })
+        .catch((error) => {
+          console.error("Eror al obtener la información:", error);
+          alert("No se encontró información para este ID.");
+          this.limpiarcampos();
+        });
+    },
+    limpiarCampos() {
+      this.formData = {
+        porcentaje_SO: "",
+
+        SO_principal: "",
+        Escritico: "",
+
+        responsable: "",
+        responsable2: "",
+        categoria: "",
+        subcategoria: "",
+      };
+    },
+  },
+};
+</script>
 
 <style scoped>
 /* Estilos generales */

@@ -11,16 +11,17 @@
       </h1>
     </div>
     <div class="contenedor_formulario">
-      <form class="formulario" @submit.prevent="gurdarDatos">
+      <form class="formulario" @submit.prevent="buscarActivo">
         <div>
           <input
-            v-model="identificador"
+            v-model="id_seguridad"
             type="text"
-            id="identificador"
-            name="identificador"
+            id="id_seguridad"
+            name="id_seguridad"
             placeholder="ACTIVO"
           />
         </div>
+        <button type="submit">Cargar Datos</button>
         <div id="Pestañas">
           <nav class="animate__animated animate__fadeInDown animate_faster">
             <router-link to="/datosgenerales">Datos Grales.</router-link>
@@ -37,7 +38,7 @@
         <div>
           <label for="nombre_instancia">Nombre:</label>
           <input
-            v-model="nombre_instancia"
+            v-model="formData.nombre_instancia"
             type="text"
             id="nombre_instancia"
             name="nombre_insatncia"
@@ -47,7 +48,7 @@
         <div>
           <label for="entorno_instancia">Entorno:</label>
           <input
-            v-model="entorno_instancia"
+            v-model="formData.entorno_instancia"
             type="text"
             id="entorno_instancia"
             name="entorno_instancia"
@@ -57,7 +58,7 @@
         <div>
           <label for="citricidad_intancia">Citricidad:</label>
           <input
-            v-model="citricidad_intancia"
+            v-model="formData.citricidad_intancia"
             type="text"
             id="citricidad_intancia"
             name="citricidad_intancia"
@@ -67,7 +68,7 @@
         <div>
           <label for="aplic_intancia">Aplic:</label>
           <input
-            v-model="aplic_intancia"
+            v-model="formData.aplic_intancia"
             type="text"
             id="aplic_intancia"
             name="aplic_intancia"
@@ -76,14 +77,14 @@
         <div>
           <label for="aplicacion_instancia">Aplicación:</label>
           <select
-            v-model="aplicacion_instancia"
+            v-model="formData.aplicacion_instancia"
             id="aplicacion_instancia"
             name="aplicacion_instancia"
           >
             <option
-              v-for="option in aplicacion_instancias"
+              v-for="option in aplicacionOpciones"
               :key="option.id"
-              value="option.id"
+              :value="option.id"
             >
               {{ option.nombre }}
             </option>
@@ -92,7 +93,12 @@
         <!--contenedor de it o ot-->
         <div>
           <label for="it_ot_instancia">ES IT/OT</label>
-          <input type="text" name="it_ot_instancia" id="it_ot_instancia" />
+          <input
+            v-model="formData.it_ot_instancia"
+            type="text"
+            name="it_ot_instancia"
+            id="it_ot_instancia"
+          />
         </div>
 
         <!--contenedor de los checks-->
@@ -102,7 +108,7 @@
             <div>
               <label for="esviewnex_instancia">Es Viewnex</label>
               <input
-                v-model="esviewnex_instancia"
+                v-model="formData.esviewnex_instancia"
                 type="checkbox"
                 name="esviewnex_instancia"
                 id="checkbox"
@@ -112,7 +118,7 @@
             <div>
               <label for="esdeazure_instancia">Es de azure</label>
               <input
-                v-model="esdeazure_instancia"
+                v-model="formData.esdeazure_instancia"
                 type="checkbox"
                 name="esdeazure_instancia"
                 id="esdeazure_instancia"
@@ -124,7 +130,7 @@
         <div>
           <label for="tarifames_intancia">Tarifa mes(€)</label>
           <input
-            v-model="tarifames_intancia"
+            v-model="formData.tarifames_intancia"
             type="text"
             name="tarifames_intancia"
             id="tarifames_intancia"
@@ -134,7 +140,7 @@
         <div>
           <label for="altagestion_instancia">Alta Gestion</label>
           <input
-            v-model="altagestion_instancia"
+            v-model="formData.altagestion_instancia"
             type="text"
             id="altagestion_instancia"
             name="altagestion_instancia"
@@ -144,7 +150,7 @@
         <div>
           <label for="bajagestion_instancia">Baja Gestión</label>
           <input
-            v-model="bajagestion_instancia"
+            v-model="formData.bajagestion_instancia"
             type="date"
             id="bajagestion_instancia"
             name="bajagestion_instancia"
@@ -154,7 +160,7 @@
         <div>
           <label for="detalle_instancia">DETALLE</label>
           <input
-            v-model="detalle_instancia"
+            v-model="formData.detalle_instancia"
             type="text"
             id="detalle_instancia"
             name="detalle_instancia"
@@ -164,7 +170,7 @@
         <div>
           <label for="motivo_no_gestion_it">Motivo No gestión IT</label>
           <input
-            v-model="motivo_no_gestion_it"
+            v-model="formData.motivo_no_gestion_it"
             type="text"
             id="motivo_no_gestion_it"
             name="motivo_no_gestion_it"
@@ -175,7 +181,7 @@
         <div class="full-width">
           <label for="comentarios">Comentarios</label>
           <input
-            v-model="comentarios"
+            v-model="formData.comentarios"
             type="text"
             name="comentarios"
             id="comentarios"
@@ -185,7 +191,106 @@
     </div>
   </div>
 </template>
-<script></script>
+<script>
+import axios from "axios";
+export default {
+  name: "ActivoIntancias",
+  data() {
+    return {
+      c: "", //id
+      formData: {
+        nombre_instancia: "",
+        entorno_instancia: "",
+        citricidad_intancia: "",
+        aplic_intancia: "",
+        aplicacion_instancia: "",
+        it_ot_instancia: "",
+        //checkbox
+        esviewnex_instancia: "",
+        esdeazure_instancia: "",
+
+        tarifames_intancia: "",
+        altagestion_instancia: "",
+
+        bajagestion_instancia: "",
+        detalle_instancia: "",
+        motivo_no_gestion_it: "",
+        comentarios: "",
+      },
+      aplicacionOpciones: [],
+    };
+  },
+  methods: {
+    buscarActivo() {
+      if (!this.id_seguridad) {
+        alert("Por favor, introduce un ID válido.");
+        return;
+      }
+
+      // Llama a la API para obtener los datos simulados
+      axios
+        .get(`https://jsonplaceholder.typicode.com/todos/${this.id_seguridad}`)
+        .then((response) => {
+          const data = response.data;
+          // Actualiza los campos con los datos obtenidos
+          this.formData.nombre_instancia = data.title;
+          this.formData.entorno_instancia = data.title;
+          this.formData.citricidad_intancia = data.title;
+          this.formData.aplic_intancia = data.title;
+          this.formData.aplicacion_instancia = data.title;
+          this.formData.it_ot_instancia = data.title;
+          //checkboxes
+          this.formData.esviewnex_instancia = data.title;
+          this.formData.esdeazure_instancia = data.title;
+          this.formData.tarifames_intancia = data.title;
+          this.formData.altagestion_instancia = data.title;
+          this.formData.bajagestion_instancia = data.title;
+          this.formData.detalle_instancia = data.title;
+          this.formData.motivo_no_gestion_it = data.title;
+          this.formData.comentarios = data.title;
+          // Llama a la API para llenar los select
+          axios
+            .get("https://jsonplaceholder.typicode.com/users")
+            .then((response) => {
+              //Mapao de las opciones de los selects
+              this.aplicacionOpciones = response.data.map((user) => ({
+                id: user.id,
+                nombre: user.name,
+              }));
+            })
+            .catch((error) => {
+              console.error("Error al obtener las opciones:", error);
+            });
+        })
+        .catch((error) => {
+          console.error("Error al obtener la información:", error);
+          alert("No se encontró información para este ID.");
+          this.limpiarCampos();
+        });
+    },
+    limpiarCampos() {
+      this.formData = {
+        modelo: "",
+        fabricante: "",
+        numserie: "",
+        modelo_antiguo: "",
+        ram: "",
+        sockets: "",
+        coresocket: "",
+        sis_operativo: "",
+        generacion_so: "",
+        sis_Operativo_pla: "",
+        servicePack: "",
+        dominio: "",
+        nombre_dns_NetBios: "",
+        ip_principal: "",
+        ip_nat: "",
+        ip_backup: "",
+      };
+    },
+  },
+};
+</script>
 <style scoped>
 /* Estilos generales */
 body {

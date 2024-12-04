@@ -12,15 +12,17 @@
     </div>
 
     <div class="contenedor_formulario">
-      <form class="formulario" @submit.prevent="guardarDatos">
+      <form class="formulario" @submit.prevent="buscarActivo">
         <div>
           <input
             v-model="id_seguridad"
             type="text"
             id="id_seguridad"
             name="id_seguridad"
+            placeholder="Activo"
           />
         </div>
+        <button type="submit">Cargar Datos</button>
         <!--contenedor de la barra de navegacion-->
         <div id="Pestañas">
           <nav class="animate__animated animate__fadeInDown animate_faster">
@@ -37,23 +39,32 @@
         </div>
         <div class="checkbox">
           <div>
-            <input v-model="av_activo" type="checkbox" id="AV_activo" />
+            <input
+              v-model="formData.av_activo"
+              type="checkbox"
+              id="AV_activo"
+            />
             <label for="av_activo">AV Activo</label>
           </div>
         </div>
 
         <div>
           <label for="antivirus">Antivirus:</label>
-          <input v-model="antivirus" type="text" id="antivirus" />
+          <input v-model="formData.antivirus" type="text" id="antivirus" />
         </div>
         <div>
           <label for="version">Version:</label>
-          <input v-model="version" type="text" id="version" name="version" />
+          <input
+            v-model="formData.version"
+            type="text"
+            id="version"
+            name="version"
+          />
         </div>
         <div class="checkbox">
           <div>
             <input
-              v-model="DLP_activo"
+              v-model="formData.DLP_activo"
               type="checkbox"
               id="DLP_activo"
               name="DLP_activo"
@@ -65,7 +76,7 @@
         <div>
           <label for="version_dlp">Version DLP:</label>
           <input
-            v-model="version_dlp"
+            v-model="formData.version_dlp"
             type="text"
             id="version_dlp"
             name="version_dlp"
@@ -75,7 +86,7 @@
         <div>
           <label for="ver_agente_seguridad"> Versión Agente Seguridad:</label>
           <input
-            v-model="ver_agente_seguridad"
+            v-model="formData.ver_agente_seguridad"
             type="text"
             id="ver_agente_seguridad"
             name="ver_agente_seguridad"
@@ -85,7 +96,7 @@
         <div class="checkbox">
           <div>
             <input
-              v-model="solid_activo"
+              v-model="formData.solid_activo"
               type="checkbox"
               name="solid_activo"
               id="soliid_activo"
@@ -96,13 +107,13 @@
 
         <div class="checkbox">
           <label for="version_solid">Version SOLID:</label>
-          <input v-model="version_solid" type="text" />
+          <input v-model="formData.version_solid" type="text" />
         </div>
         <!--contenedor de fire eye activo-->
         <div class="chekbox">
           <div>
             <input
-              v-model="FireEyeActivo"
+              v-model="formData.FireEyeActivo"
               type="checkbox"
               name="FireEyeActivo"
               id="FireEyeActivo"
@@ -114,7 +125,7 @@
         <div>
           <label for="version_FireEye">Version FireEye:</label>
           <input
-            v-model="version_FireEye"
+            v-model="formData.version_FireEye"
             type="text"
             id="version_FireEye"
             name="version_FireEye"
@@ -127,12 +138,17 @@
         <!--Primera fila de checboxes-->
         <div class="checkbox">
           <div>
-            <input v-model="samba" type="checkbox" name="samba" id="samba" />
+            <input
+              v-model="formData.samba"
+              type="checkbox"
+              name="samba"
+              id="samba"
+            />
             <label for="samba">SAMBA v1 Activo</label>
           </div>
           <div>
             <input
-              v-model="win_fuera_sop"
+              v-model="formData.win_fuera_sop"
               type="checkbox"
               name="win_fuera_sop"
               id="win_fuera_sop"
@@ -142,7 +158,7 @@
 
           <div>
             <input
-              v-model="ora_fuera_sop"
+              v-model="formData.ora_fuera_sop"
               type="checkbox"
               name="ora_fuera_sop"
               id="ora_fuera_sop"
@@ -152,7 +168,7 @@
 
           <div>
             <input
-              v-model="tls_10_activo"
+              v-model="formData.tls_10_activo"
               type="checkbox"
               id="tls_10_activo"
               name="tls_10_activo"
@@ -162,7 +178,7 @@
 
           <div>
             <input
-              v-model="sop_es_activado"
+              v-model="formData.sop_es_activado"
               type="checkbox"
               id="sop_ex_activo"
               name="sop_ex_activo"
@@ -172,7 +188,7 @@
 
           <div>
             <input
-              v-model="sql_fuera_sop"
+              v-model="formData.sql_fuera_sop"
               type="checkbox"
               id="sql_fuera_sop"
               name="sql_fuera_sop"
@@ -182,7 +198,7 @@
 
           <div>
             <input
-              v-model="tls_11_activo"
+              v-model="formData.tls_11_activo"
               type="checkbox"
               id="tls_11_activo"
               name="tls_11_activo"
@@ -196,7 +212,103 @@
     </div>
   </div>
 </template>
-<script></script>
+<script>
+import axios from "axios";
+export default {
+  name: "ActivoIntancias",
+  data() {
+    return {
+      id_seguridad: "", //id
+      formData: {
+        av_activo: "",
+        antivirus: "",
+        version: "",
+        DLP_activo: "",
+        version_dlp: "",
+        ver_agente_seguridad: "",
+        //checkbox
+        solid_activo: "",
+        version_solid: "",
+
+        FireEyeActivo: "",
+        version_FireEye: "",
+
+        samba: "",
+        win_fuera_sop: "",
+        ora_fuera_sop: "",
+        tls_10_activo: "",
+        sop_es_activado: "",
+        sql_fuera_sop: "",
+        tls_11_activo: "",
+      },
+    };
+  },
+  methods: {
+    buscarActivo() {
+      if (!this.id_seguridad) {
+        alert("Por favor, introduce un ID válido.");
+        return;
+      }
+
+      // Llama a la API para obtener los datos simulados
+      axios
+        .get(`https://jsonplaceholder.typicode.com/todos/${this.id_seguridad}`)
+        .then((response) => {
+          const data = response.data;
+          // Actualiza los campos con los datos obtenidos
+          this.formData.av_activo = data.title;
+          this.formData.antivirus = data.title;
+          this.formData.version = data.title;
+          this.formData.DLP_activo = data.title;
+          this.formData.version_dlp = data.title;
+          this.formData.ver_agente_seguridad = data.title;
+
+          this.formData.solid_activo = data.title;
+          this.formData.version_solid = data.title;
+          this.formData.FireEyeActivo = data.title;
+          this.formData.version_FireEye = data.title;
+
+          this.formData.samba = data.title;
+          this.formData.win_fuera_sop = data.title;
+          this.formData.ora_fuera_sop = data.title;
+          this.formData.tls_10_activo = data.title;
+          this.formData.sop_es_activado = data.title;
+          this.formData.sql_fuera_sop = data.title;
+          this.formData.tls_11_activo = data.title;
+        })
+        .catch((error) => {
+          console.error("Error al obtener la información:", error);
+          alert("No se encontró información para este ID.");
+          this.limpiarCampos();
+        });
+    },
+    limpiarCampos() {
+      this.formData = {
+        av_activo: "",
+        antivirus: "",
+        version: "",
+        DLP_activo: "",
+        version_dlp: "",
+        ver_agente_seguridad: "",
+        //checkbox
+        solid_activo: "",
+        version_solid: "",
+
+        FireEyeActivo: "",
+        version_FireEye: "",
+
+        samba: "",
+        win_fuera_sop: "",
+        ora_fuera_sop: "",
+        tls_10_activo: "",
+        sop_es_activado: "",
+        sql_fuera_sop: "",
+        tls_11_activo: "",
+      };
+    },
+  },
+};
+</script>
 <style scoped>
 /* Estilos generales */
 body {

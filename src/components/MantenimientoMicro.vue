@@ -10,16 +10,17 @@
       </h1>
     </div>
     <div class="contenedor_formulario">
-      <form class="formulario" @submit.prevent="guardarDatos">
+      <form class="formulario" @submit.prevent="buscarActivo">
         <div>
           <input
-            v-model="id_inventario"
+            v-model="id_seguridad"
             type="text"
-            id="identificador"
-            name="identificador"
+            id="id_seguridad"
+            name="id_seguridad"
             placeholder="ACTIVO"
           />
         </div>
+        <button type="submit">Prueba de api</button>
         <div id="Pestañas">
           <nav class="animate__animated animate__fadeInDown animate_faster">
             <!--Enlaces de las diferentes pestañas de la pagina-->
@@ -37,7 +38,7 @@
         <div>
           <label for="id_inventario">Id.inventario</label>
           <input
-            v-model="id_inventario"
+            v-model="formData.id_inventario"
             type="text"
             id="id_inventario"
             name="id_inventario"
@@ -47,12 +48,12 @@
         <div>
           <label for="usuario_micro">Usuario:</label>
           <select
-            v-model="usuario_micro"
+            v-model="formData.usuario_micro"
             id="usuario_micro"
             name="usuario_micro"
           >
             <option
-              v-for="option in usuario_micro"
+              v-for="option in usuarioOpciones"
               :key="option.id"
               :value="option.id"
             >
@@ -62,9 +63,9 @@
         </div>
         <!--contenedor de Nombre del usuario-->
         <div>
-          <label for="usuario_micro_text">Nombre:</label>
+          <label for="usuario_micro_text"></label>
           <input
-            v-model="usuario_micro_text"
+            v-model="formData.usuario_micro_text"
             type="text"
             name="usuario_micro_text"
             id="usuario_micro_text"
@@ -74,7 +75,7 @@
         <div>
           <label for="usuario_de_exel">Usuario(del Exel):</label>
           <input
-            v-model="usuario_de_exel"
+            v-model="formData.usuario_de_exel"
             type="text"
             name="usuario_de_exel"
             id="usuario_de_exel"
@@ -84,12 +85,12 @@
         <div>
           <label for="manager_micro">Manager:</label>
           <select
-            v-model="manager_micro"
+            v-model="formData.manager_micro"
             name="manager_micro"
             id="manager_micro"
           >
             <option
-              v-for="option in manager_micros"
+              v-for="option in managerOpciones"
               :key="option.id"
               :value="option.id"
             >
@@ -99,20 +100,20 @@
         </div>
         <!--Contenedor del nombre del manager-->
         <div>
-          <label for="manager_micro_micro_text">Nombre:</label>
+          <label for="manager_micro_text"></label>
           <input
-            v-model="manager_micro_micro_text"
+            v-model="formData.manager_micro_text"
             type="text"
-            name="manager_micro_micro_text"
-            id="manager_micro_micro_text"
+            name="manager_micro_text"
+            id="manager_micro_text"
           />
         </div>
         <!--Contenedor ambito-->
         <div>
           <label for="ambito">Ambito:</label>
-          <select v-model="ambito" name="ambito" id="ambito">
+          <select v-model="formData.ambito" name="ambito" id="ambito">
             <option
-              v-for="option in ambitos"
+              v-for="option in ambitoOpciones"
               :key="option.id"
               :value="option.id"
             >
@@ -125,7 +126,7 @@
           <!--Contenedor de equipo especial-->
           <div>
             <input
-              v-model="equipo_especial"
+              v-model="formData.equipo_especial"
               type="checkbox"
               name="equipo_especial"
               id="equipo_especial"
@@ -135,7 +136,7 @@
           <!--Contenedor de admin-->
           <div>
             <input
-              v-model="es_admin"
+              v-model="formData.es_admin"
               type="checkbox"
               name="es_admin"
               id="es_admin"
@@ -144,13 +145,13 @@
           </div>
           <!--Contenedor check vip-->
           <div>
-            <input v-model="vip" type="checkbox" name="vip" id="vip" />
+            <input v-model="formData.vip" type="checkbox" name="vip" id="vip" />
             <label for="vip">Es vip</label>
           </div>
           <!--Contenedor check desactivado ad-->
           <div>
             <input
-              v-model="desactivado_ad"
+              v-model="formData.desactivado_ad"
               type="checkbox"
               name="desactivado_ad"
               id="desactivado_ad"
@@ -166,9 +167,9 @@
         <!--Contenedor de proveedor-->
         <div>
           <label for="proveedor">Proveedor:</label>
-          <select v-model="proveedor" name="proveedor" id="proveedor">
+          <select v-model="formData.proveedor" name="proveedor" id="proveedor">
             <option
-              v-for="option in proveedores"
+              v-for="option in proveedorOpciones"
               :key="option.id"
               :value="option.id"
             >
@@ -180,7 +181,7 @@
         <div>
           <label for="pedi_ordinis">Pedido Ordinis:</label>
           <input
-            v-model="pedi_ordinis"
+            v-model="formData.pedi_ordinis"
             type="text"
             name="pedi_ordinis"
             id="pedi_ordinis"
@@ -190,7 +191,7 @@
         <div>
           <label for="fecha_compra">Fecha de compra:</label>
           <input
-            v-model="fecha_compra"
+            v-model="formData.fecha_compra"
             type="date"
             name="fecha_compra"
             id="fecha_compra"
@@ -200,7 +201,7 @@
         <div>
           <label for="fin_garantia">Finde Garantía:</label>
           <input
-            v-model="fin_garantia"
+            v-model="formData.fin_garantia"
             type="text"
             name="fin_garantia"
             id="fin_garantia"
@@ -210,7 +211,7 @@
         <div>
           <label for="amorti_año">Amortización(año):</label>
           <input
-            v-model="amorti_año"
+            v-model="formData.amorti_año"
             type="text"
             name="amorti_año"
             id="amorti_año"
@@ -220,7 +221,7 @@
         <div>
           <label for="fi_amorti">Fin Amortización:</label>
           <input
-            v-model="fi_amorti"
+            v-model="formData.fi_amorti"
             type="date"
             name="fi_amorti"
             id="fi_amorti"
@@ -230,7 +231,7 @@
         <div>
           <label for="es_capex">Es CAPEX(Inversión)</label>
           <input
-            v-model="es_capex"
+            v-model="formData.es_capex"
             type="checkbox"
             name="es_capex"
             id="es_capex"
@@ -244,13 +245,13 @@
         <!--Contenedor de imei-->
         <div>
           <label for="imei">IMEI:</label>
-          <input v-model="imei" type="text" name="imei" id="imei" />
+          <input v-model="formData.imei" type="text" name="imei" id="imei" />
         </div>
         <!--Contenedor de codigo de desbloqueo-->
         <div>
           <label for="cod_desbloqueo">Código Desbloqueo:</label>
           <input
-            v-model="cod_desbloqueo"
+            v-model="formData.cod_desbloqueo"
             type="text"
             name="cod_desbloqueo"
             id="cod_desbloqueo"
@@ -259,34 +260,181 @@
         <!--Contenedor de num de telefono-->
         <div>
           <label for="num_tel">Núm.Teléfono:</label>
-          <input v-model="num_tel" type="text" name="num_tel" id="num_tel" />
+          <input
+            v-model="formData.num_tel"
+            type="text"
+            name="num_tel"
+            id="num_tel"
+          />
         </div>
         <!--Contenedor de -->
         <div>
           <label for="icc">ICC:</label>
-          <input v-model="icc" type="text" name="icc" id="icc" />
+          <input v-model="formData.icc" type="text" name="icc" id="icc" />
         </div>
         <!--Contenedor de -->
         <div>
           <label for="pin">PIN:</label>
-          <input v-model="pin" type="text" name="pin" id="pin" />
+          <input v-model="formData.pin" type="text" name="pin" id="pin" />
         </div>
         <!--Contenedor de -->
         <div>
           <label for="puk">PUK:</label>
-          <input v-model="puk" type="text" name="puk" id="puk" />
+          <input v-model="formData.puk" type="text" name="puk" id="puk" />
         </div>
         <!--Contenedor de -->
         <div>
           <label for="pep">PEP:</label>
-          <input v-model="pep" type="text" name="pep" id="pep" />
+          <input v-model="formData.pep" type="text" name="pep" id="pep" />
         </div>
       </form>
     </div>
   </div>
 </template>
 
-<script></script>
+<script>
+import axios from "axios";
+export default {
+  name: "MicroActivo",
+  data() {
+    return {
+      id_seguridad: "",
+      formData: {
+        id_inventario: "",
+        usuario_micro: "",
+        usuario_micro_text: "",
+        usuario_de_exel: "",
+        manager_micro: "",
+        manager_micro_text: "",
+        ambito: "",
+        equipo_especial: "",
+        es_admin: "",
+        vip: "",
+        desactivado_ad: "",
+        proveedor: "",
+        pedi_ordinis: "",
+        fecha_compra: "",
+        fin_garantia: "",
+        amorti_año: "",
+        fi_amorti: "",
+        es_capex: "",
+        imei: "",
+        cod_desbloqueo: "",
+        num_tel: "",
+        icc: "",
+        pin: "",
+        puk: "",
+        pep: "",
+      },
+      usuarioOpciones: [],
+      managerOpciones: [],
+      ambitoOpciones: [],
+      proveedorOpciones: [],
+    };
+  },
+  methods: {
+    buscarActivo() {
+      if (!this.id_seguridad) {
+        alert("Por favor, introduce un ID válido.");
+        return;
+      }
+
+      // Llama a la API para obtener los datos simulados
+      axios
+        .get(`https://jsonplaceholder.typicode.com/todos/${this.id_seguridad}`)
+        .then((response) => {
+          const data = response.data;
+          // Actualiza los campos con los datos obtenidos
+          this.formData.id_inventario = data.title;
+          this.formData.usuario_micro = data.title;
+          this.formData.usuario_micro_text = data.title;
+          this.formData.usuario_de_exel = data.title;
+          this.formData.manager_micro = data.title;
+          this.formData.manager_micro_text = data.title;
+          this.formData.ambito = data.title;
+          this.formData.equipo_especial = data.title;
+          this.formData.es_admin = data.title;
+          this.formData.vip = data.title;
+          this.formData.desactivado_ad = data.title;
+          this.formData.proveedor = data.title;
+          this.formData.pedi_ordinis = data.title;
+          this.formData.fecha_compra = data.title;
+          this.formData.fin_garantia = data.title;
+          this.formData.amorti_año = data.title;
+          this.formData.fi_amorti = data.title;
+          this.formData.es_capex = data.title;
+          this.formData.imei = data.title;
+          this.formData.cod_desbloqueo = data.title;
+          this.formData.num_tel = data.title;
+          this.formData.icc = data.title;
+          this.formData.pin = data.title;
+          this.formData.puk = data.title;
+          this.formData.pep = data.title;
+
+          // Llama a la API para llenar los select
+          axios
+            .get("https://jsonplaceholder.typicode.com/users")
+            .then((response) => {
+              // Nota que ahora usamos 'response' en lugar de 'responce'
+              this.usuarioOpciones = response.data.map((user) => ({
+                id: user.id,
+                nombre: user.name,
+              }));
+              this.managerOpciones = response.data.map((user) => ({
+                id: user.id,
+                nombre: user.name,
+              }));
+              this.ambitoOpciones = response.data.map((user) => ({
+                id: user.id,
+                nombre: user.name,
+              }));
+              this.proveedorOpciones = response.data.map((user) => ({
+                id: user.id,
+                nombre: user.name,
+              }));
+            })
+            .catch((error) => {
+              console.error("Error al obtener las opciones:", error);
+            });
+        })
+        .catch((error) => {
+          console.error("Error al obtener la información:", error);
+          alert("No se encontró información para este ID.");
+          this.limpiarCampos();
+        });
+    },
+    limpiarCampos() {
+      this.formData = {
+        id_inventario: "",
+        usuario_micro: "",
+        usuario_micro_text: "",
+        usuario_de_exel: "",
+        manager_micro: "",
+        manager_micro_text: "",
+        ambito: "",
+        equipo_especial: "",
+        es_admin: "",
+        vip: "",
+        desactivado_ad: "",
+        proveedor: "",
+        pedi_ordinis: "",
+        fecha_compra: "",
+        fin_garantia: "",
+        amorti_año: "",
+        fi_amorti: "",
+        es_capex: "",
+        imei: "",
+        cod_desbloqueo: "",
+        num_tel: "",
+        icc: "",
+        pin: "",
+        puk: "",
+        pep: "",
+      };
+    },
+  },
+};
+</script>
 <style scoped>
 /* Estilos generales */
 body {

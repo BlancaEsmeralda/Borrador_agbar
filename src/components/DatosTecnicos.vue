@@ -22,6 +22,7 @@
           name="id_seguridad"
           placeholder="ACTIVO"
         />
+        <button type="submit">Prueba con la api</button>
         <!--contenedor de la barra de navegación-->
         <div id="Pestañas">
           <nav class="animate__animated animate__fadeInDown animate_faster">
@@ -212,7 +213,6 @@
             name="ip_backup"
           />
         </div>
-        <button type="submit">Cargar datos</button>
       </form>
     </div>
   </div>

@@ -14,16 +14,18 @@
     </div>
     <!--Contenedor del formulario-->
     <div class="contenedor_formulario">
-      <form class="formulario" @submit.prevent="guardarDatos">
+      <form class="formulario" @submit.prevent="buscarActivo">
         <div class="identificador">
           <input
-            v-model="identificador"
+            v-model="id_seguridad"
             type="text"
-            id="identificador"
-            name="identificador"
+            id="id_seguridad"
+            name="id_seguridad"
             placeholder="ACTIVO"
           />
         </div>
+        <!--ESTE BUTTON ES PARA HACER PRUEBAS DE CARGAR JSON ATRAVES DE UNA API-->
+        <button type="submit">Pruebas conexion api</button>
         <!--Barra del menú de navegación-->
         <div id="Pestañas">
           <nav class="animate__animated animate__fadeInDown">
@@ -40,7 +42,11 @@
         <!--Contenedor del tipo Activo-->
         <div>
           <label for="tipoActivo">Tipo Activo:</label>
-          <select v-model="tipoActivo" id="tipoActivo" name="tipoActivo">
+          <select
+            v-model="formData.tipoActivo"
+            id="tipoActivo"
+            name="tipoActivo"
+          >
             <option
               v-for="opcion in tipoActivoOpciones"
               :key="opcion.id"
@@ -53,7 +59,11 @@
         <!--Contenedor del tipo Activo IT-->
         <div>
           <label for="tipoActivoIt">Tipo Activo It :</label>
-          <select v-model="tipoActivoIt" id="tipoActivoIT" name="tipoActivoIT">
+          <select
+            v-model="formData.tipoActivoIt"
+            id="tipoActivoIT"
+            name="tipoActivoIT"
+          >
             <option
               v-for="opcion in tipoActivoItOpciones"
               :key="opcion.id"
@@ -66,7 +76,7 @@
         <!--Contenedor del textarea con la clase largo completo-->
         <div class="full-width">
           <textarea
-            v-model="textDescripcion"
+            v-model="formData.textDescripcion"
             id="textDescripcion"
             name="textDescripcion"
             placeholder="Descripción"
@@ -75,7 +85,7 @@
         <!--Contenedor de es IT/OT-->
         <div>
           <label for="esITesOT">ES IT/ ES OT:</label>
-          <select v-model="esITesOT" id="esITesOT" name="esITesOT">
+          <select v-model="formData.esITesOT" id="esITesOT" name="esITesOT">
             <option
               v-for="opcion in esITesOTOpciones"
               :key="opcion.id"
@@ -88,7 +98,7 @@
         <!--Contenedor de Entorno-->
         <div>
           <label for="entorno">Entorno:</label>
-          <select v-model="entorno" id="entorno" name="entorno">
+          <select v-model="formData.entorno" id="entorno" name="entorno">
             <option
               v-for="opcion in entornoOpciones"
               :key="opcion.id"
@@ -101,7 +111,7 @@
         <!--Contenedor de Categoria-->
         <div>
           <label for="categoria">Categoria:</label>
-          <select v-model="categoria" id="categoria" name="categoria">
+          <select v-model="formData.categoria" id="categoria" name="categoria">
             <option
               v-for="opcion in categoriaOpciones"
               :key="opcion.id"
@@ -115,7 +125,7 @@
         <div>
           <label for="tarifaMensual">Tarifa Mensual Servicio:</label>
           <input
-            v-model="tarifaMensual"
+            v-model="formData.tarifaMensual"
             type="text"
             id="tarifaMensual"
             name="tarifaMensual"
@@ -125,7 +135,7 @@
         <!--Contenedor de Ubicacion-->
         <div>
           <label for="ubicacion">Ubicacion:</label>
-          <select v-model="ubicacion" id="ubicacion" name="ubicacion">
+          <select v-model="formData.ubicacion" id="ubicacion" name="ubicacion">
             <option
               v-for="option in ubicacionOpciones"
               :key="option.id"
@@ -138,7 +148,11 @@
         <!--Contenedor de Sububicacion-->
         <div>
           <label for="sububicacion">Sububicación:</label>
-          <select v-model="sububicacion" id="sububicacion" name="sububicacion">
+          <select
+            v-model="formData.sububicacion"
+            id="sububicacion"
+            name="sububicacion"
+          >
             <option
               v-for="option in sububicacionOpciones"
               :key="option.id"
@@ -152,7 +166,7 @@
         <div class="full-width">
           <label for="comentarios">Comentarios:</label>
           <textarea
-            v-model="comentarios"
+            v-model="formData.comentarios"
             id="comentarios"
             name="comentarios"
           ></textarea>
@@ -160,22 +174,32 @@
         <!--Contenedor de Rack-->
         <div>
           <label for="rack">Rack:</label>
-          <input v-model="rack" type="text" id="rack" name="rack" />
+          <input v-model="formData.rack" type="text" id="rack" name="rack" />
         </div>
         <!--Contenedor de Posicion-->
         <div>
           <label for="posicion">Posicion:</label>
-          <input v-model="posicion" type="text" id="posicion" name="posicion" />
+          <input
+            v-model="formData.posicion"
+            type="text"
+            id="posicion"
+            name="posicion"
+          />
         </div>
         <!--Contenedor de Unidad-->
         <div>
           <label for="unidad">Unidad:</label>
-          <input v-model="unidad" type="text" id="unidad" name="unidad" />
+          <input
+            v-model="formData.unidad"
+            type="text"
+            id="unidad"
+            name="unidad"
+          />
         </div>
         <!--Contenedor de Empres-->
         <div>
           <label for="empresa">Empresa:</label>
-          <select v-model="empresa" id="empresa" name="empresa">
+          <select v-model="formData.empresa" id="empresa" name="empresa">
             <option
               v-for="option in empresaOpciones"
               :key="option.id"
@@ -190,7 +214,7 @@
           <!--Contenedor del primer checkbox-item con gestionadoProveedorOT-->
           <div class="checkbox-item">
             <input
-              v-model="gestionadoProveedorOT"
+              v-model="formData.gestionadoProveedorOT"
               type="checkbox"
               id="gestionadoProveedorOT"
               name="gestionadoProveedorOT"
@@ -202,7 +226,7 @@
           <!--Contenedor del segundo checkbox-item con gestionadoProveedorIT-->
           <div class="checkbox-item">
             <input
-              v-model="gestionadoProveedorIT"
+              v-model="formData.gestionadoProveedorIT"
               type="checkbox"
               id="gestionadoProveedorIT"
               name="gestionadoProveedorIT"
@@ -214,7 +238,7 @@
           <!--Contenedor del tercer checkbox-item con esAzure-->
           <div class="checkbox-item">
             <input
-              v-model="esAzure"
+              v-model="formData.esAzure"
               type="checkbox"
               id="Esazure"
               name="Esazure"
@@ -224,7 +248,7 @@
           <!--Contenedor del tercer checkbox-item con esSeguridad-->
           <div class="checkbox-item">
             <input
-              v-model="esSeguridad"
+              v-model="formData.esSeguridad"
               type="checkbox"
               id="esSeguridad"
               name="esSeguridad"
@@ -236,7 +260,7 @@
         <div>
           <label for="altaActivo">Alta Activo:</label>
           <input
-            v-model="altaActivo"
+            v-model="formData.altaActivo"
             type="date"
             id="altaActivo"
             name="altaActivo"
@@ -246,7 +270,7 @@
         <div>
           <label for="altaGestion">Alta Gestión:</label>
           <input
-            v-model="altaGestion"
+            v-model="formData.altaGestion"
             type="date"
             id="altaGestion"
             name="altaGestion"
@@ -256,7 +280,7 @@
         <div>
           <label for="mesAltaGestion">Mes alta Gestión:</label>
           <input
-            v-model="mesAltaGestion"
+            v-model="formData.mesAltaGestion"
             type="text"
             id="mesAltaGestion"
             name="mesAltaGestion"
@@ -266,7 +290,7 @@
         <div>
           <label for="bajaActivo">Baja Activo:</label>
           <input
-            v-model="bajaActivo"
+            v-model="formData.bajaActivo"
             type="date"
             id="bajaActivo"
             name="bajaActivo"
@@ -276,7 +300,7 @@
         <div>
           <label for="bajaGestion">Baja Gestión:</label>
           <input
-            v-model="bajaGestion"
+            v-model="formData.bajaGestion"
             type="date"
             id="bajaGestion"
             name="bajaGestion"
@@ -285,7 +309,11 @@
         <!--Contenedor del citricidad-->
         <div>
           <label for="citricidad">Citricidad:</label>
-          <select v-model="citricidad" id="citricidad" name="citricidad">
+          <select
+            v-model="formData.citricidad"
+            id="citricidad"
+            name="citricidad"
+          >
             <option
               v-for="option in citricidadOpciones"
               :key="option.id"
@@ -298,7 +326,7 @@
         <!--Contenedor del estado-->
         <div>
           <label for="estado">Estado:</label>
-          <select v-model="estado" id="estado" name="estado">
+          <select v-model="formData.estado" id="estado" name="estado">
             <option
               v-for="option in estadoOpciones"
               :key="option.id"
@@ -312,7 +340,7 @@
         <div class="full-width">
           <label for="anotaciones">Anotaciones:</label>
           <textarea
-            v-model="anotaciones"
+            v-model="formData.anotaciones"
             id="anotaciones"
             name="anotaciones"
           ></textarea>
@@ -325,7 +353,7 @@
         <!--Contenedor del proveedor-->
         <div>
           <label for="proveedor">Proveedor:</label>
-          <select v-model="proveedor" id="proveedor" name="proveedor">
+          <select v-model="formData.proveedor" id="proveedor" name="proveedor">
             <option
               v-for="option in proveedorOpciones"
               :key="option.id"
@@ -339,7 +367,7 @@
         <div>
           <label for="fechaCompra">Fecha de Compra:</label>
           <input
-            v-model="fechaCompra"
+            v-model="formData.fechaCompra"
             type="date"
             id="fechaCompra"
             name="fechaCompra"
@@ -349,7 +377,7 @@
         <div>
           <label for="finGarantia">Fin de Garantia (Fabricante):</label>
           <input
-            v-model="finGarantia"
+            v-model="formData.finGarantia"
             type="date"
             id="finGarantia"
             name="finGarantia"
@@ -359,7 +387,7 @@
         <div>
           <label for="proveedorMant">Prov. Mant. Hardware:</label>
           <select
-            v-model="proveedorMant"
+            v-model="formData.proveedorMant"
             id="proveedorMant"
             name="proveedorMant"
           >
@@ -374,7 +402,12 @@
         </div>
         <!--Contenedor checkbox-item del pertet-->
         <div class="checkbox-item">
-          <input v-model="pertet" type="checkbox" id="pertet" name="pertet" />
+          <input
+            v-model="formData.pertet"
+            type="checkbox"
+            id="pertet"
+            name="pertet"
+          />
           <label for="pertet">PERTET?</label>
         </div>
       </form>
@@ -383,7 +416,203 @@
 </template>
 
 <script>
-export default {};
+import axios from "axios";
+
+export default {
+  name: "ActivoGeneral",
+  data() {
+    return {
+      id_seguridad: "",
+      formData: {
+        tipoActivo: "",
+        tipoActivoIt: "",
+        textDescripcion: "",
+        esITesOTOpciones: "",
+        entorno: "",
+        categoria: "",
+        tarifaMensual: "",
+        ubicacion: "",
+        sububicacion: "",
+        comentarios: "",
+        rack: "",
+        posicion: "",
+        unidad: "",
+        empresa: "",
+        //checkboxes
+        gestionadoProveedorOT: "",
+        gestionadoProveedorIT: "",
+        esAzure: "",
+        esSeguridad: "",
+        //Gestion del activo
+        altaActivo: "",
+        altaGestion: "",
+        mesAltaGestion: "",
+        bajaActivo: "",
+        bajaGestion: "",
+        citricidad: "",
+        anotaciones: "",
+        fechaCompra: "",
+        finGarantia: "",
+        proveedorMant: "",
+      },
+      //option de los selects
+      tipoActivoOpciones: [],
+      tipoActivoItOpciones: [],
+      esITesOTOpciones: [],
+      entornoOpciones: [],
+      categoriaOpciones: [],
+      ubicacionOpciones: [],
+      sububicacionOpciones: [],
+      empresaOpciones: [],
+      citricidadOpciones: [],
+      estadoOpciones: [],
+      proveedorOpciones: [],
+      proveedorMantOpciones: [],
+    };
+  },
+  methods: {
+    buscarActivo() {
+      if (!this.id_seguridad) {
+        alert("Por favor, introduce un ID válido.");
+        return;
+      }
+      // Llama a la API para obtener los datos simulados
+      axios
+        .get(`https://jsonplaceholder.typicode.com/todos/${this.id_seguridad}`)
+        .then((response) => {
+          const data = response.data;
+          // Actualiza los campos con los datos obtenidos
+          this.formData.tipoActivo = data.title;
+          this.formData.tipoActivoIt = data.title;
+          this.formData.textDescripcion = data.title;
+          this.formData.esITesOTOpciones = data.title;
+          this.formData.entorno = data.title;
+          this.formData.categoria = data.title;
+          this.formData.tarifaMensual = data.title;
+          this.formData.ubicacion = data.title;
+          this.formData.sububicacion = data.title;
+          this.formData.comentarios = data.title;
+          this.formData.rack = data.title;
+          this.formData.posicion = data.title;
+          this.formData.unidad = data.title;
+          this.formData.empresa = data.title;
+          //checkboxes
+          this.formData.gestionadoProveedorOT = data.title;
+          this.formData.gestionadoProveedorIT = data.title;
+          this.formData.esAzure = data.title;
+          this.formData.esSeguridad = data.title;
+
+          this.formData.altaActivo = data.title;
+          this.formData.altaGestion = data.title;
+          this.formData.mesAltaGestion = data.title;
+          this.formData.bajaActivo = data.title;
+          this.formData.bajaGestion = data.title;
+          this.formData.citricidad = data.title;
+          this.formData.anotaciones = data.title;
+          this.formData.fechaCompra = data.title;
+          this.formData.finGarantia = data.title;
+          this.formData.proveedorMant = data.title;
+
+          // Llama a la API para llenar los select
+          axios
+            .get("https://jsonplaceholder.typicode.com/users")
+            .then((response) => {
+              // Nota que ahora usamos 'response' en lugar de 'responce'
+              this.tipoActivoOpciones = response.data.map((user) => ({
+                id: user.id,
+                nombre: user.name,
+              }));
+              this.tipoActivoItOpciones = response.data.map((user) => ({
+                id: user.id,
+                nombre: user.name,
+              }));
+              this.esITesOTOpciones = response.data.map((user) => ({
+                id: user.id,
+                nombre: user.name,
+              }));
+              this.entornoOpciones = response.data.map((user) => ({
+                id: user.id,
+                nombre: user.name,
+              }));
+              this.categoriaOpciones = response.data.map((user) => ({
+                id: user.id,
+                nombre: user.name,
+              }));
+              this.ubicacionOpciones = response.data.map((user) => ({
+                id: user.id,
+                nombre: user.name,
+              }));
+              this.sububicacionOpciones = response.data.map((user) => ({
+                id: user.id,
+                nombre: user.name,
+              }));
+              this.empresaOpciones = response.data.map((user) => ({
+                id: user.id,
+                nombre: user.name,
+              }));
+              this.citricidadOpciones = response.data.map((user) => ({
+                id: user.id,
+                nombre: user.name,
+              }));
+              this.estadoOpciones = response.data.map((user) => ({
+                id: user.id,
+                nombre: user.name,
+              }));
+              this.proveedorOpciones = response.data.map((user) => ({
+                id: user.id,
+                nombre: user.name,
+              }));
+              this.proveedorMantOpciones = response.data.map((user) => ({
+                id: user.id,
+                nombre: user.name,
+              }));
+            })
+            .catch((error) => {
+              console.error("Error al obtener las opciones:", error);
+            });
+        })
+        .catch((error) => {
+          console.error("Error al obtener la información:", error);
+          alert("No se encontró información para este ID.");
+          this.limpiarCampos();
+        });
+    },
+    limpiarCampos() {
+      this.formData = {
+        tipoActivo: "",
+        tipoActivoIt: "",
+        textDescripcion: "",
+        esITesOTOpciones: "",
+        entorno: "",
+        categoria: "",
+        tarifaMensual: "",
+        ubicacion: "",
+        sububicacion: "",
+        comentarios: "",
+        rack: "",
+        posicion: "",
+        unidad: "",
+        empresa: "",
+        //checkboxes
+        gestionadoProveedorOT: "",
+        gestionadoProveedorIT: "",
+        esAzure: "",
+        esSeguridad: "",
+        //Gestion del activo
+        altaActivo: "",
+        altaGestion: "",
+        mesAltaGestion: "",
+        bajaActivo: "",
+        bajaGestion: "",
+        citricidad: "",
+        anotaciones: "",
+        fechaCompra: "",
+        finGarantia: "",
+        proveedorMant: "",
+      };
+    },
+  },
+};
 </script>
 
 <style scoped>
