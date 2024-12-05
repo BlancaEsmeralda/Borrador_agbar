@@ -40,15 +40,15 @@
             </nav>
           </div>
           <div>
-            <label for="ip">IP:</label>
+            <label for="ip">IP</label>
             <input v-model="formData.ip" type="text" id="ip" name="ip" />
           </div>
           <div>
-            <label for="vlan">VLAN:</label>
+            <label for="vlan">VLAN</label>
             <input v-model="formData.vlan" type="text" id="vlan" name="vlan" />
           </div>
           <div>
-            <label for="tipo_ip">Tipo IP:</label>
+            <label for="tipo_ip">Tipo IP</label>
             <input
               v-model="formData.tipo_ip"
               type="text"
@@ -142,9 +142,23 @@ body {
   font-size: 70px;
   font-weight: bold;
   text-align: center;
-  color: #1c346c;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+  background-color: #1c346c;
+  border-radius: 20px;
+  padding: 10px 20px;
+  display: inline-block;
   margin-top: 50px;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+label {
+  font-size: 16px;
+  font-weight: bold;
+  color: #09090a;
+  background-color: #e0f1ff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  display: inline-block;
 }
 /* Formularios */
 .identificador {

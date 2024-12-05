@@ -40,7 +40,7 @@
           </div>
 
           <div>
-            <label for="modelo_software">Modelo de software:</label>
+            <label for="modelo_software">Modelo de software</label>
             <input
               v-model="formData.modelo_software"
               type="text"
@@ -49,7 +49,7 @@
             />
           </div>
           <div>
-            <label for="licencia">Licencia:</label>
+            <label for="licencia">Licencia</label>
             <input
               v-model="formData.licencia"
               type="text"
@@ -58,7 +58,7 @@
             />
           </div>
           <div>
-            <label for="comentarios">Comentarios:</label>
+            <label for="comentarios">Comentarios</label>
             <input
               v-model="formData.comentarios"
               type="text"
@@ -141,11 +141,11 @@ body {
 }
 /* Fondo */
 .contenedor_global {
-  background-color: #ffffff; /* o el color que prefieras */
+  background-color: #ffffff;
   background-image: url("../assets/water-splash.png");
   background-repeat: no-repeat;
-  background-position: bottom right; /* o la posición que prefieras */
-  background-size: 100% auto; /* ajusta el tamaño según sea necesario */
+  background-position: bottom right;
+  background-size: 100% auto;
 }
 /* Títulos */
 .contenedor_titulo {
@@ -156,9 +156,23 @@ body {
   font-size: 70px;
   font-weight: bold;
   text-align: center;
-  color: #1c346c;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+  background-color: #1c346c;
+  border-radius: 20px;
+  padding: 10px 20px;
+  display: inline-block;
   margin-top: 50px;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+label {
+  font-size: 16px;
+  font-weight: bold;
+  color: #09090a;
+  background-color: #e0f1ff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  display: inline-block;
 }
 /* Formularios */
 .identificador {

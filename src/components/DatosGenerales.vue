@@ -44,7 +44,7 @@
           </div>
           <!--Contenedor del tipo Activo-->
           <div>
-            <label for="tipoActivo">Tipo Activo:</label>
+            <label for="tipoActivo">Tipo Activo</label>
             <select
               v-model="formData.tipoActivo"
               id="tipoActivo"
@@ -61,7 +61,7 @@
           </div>
           <!--Contenedor del tipo Activo IT-->
           <div>
-            <label for="tipoActivoIt">Tipo Activo It :</label>
+            <label for="tipoActivoIt">Tipo Activo It</label>
             <select
               v-model="formData.tipoActivoIt"
               id="tipoActivoIT"
@@ -87,7 +87,7 @@
           </div>
           <!--Contenedor de es IT/OT-->
           <div>
-            <label for="esITesOT">ES IT/ ES OT:</label>
+            <label for="esITesOT">ES IT/ ES OT</label>
             <select v-model="formData.esITesOT" id="esITesOT" name="esITesOT">
               <option
                 v-for="opcion in esITesOTOpciones"
@@ -100,7 +100,7 @@
           </div>
           <!--Contenedor de Entorno-->
           <div>
-            <label for="entorno">Entorno:</label>
+            <label for="entorno">Entorno</label>
             <select v-model="formData.entorno" id="entorno" name="entorno">
               <option
                 v-for="opcion in entornoOpciones"
@@ -113,7 +113,7 @@
           </div>
           <!--Contenedor de Categoria-->
           <div>
-            <label for="categoria">Categoria:</label>
+            <label for="categoria">Categoria</label>
             <select
               v-model="formData.categoria"
               id="categoria"
@@ -130,7 +130,7 @@
           </div>
           <!--Contenedor de Tarifa Mensual Servicio-->
           <div>
-            <label for="tarifaMensual">Tarifa Mensual Servicio:</label>
+            <label for="tarifaMensual">Tarifa Mensual Servicio</label>
             <input
               v-model="formData.tarifaMensual"
               type="text"
@@ -141,7 +141,7 @@
           </div>
           <!--Contenedor de Ubicacion-->
           <div>
-            <label for="ubicacion">Ubicacion:</label>
+            <label for="ubicacion">Ubicacion</label>
             <select
               v-model="formData.ubicacion"
               id="ubicacion"
@@ -158,7 +158,7 @@
           </div>
           <!--Contenedor de Sububicacion-->
           <div>
-            <label for="sububicacion">Sububicación:</label>
+            <label for="sububicacion">Sububicación</label>
             <select
               v-model="formData.sububicacion"
               id="sububicacion"
@@ -175,7 +175,7 @@
           </div>
           <!--Contenedor de comentarios-->
           <div class="full-width">
-            <label for="comentarios">Comentarios:</label>
+            <label for="comentarios">Comentarios</label>
             <textarea
               v-model="formData.comentarios"
               id="comentarios"
@@ -184,12 +184,12 @@
           </div>
           <!--Contenedor de Rack-->
           <div>
-            <label for="rack">Rack:</label>
+            <label for="rack">Rack</label>
             <input v-model="formData.rack" type="text" id="rack" name="rack" />
           </div>
           <!--Contenedor de Posicion-->
           <div>
-            <label for="posicion">Posicion:</label>
+            <label for="posicion">Posicion</label>
             <input
               v-model="formData.posicion"
               type="text"
@@ -199,7 +199,7 @@
           </div>
           <!--Contenedor de Unidad-->
           <div>
-            <label for="unidad">Unidad:</label>
+            <label for="unidad">Unidad</label>
             <input
               v-model="formData.unidad"
               type="text"
@@ -209,7 +209,7 @@
           </div>
           <!--Contenedor de Empres-->
           <div>
-            <label for="empresa">Empresa:</label>
+            <label for="empresa">Empresa</label>
             <select v-model="formData.empresa" id="empresa" name="empresa">
               <option
                 v-for="option in empresaOpciones"
@@ -269,7 +269,7 @@
           </div>
           <!--Contenedor del altaActivo-->
           <div>
-            <label for="altaActivo">Alta Activo:</label>
+            <label for="altaActivo">Alta Activo</label>
             <input
               v-model="formData.altaActivo"
               type="date"
@@ -279,7 +279,7 @@
           </div>
           <!--Contenedor del altaGestion-->
           <div>
-            <label for="altaGestion">Alta Gestión:</label>
+            <label for="altaGestion">Alta Gestión</label>
             <input
               v-model="formData.altaGestion"
               type="date"
@@ -289,7 +289,7 @@
           </div>
           <!--Contenedor del mesAltaGestion-->
           <div>
-            <label for="mesAltaGestion">Mes alta Gestión:</label>
+            <label for="mesAltaGestion">Mes alta Gestión</label>
             <input
               v-model="formData.mesAltaGestion"
               type="text"
@@ -299,7 +299,7 @@
           </div>
           <!--Contenedor del bajaActivo-->
           <div>
-            <label for="bajaActivo">Baja Activo:</label>
+            <label for="bajaActivo">Baja Activo</label>
             <input
               v-model="formData.bajaActivo"
               type="date"
@@ -309,7 +309,7 @@
           </div>
           <!--Contenedor del bajaGestion-->
           <div>
-            <label for="bajaGestion">Baja Gestión:</label>
+            <label for="bajaGestion">Baja Gestión</label>
             <input
               v-model="formData.bajaGestion"
               type="date"
@@ -319,7 +319,7 @@
           </div>
           <!--Contenedor del citricidad-->
           <div>
-            <label for="citricidad">Citricidad:</label>
+            <label for="citricidad">Citricidad</label>
             <select
               v-model="formData.citricidad"
               id="citricidad"
@@ -336,7 +336,7 @@
           </div>
           <!--Contenedor del estado-->
           <div>
-            <label for="estado">Estado:</label>
+            <label for="estado">Estado</label>
             <select v-model="formData.estado" id="estado" name="estado">
               <option
                 v-for="option in estadoOpciones"
@@ -349,7 +349,7 @@
           </div>
           <!--Contenedor de anotaciones-->
           <div class="full-width">
-            <label for="anotaciones">Anotaciones:</label>
+            <label for="anotaciones">Anotaciones</label>
             <textarea
               v-model="formData.anotaciones"
               id="anotaciones"
@@ -363,7 +363,7 @@
 
           <!--Contenedor del proveedor-->
           <div>
-            <label for="proveedor">Proveedor:</label>
+            <label for="proveedor">Proveedor</label>
             <select
               v-model="formData.proveedor"
               id="proveedor"
@@ -380,7 +380,7 @@
           </div>
           <!--Contenedor del fechaCompra-->
           <div>
-            <label for="fechaCompra">Fecha de Compra:</label>
+            <label for="fechaCompra">Fecha de Compra</label>
             <input
               v-model="formData.fechaCompra"
               type="date"
@@ -390,7 +390,7 @@
           </div>
           <!--Contenedor del finGarantia-->
           <div>
-            <label for="finGarantia">Fin de Garantia (Fabricante):</label>
+            <label for="finGarantia">Fin de Garantia (Fabricante)</label>
             <input
               v-model="formData.finGarantia"
               type="date"
@@ -400,7 +400,7 @@
           </div>
           <!--Contenedor del proveedorMant-->
           <div>
-            <label for="proveedorMant">Prov. Mant. Hardware:</label>
+            <label for="proveedorMant">Prov. Mant. Hardware</label>
             <select
               v-model="formData.proveedorMant"
               id="proveedorMant"
@@ -667,17 +667,37 @@ body {
   font-size: 70px;
   font-weight: bold;
   text-align: center;
-  color: #1c346c;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+  background-color: #1c346c;
+  border-radius: 20px;
+  padding: 10px 20px;
+  display: inline-block;
   margin-top: 50px;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
 
 .Titulo2 {
   font-size: 30px;
   font-weight: bold;
-  color: #1c346c;
-  margin-top: 30px;
+  text-align: center;
+  color: #ffffff;
+  background-color: #1c346c;
+  border-radius: 20px;
+  padding: 10px 20px;
+  display: inline-block;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
   margin-bottom: 30px;
+}
+
+label {
+  font-size: 16px;
+  font-weight: bold;
+  color: #09090a;
+  background-color: #e0f1ff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  display: inline-block;
 }
 /* Formularios */
 .identificador {

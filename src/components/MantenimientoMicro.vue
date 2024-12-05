@@ -51,7 +51,7 @@
           </div>
           <!--contenedor de usuario-->
           <div>
-            <label for="usuario_micro">Usuario:</label>
+            <label for="usuario_micro">Usuario</label>
             <select
               v-model="formData.usuario_micro"
               id="usuario_micro"
@@ -78,7 +78,7 @@
           </div>
           <!--contenedor de usuario del exel-->
           <div>
-            <label for="usuario_de_exel">Usuario(del Exel):</label>
+            <label for="usuario_de_exel">Usuario(del Exel)</label>
             <input
               v-model="formData.usuario_de_exel"
               type="text"
@@ -88,7 +88,7 @@
           </div>
           <!--Contenedor del manager-->
           <div>
-            <label for="manager_micro">Manager:</label>
+            <label for="manager_micro">Manager</label>
             <select
               v-model="formData.manager_micro"
               name="manager_micro"
@@ -115,7 +115,7 @@
           </div>
           <!--Contenedor ambito-->
           <div>
-            <label for="ambito">Ambito:</label>
+            <label for="ambito">Ambito</label>
             <select v-model="formData.ambito" name="ambito" id="ambito">
               <option
                 v-for="option in ambitoOpciones"
@@ -176,7 +176,7 @@
           </div>
           <!--Contenedor de proveedor-->
           <div>
-            <label for="proveedor">Proveedor:</label>
+            <label for="proveedor">Proveedor</label>
             <select
               v-model="formData.proveedor"
               name="proveedor"
@@ -193,7 +193,7 @@
           </div>
           <!--Contenedor de pedido ordenis-->
           <div>
-            <label for="pedi_ordinis">Pedido Ordinis:</label>
+            <label for="pedi_ordinis">Pedido Ordinis</label>
             <input
               v-model="formData.pedi_ordinis"
               type="text"
@@ -203,7 +203,7 @@
           </div>
           <!--Contenedor de fecha de compra-->
           <div>
-            <label for="fecha_compra">Fecha de compra:</label>
+            <label for="fecha_compra">Fecha de compra</label>
             <input
               v-model="formData.fecha_compra"
               type="date"
@@ -213,7 +213,7 @@
           </div>
           <!--Contenedor de finde de gantia-->
           <div>
-            <label for="fin_garantia">Finde Garantía:</label>
+            <label for="fin_garantia">Finde Garantía</label>
             <input
               v-model="formData.fin_garantia"
               type="text"
@@ -223,7 +223,7 @@
           </div>
           <!--Contenedor de amortizacion(año)-->
           <div>
-            <label for="amorti_año">Amortización(año):</label>
+            <label for="amorti_año">Amortización(año)</label>
             <input
               v-model="formData.amorti_año"
               type="text"
@@ -233,7 +233,7 @@
           </div>
           <!--Contenedor fin amortizacion-->
           <div>
-            <label for="fi_amorti">Fin Amortización:</label>
+            <label for="fi_amorti">Fin Amortización</label>
             <input
               v-model="formData.fi_amorti"
               type="date"
@@ -265,7 +265,7 @@
           </div>
           <!--Contenedor de codigo de desbloqueo-->
           <div>
-            <label for="cod_desbloqueo">Código Desbloqueo:</label>
+            <label for="cod_desbloqueo">Código Desbloqueo</label>
             <input
               v-model="formData.cod_desbloqueo"
               type="text"
@@ -275,7 +275,7 @@
           </div>
           <!--Contenedor de num de telefono-->
           <div>
-            <label for="num_tel">Núm.Teléfono:</label>
+            <label for="num_tel">Núm.Teléfono</label>
             <input
               v-model="formData.num_tel"
               type="text"
@@ -285,22 +285,22 @@
           </div>
           <!--Contenedor de -->
           <div>
-            <label for="icc">ICC:</label>
+            <label for="icc">ICC</label>
             <input v-model="formData.icc" type="text" name="icc" id="icc" />
           </div>
           <!--Contenedor de -->
           <div>
-            <label for="pin">PIN:</label>
+            <label for="pin">PIN</label>
             <input v-model="formData.pin" type="text" name="pin" id="pin" />
           </div>
           <!--Contenedor de -->
           <div>
-            <label for="puk">PUK:</label>
+            <label for="puk">PUK</label>
             <input v-model="formData.puk" type="text" name="puk" id="puk" />
           </div>
           <!--Contenedor de -->
           <div>
-            <label for="pep">PEP:</label>
+            <label for="pep">PEP</label>
             <input v-model="formData.pep" type="text" name="pep" id="pep" />
           </div>
         </form>
@@ -472,11 +472,11 @@ body {
 }
 /* Fondo */
 .contenedor_global {
-  background-color: #ffffff; /* o el color que prefieras */
+  background-color: #ffffff;
   background-image: url("../assets/water-splash.png");
   background-repeat: no-repeat;
-  background-position: bottom right; /* o la posición que prefieras */
-  background-size: 100% auto; /* ajusta el tamaño según sea necesario */
+  background-position: bottom right;
+  background-size: 100% auto;
 }
 /* Títulos */
 .contenedor_titulo {
@@ -487,16 +487,35 @@ body {
   font-size: 70px;
   font-weight: bold;
   text-align: center;
-  color: #1c346c;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+  background-color: #1c346c;
+  border-radius: 20px;
+  padding: 10px 20px;
+  display: inline-block;
   margin-top: 50px;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
 .subtitulo {
   font-size: 30px;
   font-weight: bold;
-  color: #1c346c;
-  margin-top: 30px;
+  text-align: center;
+  color: #ffffff;
+  background-color: #1c346c;
+  border-radius: 20px;
+  padding: 10px 20px;
+  display: inline-block;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
   margin-bottom: 30px;
+}
+label {
+  font-size: 16px;
+  font-weight: bold;
+  color: #09090a;
+  background-color: #e0f1ff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  display: inline-block;
 }
 /* Formularios */
 .identificador {

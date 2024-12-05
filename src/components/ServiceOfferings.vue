@@ -54,7 +54,7 @@
             </select>
           </div>
           <div>
-            <label for="porcentaje_SO"> %S.O:</label>
+            <label for="porcentaje_SO"> %S.O</label>
             <input
               v-model="formData.porcentaje_SO"
               type="text"
@@ -70,7 +70,7 @@
                 type="checkbox"
                 id="SO_principal"
                 name="SO_principal"
-              /><label for="SO_pricipal">S.O Principal:</label>
+              /><label for="SO_pricipal">S.O Principal</label>
             </div>
             <div>
               <input
@@ -79,11 +79,11 @@
                 id="Escritico"
                 name="EScritico"
               />
-              <label for="EScritico">Es Crítico:</label>
+              <label for="EScritico">Es Crítico</label>
             </div>
           </div>
           <div>
-            <label for="responsable1">Responsable:</label>
+            <label for="responsable1">Responsable</label>
             <input
               v-model="formData.responsable"
               type="text"
@@ -92,7 +92,7 @@
             />
           </div>
           <div>
-            <label for="responsable2">Segundo Responsable:</label>
+            <label for="responsable2">Segundo Responsable</label>
             <input
               v-model="formData.responsable2"
               type="text"
@@ -101,7 +101,7 @@
             />
           </div>
           <div>
-            <label for="categoria">Categoria:</label>
+            <label for="categoria">Categoria</label>
             <input
               v-model="formData.categoria"
               type="text"
@@ -110,7 +110,7 @@
             />
           </div>
           <div>
-            <label for="subcategoria">Subcategoria:</label>
+            <label for="subcategoria">Subcategoria</label>
             <input
               v-model="formData.subcategoria"
               type="text"
@@ -215,11 +215,11 @@ body {
 }
 /* Fondo */
 .contenedor_global {
-  background-color: #ffffff; /* o el color que prefieras */
+  background-color: #ffffff;
   background-image: url("../assets/water-splash.png");
   background-repeat: no-repeat;
-  background-position: bottom right; /* o la posición que prefieras */
-  background-size: 100% auto; /* ajusta el tamaño según sea necesario */
+  background-position: bottom right;
+  background-size: 100% auto;
 }
 /* Títulos */
 .contenedor_titulo {
@@ -230,19 +230,24 @@ body {
   font-size: 70px;
   font-weight: bold;
   text-align: center;
-  color: #1c346c;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+  background-color: #1c346c;
+  border-radius: 20px;
+  padding: 10px 20px;
+  display: inline-block;
   margin-top: 50px;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
-
-.subtitulos {
-  font-size: 30px;
+label {
+  font-size: 16px;
   font-weight: bold;
-  color: #1c346c;
-  margin-top: 30px;
-  margin-bottom: 30px;
+  color: #09090a;
+  background-color: #e0f1ff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  display: inline-block;
 }
-
 /* Formularios */
 .identificador {
   padding: 20px;

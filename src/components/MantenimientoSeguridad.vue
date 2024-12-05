@@ -348,16 +348,35 @@ body {
   font-size: 70px;
   font-weight: bold;
   text-align: center;
-  color: #1c346c;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+  background-color: #1c346c;
+  border-radius: 20px;
+  padding: 10px 20px;
+  display: inline-block;
   margin-top: 50px;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
 .subtitulo {
   font-size: 30px;
   font-weight: bold;
-  color: #1c346c;
-  margin-top: 30px;
+  text-align: center;
+  color: #ffffff;
+  background-color: #1c346c;
+  border-radius: 20px;
+  padding: 10px 20px;
+  display: inline-block;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
   margin-bottom: 30px;
+}
+label {
+  font-size: 16px;
+  font-weight: bold;
+  color: #09090a;
+  background-color: #e0f1ff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  display: inline-block;
 }
 /* Formularios */
 .identificador {
@@ -369,8 +388,8 @@ body {
 .formulario {
   background: #fff;
   padding: 45px;
-  border-radius: 8p;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
   gap: 20px;

@@ -42,7 +42,7 @@
           </div>
           <!--Contenedor de modelo-->
           <div>
-            <label for="modelo">Modelo:</label>
+            <label for="modelo">Modelo</label>
             <select v-model="formData.modelo" id="opcionesModelo" name="modelo">
               <option
                 v-for="option in opcionesModelo"
@@ -55,7 +55,7 @@
           </div>
           <!--Contenedor de fabricante-->
           <div>
-            <label for="fabricante">Fabricante:</label>
+            <label for="fabricante">Fabricante</label>
             <input
               v-model="formData.fabricante"
               type="text"
@@ -65,7 +65,7 @@
           </div>
           <!--Contenedor de numero de serie-->
           <div>
-            <label for="numserie"> Número de serie:</label>
+            <label for="numserie"> Número de serie</label>
             <input
               v-model="formData.numserie"
               type="text"
@@ -75,7 +75,7 @@
           </div>
           <!--Contenedor de modelo antiguo-->
           <div class="modelo_antiguo">
-            <label for="modelo_antiguo">Modelo(campo antiguo):</label>
+            <label for="modelo_antiguo">Modelo(campo antiguo)</label>
             <input
               v-model="formData.modelo_antiguo"
               type="text"
@@ -85,12 +85,12 @@
           </div>
           <!--Contenedor de RAM-->
           <div class="ram-sockets">
-            <label for="ram">RAM(GB):</label>
+            <label for="ram">RAM(GB)</label>
             <input v-model="formData.ram" type="text" id="ram" name="ram" />
           </div>
           <!--Contenedor de Sockets-->
           <div>
-            <label for="core-sockets">Sockets:</label>
+            <label for="core-sockets">Sockets</label>
             <input
               v-model="formData.sockets"
               type="text"
@@ -100,7 +100,7 @@
           </div>
           <!--Contenedor de cores por socket-->
           <div>
-            <label for="coresocket">Cores por Socket:</label>
+            <label for="coresocket">Cores por Socket</label>
             <input
               v-model="formData.coresocket"
               type="text"
@@ -114,7 +114,7 @@
             <h2 class="subtitulos">Sistema operativo</h2>
           </div>
           <div>
-            <label for="sis_operativo">Sistema_operativo(Versión):</label>
+            <label for="sis_operativo">Sistema_operativo(Versión)</label>
             <select
               v-model="formData.sis_operativo"
               id="sis_operativo"
@@ -157,7 +157,7 @@
           </div>
 
           <div>
-            <label for="servicePack">Service Pack:</label>
+            <label for="servicePack">Service Pack</label>
             <input
               v-model="formData.servicePack"
               type="text"
@@ -171,7 +171,7 @@
 
           <!--Nombre de del dominio y el nombre del dns-->
           <div>
-            <label for="dominio">Dominio:</label>
+            <label for="dominio">Dominio</label>
             <select v-model="formData.dominio" name="dominio" id="dominio">
               <option
                 v-for="option in opcionDominio"
@@ -183,7 +183,7 @@
             </select>
           </div>
           <div>
-            <label for="nombre_dns_NetBios">Nombre DNS/NetBIOS:</label>
+            <label for="nombre_dns_NetBios">Nombre DNS/NetBIOS</label>
             <input
               v-model="formData.nombre_dns_NetBios"
               type="text"
@@ -368,7 +368,7 @@ body {
   background-position: bottom right;
   background-size: 100% auto;
 }
-/* Títulos */
+/* Títulos y Subtitulos*/
 .contenedor_titulo {
   padding: 30px;
   margin-bottom: 1px;
@@ -377,19 +377,38 @@ body {
   font-size: 70px;
   font-weight: bold;
   text-align: center;
-  color: #1c346c;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+  background-color: #1c346c;
+  border-radius: 20px;
+  padding: 10px 20px;
+  display: inline-block;
   margin-top: 50px;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
 
 .subtitulos {
   font-size: 30px;
   font-weight: bold;
-  color: #1c346c;
-  margin-top: 30px;
+  text-align: center;
+  color: #ffffff;
+  background-color: #1c346c;
+  border-radius: 20px;
+  padding: 10px 20px;
+  display: inline-block;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
   margin-bottom: 30px;
 }
 
+label {
+  font-size: 16px;
+  font-weight: bold;
+  color: #09090a;
+  background-color: #e0f1ff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  display: inline-block;
+}
 /* Formularios */
 .identificador {
   padding: 20px;

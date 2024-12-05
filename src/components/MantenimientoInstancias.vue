@@ -42,7 +42,7 @@
           </div>
           <!--Contenedor de nombre-->
           <div>
-            <label for="nombre_instancia">Nombre:</label>
+            <label for="nombre_instancia">Nombre</label>
             <input
               v-model="formData.nombre_instancia"
               type="text"
@@ -52,7 +52,7 @@
           </div>
           <!--contendro entorno-->
           <div>
-            <label for="entorno_instancia">Entorno:</label>
+            <label for="entorno_instancia">Entorno</label>
             <input
               v-model="formData.entorno_instancia"
               type="text"
@@ -62,7 +62,7 @@
           </div>
           <!--Contendor de citricidad-->
           <div>
-            <label for="citricidad_intancia">Citricidad:</label>
+            <label for="citricidad_intancia">Citricidad</label>
             <input
               v-model="formData.citricidad_intancia"
               type="text"
@@ -72,7 +72,7 @@
           </div>
           <!--Contendor de aplic-->
           <div>
-            <label for="aplic_intancia">Aplic:</label>
+            <label for="aplic_intancia">Aplic</label>
             <input
               v-model="formData.aplic_intancia"
               type="text"
@@ -81,7 +81,7 @@
             />
           </div>
           <div>
-            <label for="aplicacion_instancia">Aplicación:</label>
+            <label for="aplicacion_instancia">Aplicación</label>
             <select
               v-model="formData.aplicacion_instancia"
               id="aplicacion_instancia"
@@ -334,9 +334,23 @@ body {
   font-size: 70px;
   font-weight: bold;
   text-align: center;
-  color: #1c346c;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+  background-color: #1c346c;
+  border-radius: 20px;
+  padding: 10px 20px;
+  display: inline-block;
   margin-top: 50px;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+label {
+  font-size: 16px;
+  font-weight: bold;
+  color: #09090a;
+  background-color: #e0f1ff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  display: inline-block;
 }
 /* Formularios */
 .identificador {
