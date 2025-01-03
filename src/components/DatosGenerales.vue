@@ -3,7 +3,7 @@
     <!--Contenedor del logo con la ruta al home-->
     <div class="logo">
       <router-link to="/">
-        <img src="../assets/logo.png" alt="Logo de aguas de barcelona" />
+        <img src="../assets/logo.png" alt="Logo" />
       </router-link>
     </div>
     <div class="contenedor_global">
@@ -18,17 +18,17 @@
       <!--Contenedor del formulario-->
       <div class="contenedor_formulario">
         <form class="formulario" @submit.prevent="buscarActivo">
-          <div class="identificador">
+          <div class="id">
             <input
-              v-model="id_seguridad"
+              v-model="id"
               type="text"
-              id="id_seguridad"
-              name="id_seguridad"
+              id="id"
+              name="id"
               placeholder="ACTIVO"
             />
           </div>
           <!--ESTE BUTTON ES PARA HACER PRUEBAS DE CARGAR JSON ATRAVES DE UNA API-->
-          <button type="submit">Pruebas conexion api</button>
+          <button type="submit">Pruebas conexion apii</button>
           <!--Barra del menú de navegación-->
           <div id="Pestañas">
             <nav class="animate__animated animate__fadeInDown">
@@ -53,7 +53,7 @@
               <option
                 v-for="opcion in tipoActivoOpciones"
                 :key="opcion.id"
-                :value="opcion.id"
+                :value="opcion.nombre"
               >
                 {{ opcion.nombre }}
               </option>
@@ -70,7 +70,7 @@
               <option
                 v-for="opcion in tipoActivoItOpciones"
                 :key="opcion.id"
-                :value="opcion.id"
+                :value="opcion.nombre"
               >
                 {{ opcion.nombre }}
               </option>
@@ -92,7 +92,7 @@
               <option
                 v-for="opcion in esITesOTOpciones"
                 :key="opcion.id"
-                :value="opcion.id"
+                :value="opcion.nombre"
               >
                 {{ opcion.nombre }}
               </option>
@@ -105,7 +105,7 @@
               <option
                 v-for="opcion in entornoOpciones"
                 :key="opcion.id"
-                :value="opcion.id"
+                :value="opcion.nombre"
               >
                 {{ opcion.nombre }}
               </option>
@@ -122,13 +122,13 @@
               <option
                 v-for="opcion in categoriaOpciones"
                 :key="opcion.id"
-                :value="opcion.id"
+                :value="opcion.nombre"
               >
                 {{ opcion.nombre }}
               </option>
             </select>
           </div>
-          <!--Contenedor de Tarifa Mensual Servicio-->
+          <!--Contenedor de Tarifa Mensual Servicio
           <div>
             <label for="tarifaMensual">Tarifa Mensual Servicio</label>
             <input
@@ -139,6 +139,8 @@
             />
             <span>€/mes</span>
           </div>
+          -->
+
           <!--Contenedor de Ubicacion-->
           <div>
             <label for="ubicacion">Ubicacion</label>
@@ -150,7 +152,7 @@
               <option
                 v-for="option in ubicacionOpciones"
                 :key="option.id"
-                :value="option.id"
+                :value="option.nombre"
               >
                 {{ option.nombre }}
               </option>
@@ -167,7 +169,7 @@
               <option
                 v-for="option in sububicacionOpciones"
                 :key="option.id"
-                :value="option.id"
+                :value="option.nombre"
               >
                 {{ option.nombre }}
               </option>
@@ -214,7 +216,7 @@
               <option
                 v-for="option in empresaOpciones"
                 :key="option.id"
-                :value="option.id"
+                :value="option.nombre"
               >
                 {{ option.nombre }}
               </option>
@@ -267,6 +269,7 @@
               <label for="esSeguridad">Es de Seguridad</label>
             </div>
           </div>
+          <!--FECHAS ACTIVO -->
           <!--Contenedor del altaActivo-->
           <div>
             <label for="altaActivo">Alta Activo</label>
@@ -317,6 +320,16 @@
               name="bajaGestion"
             />
           </div>
+          <!--Contenedor del bajaGestion-->
+          <div>
+            <label for="Mes_Baja_Viewnext">Mes baja Gestion</label>
+            <input
+              v-model="formData.Mes_Baja_Viewnext"
+              type="text"
+              id="Mes_Baja_Viewnext"
+              name="Mes_Baja_Viewnext"
+            />
+          </div>
           <!--Contenedor del citricidad-->
           <div>
             <label for="citricidad">Citricidad</label>
@@ -328,7 +341,7 @@
               <option
                 v-for="option in citricidadOpciones"
                 :key="option.id"
-                :value="option.id"
+                :value="option.nombre"
               >
                 {{ option.nombre }}
               </option>
@@ -341,7 +354,7 @@
               <option
                 v-for="option in estadoOpciones"
                 :key="option.id"
-                :value="option.id"
+                :value="option.nombre"
               >
                 {{ option.nombre }}
               </option>
@@ -372,7 +385,7 @@
               <option
                 v-for="option in proveedorOpciones"
                 :key="option.id"
-                :value="option.id"
+                :value="option.nombre"
               >
                 {{ option.nombre }}
               </option>
@@ -409,7 +422,7 @@
               <option
                 v-for="option in proveedorMantOpciones"
                 :key="option.id"
-                :value="option.id"
+                :value="option.nombre"
               >
                 {{ option.nombre }}
               </option>
@@ -438,11 +451,12 @@ export default {
   name: "ActivoGeneral",
   data() {
     return {
-      id_seguridad: "",
+      id: "",
       formData: {
         tipoActivo: "",
         tipoActivoIt: "",
         textDescripcion: "",
+        esITesOT: "",
         esITesOTOpciones: "",
         entorno: "",
         categoria: "",
@@ -465,11 +479,15 @@ export default {
         mesAltaGestion: "",
         bajaActivo: "",
         bajaGestion: "",
+        Mes_Baja_Viewnext: "",
         citricidad: "",
+        estado: "",
         anotaciones: "",
+        proveedor: "",
         fechaCompra: "",
         finGarantia: "",
         proveedorMant: "",
+        pertet: "",
       },
       //option de los selects
       tipoActivoOpciones: [],
@@ -488,109 +506,116 @@ export default {
   },
   methods: {
     buscarActivo() {
-      if (!this.id_seguridad) {
+      if (!this.id) {
         alert("Por favor, introduce un ID válido.");
         return;
       }
-      // Llama a la API para obtener los datos simulados
+      // Llama a la API para obtener los datos de la api de datos generales
       axios
-        .get(`https://jsonplaceholder.typicode.com/todos/${this.id_seguridad}`)
+        .get(`http://localhost:3001/api/datos-generales/${this.id}`)
         .then((response) => {
-          const data = response.data;
-          // Actualiza los campos con los datos obtenidos
-          this.formData.tipoActivo = data.title;
-          this.formData.tipoActivoIt = data.title;
-          this.formData.textDescripcion = data.title;
-          this.formData.esITesOTOpciones = data.title;
-          this.formData.entorno = data.title;
-          this.formData.categoria = data.title;
-          this.formData.tarifaMensual = data.title;
-          this.formData.ubicacion = data.title;
-          this.formData.sububicacion = data.title;
-          this.formData.comentarios = data.title;
-          this.formData.rack = data.title;
-          this.formData.posicion = data.title;
-          this.formData.unidad = data.title;
-          this.formData.empresa = data.title;
+          //Accede al primer elemento del array
+          const data = response.data[0];
+          //Muestra por consola la respuesta del backend
+          console.log("JSON recibido:", response.data);
+          // Convertir fechas al formato YYYY-MM-DD
+          const convertirFecha = (fecha) => {
+            if (!fecha) return ""; // Si la fecha es nula, devolver un string vacío
+            return fecha.split("T")[0]; // Tomar solo la parte de la fecha
+          };
+          // Datos obtenidos
+          this.formData.tipoActivo = data.Tipo || "No especificado";
+          this.formData.tipoActivoIt = data.TIPO_it || "No especificado";
+          this.formData.textDescripcion = data.Descripción || "No especificado";
+          this.formData.esITesOT = data.ITOT || "No especificado";
+          this.formData.entorno = data.Entorno || "No especificado";
+          this.formData.categoria = data.Categoria || "No especificado";
+          this.formData.ubicacion = data.Ubicacion || "No especificado";
+          this.formData.sububicacion = data.SubUbicacion || "No especificado";
+          this.formData.comentarios = data.Comentarios || "No especificado";
+          this.formData.rack = data.RACK || "No especificado";
+          this.formData.posicion = data.POSICION || "No especificado";
+          this.formData.unidad = data.UNIDAD || "No especificado";
+          this.formData.empresa = data.Empresa || "No especificado";
           //checkboxes
-          this.formData.gestionadoProveedorOT = data.title;
-          this.formData.gestionadoProveedorIT = data.title;
-          this.formData.esAzure = data.title;
-          this.formData.esSeguridad = data.title;
-
-          this.formData.altaActivo = data.title;
-          this.formData.altaGestion = data.title;
-          this.formData.mesAltaGestion = data.title;
-          this.formData.bajaActivo = data.title;
-          this.formData.bajaGestion = data.title;
-          this.formData.citricidad = data.title;
-          this.formData.anotaciones = data.title;
-          this.formData.fechaCompra = data.title;
-          this.formData.finGarantia = data.title;
-          this.formData.proveedorMant = data.title;
-
-          // Llama a la API para llenar los select
-          axios
-            .get("https://jsonplaceholder.typicode.com/users")
-            .then((response) => {
-              // Nota que ahora usamos 'response' en lugar de 'responce'
-              this.tipoActivoOpciones = response.data.map((user) => ({
-                id: user.id,
-                nombre: user.name,
-              }));
-              this.tipoActivoItOpciones = response.data.map((user) => ({
-                id: user.id,
-                nombre: user.name,
-              }));
-              this.esITesOTOpciones = response.data.map((user) => ({
-                id: user.id,
-                nombre: user.name,
-              }));
-              this.entornoOpciones = response.data.map((user) => ({
-                id: user.id,
-                nombre: user.name,
-              }));
-              this.categoriaOpciones = response.data.map((user) => ({
-                id: user.id,
-                nombre: user.name,
-              }));
-              this.ubicacionOpciones = response.data.map((user) => ({
-                id: user.id,
-                nombre: user.name,
-              }));
-              this.sububicacionOpciones = response.data.map((user) => ({
-                id: user.id,
-                nombre: user.name,
-              }));
-              this.empresaOpciones = response.data.map((user) => ({
-                id: user.id,
-                nombre: user.name,
-              }));
-              this.citricidadOpciones = response.data.map((user) => ({
-                id: user.id,
-                nombre: user.name,
-              }));
-              this.estadoOpciones = response.data.map((user) => ({
-                id: user.id,
-                nombre: user.name,
-              }));
-              this.proveedorOpciones = response.data.map((user) => ({
-                id: user.id,
-                nombre: user.name,
-              }));
-              this.proveedorMantOpciones = response.data.map((user) => ({
-                id: user.id,
-                nombre: user.name,
-              }));
-            })
-            .catch((error) => {
-              console.error("Error al obtener las opciones:", error);
-            });
+          this.formData.gestionadoProveedorOT = Boolean(data.EsConnectis);
+          this.formData.gestionadoProveedorIT = Boolean(data.EsViewnext);
+          this.formData.esAzure = Boolean(data.EsAzure);
+          this.formData.esSeguridad = Boolean(data.EsSeguridad); //
+          //fechas
+          this.formData.altaActivo =
+            convertirFecha(data.Alta_SRV) || "No especificado";
+          this.formData.altaGestion =
+            convertirFecha(data.Alta_Viewnext) || "No especificado";
+          this.formData.mesAltaGestion =
+            data.Mes_Alta_Viewnext || "No especificado";
+          this.formData.bajaActivo =
+            convertirFecha(data.Baja_SRV) || "No especificado";
+          this.formData.bajaGestion =
+            convertirFecha(data.Baja_Viewnext) || "No especificado";
+          this.formData.Mes_Baja_Viewnext =
+            data.Mes_Baja_Viewnext || "No especificado";
+          this.formData.citricidad = data.T_Criticidad || "No especificado";
+          this.formData.estado = data.T_Estado || "No especificado";
+          this.formData.anotaciones = data.ANOTACIONES || "No especificado";
+          this.formData.proveedor = data.Proveedor || "No especificado";
+          this.formData.fechaCompra =
+            convertirFecha(data.Fecha_Compra) || "No especificado";
+          this.formData.finGarantia =
+            convertirFecha(data.FFin_Garantia) || "No especificado";
+          this.formData.proveedorMant = data.Proveedor || "No especificado";
+          this.formData.pertet = Boolean(data.esPERTE) || "No especificado";
         })
         .catch((error) => {
           console.error("Error al obtener la información:", error);
           alert("No se encontró información para este ID.");
           this.limpiarCampos();
+        });
+    },
+    cargarOpcionesSelects() {
+      // Llama a la API para llenar los selects
+      Promise.all([
+        axios.get("http://localhost:3001/api/selects-general/tipo-activo"),
+        axios.get("http://localhost:3001/api/selects-general/tipo-activo-it"),
+        axios.get("http://localhost:3001/api/selects-general/itot"),
+        axios.get("http://localhost:3001/api/selects-general/entorno"),
+        axios.get("http://localhost:3001/api/selects-general/categoria"),
+        axios.get("http://localhost:3001/api/selects-general/ubicacion"),
+        axios.get("http://localhost:3001/api/selects-general/sububicacion"),
+        axios.get("http://localhost:3001/api/selects-general/empresa"),
+        axios.get("http://localhost:3001/api/selects-general/criticidad"),
+        axios.get("http://localhost:3001/api/selects-general/estado"),
+        axios.get("http://localhost:3001/api/selects-general/proveedor"),
+      ])
+        .then(
+          ([
+            tipoActivoRes,
+            tipoActivoItRes,
+            itotRes,
+            entornoRes,
+            categoriaRes,
+            ubicacionRes,
+            sububicacionRes,
+            empresaRes,
+            criticidadRes,
+            estadoRes,
+            proveedorRes,
+          ]) => {
+            this.tipoActivoOpciones = tipoActivoRes.data;
+            this.tipoActivoItOpciones = tipoActivoItRes.data;
+            this.esITesOTOpciones = itotRes.data;
+            this.entornoOpciones = entornoRes.data;
+            this.categoriaOpciones = categoriaRes.data;
+            this.ubicacionOpciones = ubicacionRes.data;
+            this.sububicacionOpciones = sububicacionRes.data;
+            this.empresaOpciones = empresaRes.data;
+            this.citricidadOpciones = criticidadRes.data;
+            this.estadoOpciones = estadoRes.data;
+            this.proveedorOpciones = proveedorRes.data;
+          }
+        )
+        .catch((error) => {
+          console.error("Error al obtener las opciones:", error);
         });
     },
     limpiarCampos() {
@@ -627,6 +652,9 @@ export default {
         proveedorMant: "",
       };
     },
+  },
+  mounted() {
+    this.cargarOpcionesSelects(); // Cargar las opciones al montar el componente
   },
 };
 </script>

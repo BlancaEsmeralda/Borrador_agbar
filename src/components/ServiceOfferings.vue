@@ -165,11 +165,11 @@ export default {
           this.formData.subcategoria = data.title;
         });
       axios
-        .get("https://jsonplaceholder.typicode.com/users")
+        .get("https://localhost:3000/api/productos")
         .then((response) => {
-          this.opciones_service_offering = response.data.map((user) => ({
-            id: user.id,
-            nombre: user.name,
+          this.opciones_service_offering = response.data.map((productos) => ({
+            id: productos.id,
+            nombre: productos.name,
           }));
         })
         .catch((error) => {

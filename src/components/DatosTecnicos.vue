@@ -269,7 +269,7 @@ export default {
         .then((response) => {
           const data = response.data;
           // Actualiza los campos con los datos obtenidos
-          this.formData.modelo = data.title;
+          this.formData.modelo = data.name;
           this.formData.fabricante = data.title;
           this.formData.numserie = data.title;
           this.formData.modelo_antiguo = data.title;

@@ -26,8 +26,6 @@ export default {
 /* Fondo */
 .contenedor_global {
   background-color: #ffffff;
-  background-image: url("../assets/water-splash.png");
-  background-repeat: no-repeat;
   background-position: bottom right;
   background-size: 100% auto;
 }
