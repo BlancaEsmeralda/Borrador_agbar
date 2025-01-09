@@ -29,6 +29,7 @@
           </div>
           <!--ESTE BUTTON ES PARA HACER PRUEBAS DE CARGAR JSON ATRAVES DE UNA API-->
           <button type="submit">Pruebas conexion apii</button>
+          <button @click="actualizarActivo">Actualizar Activo</button>
           <!--Barra del menú de navegación-->
           <div id="Pestañas">
             <nav class="animate__animated animate__fadeInDown">
@@ -445,6 +446,7 @@
 </template>
 
 <script>
+//import de la libreria de axios
 import axios from "axios";
 
 export default {
@@ -504,67 +506,60 @@ export default {
       proveedorMantOpciones: [],
     };
   },
+
   methods: {
+    //--- Método para buscar un activo (GET) ---
+
     buscarActivo() {
       if (!this.id) {
         alert("Por favor, introduce un ID válido.");
         return;
       }
-      // Llama a la API para obtener los datos de la api de datos generales
       axios
+        //Peticion a la api con el endpoint
         .get(`http://localhost:3001/api/datos-generales/${this.id}`)
         .then((response) => {
-          //Accede al primer elemento del array
+          //La respuesta viene en forma de array.
           const data = response.data[0];
-          //Muestra por consola la respuesta del backend
           console.log("JSON recibido:", response.data);
-          // Convertir fechas al formato YYYY-MM-DD
+
+          //funcion fecha que transforma la fecha al formato dd/mm/yy
           const convertirFecha = (fecha) => {
-            if (!fecha) return ""; // Si la fecha es nula, devolver un string vacío
-            return fecha.split("T")[0]; // Tomar solo la parte de la fecha
+            if (!fecha) return "";
+            return fecha.split("T")[0];
           };
-          // Datos obtenidos
-          this.formData.tipoActivo = data.Tipo || "No especificado";
-          this.formData.tipoActivoIt = data.TIPO_it || "No especificado";
-          this.formData.textDescripcion = data.Descripción || "No especificado";
-          this.formData.esITesOT = data.ITOT || "No especificado";
-          this.formData.entorno = data.Entorno || "No especificado";
-          this.formData.categoria = data.Categoria || "No especificado";
-          this.formData.ubicacion = data.Ubicacion || "No especificado";
-          this.formData.sububicacion = data.SubUbicacion || "No especificado";
-          this.formData.comentarios = data.Comentarios || "No especificado";
-          this.formData.rack = data.RACK || "No especificado";
-          this.formData.posicion = data.POSICION || "No especificado";
-          this.formData.unidad = data.UNIDAD || "No especificado";
-          this.formData.empresa = data.Empresa || "No especificado";
-          //checkboxes
+
+          // Asignar los datos al formulario con la pripiedad que coincide con json.
+          this.formData.tipoActivo = data.Tipo || "";
+          this.formData.tipoActivoIt = data.TIPO_it || "";
+          this.formData.textDescripcion = data.Descripción || "";
+          this.formData.esITesOT = data.ITOT || "";
+          this.formData.entorno = data.Entorno || "";
+          this.formData.categoria = data.Categoria || "";
+          this.formData.ubicacion = data.Ubicacion || "";
+          this.formData.sububicacion = data.SubUbicacion || "";
+          this.formData.comentarios = data.Comentarios || "";
+          this.formData.rack = data.RACK || "";
+          this.formData.posicion = data.POSICION || "";
+          this.formData.unidad = data.UNIDAD || "";
+          this.formData.empresa = data.Empresa || "";
           this.formData.gestionadoProveedorOT = Boolean(data.EsConnectis);
           this.formData.gestionadoProveedorIT = Boolean(data.EsViewnext);
           this.formData.esAzure = Boolean(data.EsAzure);
-          this.formData.esSeguridad = Boolean(data.EsSeguridad); //
-          //fechas
-          this.formData.altaActivo =
-            convertirFecha(data.Alta_SRV) || "No especificado";
-          this.formData.altaGestion =
-            convertirFecha(data.Alta_Viewnext) || "No especificado";
-          this.formData.mesAltaGestion =
-            data.Mes_Alta_Viewnext || "No especificado";
-          this.formData.bajaActivo =
-            convertirFecha(data.Baja_SRV) || "No especificado";
-          this.formData.bajaGestion =
-            convertirFecha(data.Baja_Viewnext) || "No especificado";
-          this.formData.Mes_Baja_Viewnext =
-            data.Mes_Baja_Viewnext || "No especificado";
-          this.formData.citricidad = data.T_Criticidad || "No especificado";
-          this.formData.estado = data.T_Estado || "No especificado";
-          this.formData.anotaciones = data.ANOTACIONES || "No especificado";
-          this.formData.proveedor = data.Proveedor || "No especificado";
-          this.formData.fechaCompra =
-            convertirFecha(data.Fecha_Compra) || "No especificado";
-          this.formData.finGarantia =
-            convertirFecha(data.FFin_Garantia) || "No especificado";
-          this.formData.proveedorMant = data.Proveedor || "No especificado";
-          this.formData.pertet = Boolean(data.esPERTE) || "No especificado";
+          this.formData.esSeguridad = Boolean(data.EsSeguridad);
+          this.formData.altaActivo = convertirFecha(data.Alta_SRV) || "";
+          this.formData.altaGestion = convertirFecha(data.Alta_Viewnext) || "";
+          this.formData.mesAltaGestion = data.Mes_Alta_Viewnext || "";
+          this.formData.bajaActivo = convertirFecha(data.Baja_SRV) || "";
+          this.formData.bajaGestion = convertirFecha(data.Baja_Viewnext) || "";
+          this.formData.Mes_Baja_Viewnext = data.Mes_Baja_Viewnext || "";
+          this.formData.citricidad = data.T_Criticidad || "";
+          this.formData.estado = data.T_Estado || "";
+          this.formData.anotaciones = data.ANOTACIONES || "";
+          this.formData.proveedor = data.Proveedor || "";
+          this.formData.fechaCompra = convertirFecha(data.Fecha_Compra) || "";
+          this.formData.finGarantia = convertirFecha(data.FFin_Garantia) || "";
+          this.formData.pertet = Boolean(data.esPERTE);
         })
         .catch((error) => {
           console.error("Error al obtener la información:", error);
@@ -572,8 +567,101 @@ export default {
           this.limpiarCampos();
         });
     },
+
+    actualizarActivo() {
+      console.log("Valores del formulario:", this.formData);
+      if (!this.id) {
+        alert("Por favor, introduce un ID válido.");
+        return;
+      }
+
+      //Las variables de seleccion de los datos
+      const datosActualizados = {
+        IdTipo: this.formData.tipoActivo,
+        IdTipo_it: this.formData.tipoActivoIt
+          ? Number(this.formData.tipoActivoIt)
+          : null,
+        Descripción: this.formData.textDescripcion,
+        IdITOT: this.formData.esITesOT ? Number(this.formData.esITesOT) : null,
+        IdEntorno: this.formData.entorno ? Number(this.formData.entorno) : null,
+        IdCategoria: this.formData.categoria
+          ? Number(this.formData.categoria)
+          : null,
+        IdUbicacion: this.formData.ubicacion
+          ? Number(this.formData.ubicacion)
+          : null,
+        IdSubUbicacion: this.formData.sububicacion
+          ? Number(this.formData.sububicacion)
+          : null,
+        RACK: this.formData.rack ? Number(this.formData.rack) : null,
+        POSICION: this.formData.posicion
+          ? Number(this.formData.posicion)
+          : null,
+        UNIDAD: this.formData.unidad ? Number(this.formData.unidad) : null,
+        idEmpresa: this.formData.empresa ? Number(this.formData.empresa) : null,
+        Comentarios: this.formData.comentarios,
+        EsConnectis: this.formData.gestionadoProveedorOT
+          ? Boolean(this.formData.gestionadoProveedorOT)
+          : null,
+        EsViewnext: this.formData.gestionadoProveedorIT
+          ? Boolean(this.formData.gestionadoProveedorIT)
+          : null,
+        EsAzure: this.formData.esAzure ? Boolean(this.formData.esAzure) : null,
+        EsSeguridad: this.formData.esSeguridad
+          ? Boolean(this.formData.esSeguridad)
+          : null,
+        Alta_SRV: this.formData.altaActivo,
+        Alta_Viewnext: this.formData.altaGestion,
+        Mes_Alta_Viewnext: this.formData.mesAltaGestion,
+        Baja_SRV: this.formData.bajaActivo,
+        Baja_Viewnext: this.formData.bajaGestion,
+        Mes_Baja_Viewnext: this.formData.Mes_Baja_Viewnext,
+        IdTCriticidad: this.formData.citricidad
+          ? Number(this.formData.citricidad)
+          : null,
+        IdTEstado: this.formData.estado ? Number(this.formData.estado) : null,
+        ANOTACIONES: this.formData.anotaciones,
+        IdProv: this.formData.proveedor
+          ? Number(this.formData.proveedor)
+          : null,
+        Fecha_Compra: this.formData.fechaCompra,
+        FFin_Garantia: this.formData.finGarantia,
+        esPERTE: this.formData.pertet ? Boolean(this.formData.pertet) : null,
+      };
+
+      console.log("Datos enviados:", datosActualizados);
+      axios
+        .put(
+          `http://localhost:3001/api/datos-generales/activos/${this.id}`,
+          datosActualizados,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        //La respuesta del servidor
+        .then((response) => {
+          console.log("Respuesta del servidor:", response.data);
+          if (response.data.success) {
+            alert("Datos actualizados correctamente");
+          } else {
+            alert("La actualización no se completó correctamente");
+          }
+        })
+        .catch((error) => {
+          console.error("Error detallado:", error);
+          alert(
+            `Error al actualizar: ${
+              error.response?.data?.message || error.message
+            }`
+          );
+        });
+    },
+
+    //FUNCION CARGA LOS SELECTS
     cargarOpcionesSelects() {
-      // Llama a la API para llenar los selects
+      //nos permite manejar de manera concurrente las solicitudes
       Promise.all([
         axios.get("http://localhost:3001/api/selects-general/tipo-activo"),
         axios.get("http://localhost:3001/api/selects-general/tipo-activo-it"),
@@ -587,6 +675,7 @@ export default {
         axios.get("http://localhost:3001/api/selects-general/estado"),
         axios.get("http://localhost:3001/api/selects-general/proveedor"),
       ])
+        //Maneja las respuestas de las solicitudese en le mismo oreden
         .then(
           ([
             tipoActivoRes,
@@ -618,6 +707,8 @@ export default {
           console.error("Error al obtener las opciones:", error);
         });
     },
+
+    //FUNCION PARA LIMPIAR LOS CAMPOS
     limpiarCampos() {
       this.formData = {
         tipoActivo: "",
@@ -634,12 +725,10 @@ export default {
         posicion: "",
         unidad: "",
         empresa: "",
-        //checkboxes
         gestionadoProveedorOT: "",
         gestionadoProveedorIT: "",
         esAzure: "",
         esSeguridad: "",
-        //Gestion del activo
         altaActivo: "",
         altaGestion: "",
         mesAltaGestion: "",
@@ -653,8 +742,13 @@ export default {
       };
     },
   },
+  /*
+   *se ejecuta después de que el componente ha sido montado en el DOM.
+   *Es decir, una vez que Vue ha renderizado el componente en la página y los elementos están disponibles en el DOM.
+   */
   mounted() {
-    this.cargarOpcionesSelects(); // Cargar las opciones al montar el componente
+    //funcion para vargar los select una vez obtenga los datos del backend.
+    this.cargarOpcionesSelects();
   },
 };
 </script>
@@ -681,8 +775,6 @@ body {
 /* Fondo */
 .contenedor_global {
   background-color: #ffffff;
-  background-image: url("../assets/water-splash.png");
-  background-repeat: no-repeat;
   background-position: bottom right;
   background-size: 100% auto;
 }
