@@ -455,20 +455,27 @@ export default {
     return {
       id: "",
       formData: {
+        tipoActivoId: null, //id de activo
         tipoActivo: "",
+        tipoActivoItId: null, //id de activo_it
         tipoActivoIt: "",
         textDescripcion: "",
+        esITesOTId: null, //id de it o ot
         esITesOT: "",
-        esITesOTOpciones: "",
+        entornoId: null, //id de entorno
         entorno: "",
+        categoriaId: null, //id de categoria
         categoria: "",
         tarifaMensual: "",
+        ubicacionId: null, //id de ubicacion
         ubicacion: "",
+        sububicacionId: null, //id de sububicacion
         sububicacion: "",
         comentarios: "",
         rack: "",
         posicion: "",
         unidad: "",
+        empresaId: null, //id de empresa
         empresa: "",
         //checkboxes
         gestionadoProveedorOT: "",
@@ -482,28 +489,32 @@ export default {
         bajaActivo: "",
         bajaGestion: "",
         Mes_Baja_Viewnext: "",
+        citricidadId: null, //id de citricidad
         citricidad: "",
+        estadoId: null,
         estado: "",
         anotaciones: "",
+        proveedorId: null, //id proveedor
         proveedor: "",
         fechaCompra: "",
         finGarantia: "",
+        proveedorMantId: null, //id prov mant
         proveedorMant: "",
         pertet: "",
       },
       //option de los selects
-      tipoActivoOpciones: [],
-      tipoActivoItOpciones: [],
-      esITesOTOpciones: [],
-      entornoOpciones: [],
-      categoriaOpciones: [],
-      ubicacionOpciones: [],
-      sububicacionOpciones: [],
-      empresaOpciones: [],
-      citricidadOpciones: [],
-      estadoOpciones: [],
-      proveedorOpciones: [],
-      proveedorMantOpciones: [],
+      tipoActivoOpciones: [], //array de tipoActivo
+      tipoActivoItOpciones: [], // array de TIPO_it
+      esITesOTOpciones: [], // array de ITOT
+      entornoOpciones: [], //array de Entorno
+      categoriaOpciones: [], // array de Categoria
+      ubicacionOpciones: [], // array de Ubicacion
+      sububicacionOpciones: [], // array de sububicacion
+      empresaOpciones: [], // array de empresa
+      citricidadOpciones: [], // array de citricidad
+      estadoOpciones: [], // array de estado
+      proveedorOpciones: [], // array de proveedor
+      proveedorMantOpciones: [], // array de ..
     };
   },
 
@@ -529,19 +540,27 @@ export default {
             return fecha.split("T")[0];
           };
 
-          // Asignar los datos al formulario con la pripiedad que coincide con json.
+          // Asignar los datos al formulario(variable vue.js) con la pripiedad que coincide con json.
+          this.formData.tipoActivoId = data.IdTipo; //id
           this.formData.tipoActivo = data.Tipo || "";
+          this.formData.tipoActivoItId = data.IdTipo_it; //id
           this.formData.tipoActivoIt = data.TIPO_it || "";
           this.formData.textDescripcion = data.Descripción || "";
+          this.formData.esITesOTId = data.IdITOT; //id
           this.formData.esITesOT = data.ITOT || "";
+          this.formData.entornoId = data.IdEntorno; //id
           this.formData.entorno = data.Entorno || "";
+          this.formData.categoriaId = data.IdCategoria; //id
           this.formData.categoria = data.Categoria || "";
+          this.formData.ubicacionId = data.IdUbicacion; //id
           this.formData.ubicacion = data.Ubicacion || "";
+          this.formData.sububicacionId = data.IdSubUbicacion; //id
           this.formData.sububicacion = data.SubUbicacion || "";
           this.formData.comentarios = data.Comentarios || "";
           this.formData.rack = data.RACK || "";
           this.formData.posicion = data.POSICION || "";
           this.formData.unidad = data.UNIDAD || "";
+          this.formData.empresaId = data.idEmpresa; //id de la empresa
           this.formData.empresa = data.Empresa || "";
           this.formData.gestionadoProveedorOT = Boolean(data.EsConnectis);
           this.formData.gestionadoProveedorIT = Boolean(data.EsViewnext);
@@ -553,12 +572,16 @@ export default {
           this.formData.bajaActivo = convertirFecha(data.Baja_SRV) || "";
           this.formData.bajaGestion = convertirFecha(data.Baja_Viewnext) || "";
           this.formData.Mes_Baja_Viewnext = data.Mes_Baja_Viewnext || "";
+          this.formData.citricidadId = data.IdTCriticidad; //id
           this.formData.citricidad = data.T_Criticidad || "";
+          this.formData.estadoId = data.IdTEstado; //id
           this.formData.estado = data.T_Estado || "";
           this.formData.anotaciones = data.ANOTACIONES || "";
+          this.formData.proveedorId = data.IdProv; //id
           this.formData.proveedor = data.Proveedor || "";
           this.formData.fechaCompra = convertirFecha(data.Fecha_Compra) || "";
           this.formData.finGarantia = convertirFecha(data.FFin_Garantia) || "";
+          //aqui iria el proveedor.
           this.formData.pertet = Boolean(data.esPERTE);
         })
         .catch((error) => {
@@ -575,30 +598,23 @@ export default {
         return;
       }
 
-      //Las variables de seleccion de los datos
+      //Se asigna json al vue.js
       const datosActualizados = {
-        IdTipo: this.formData.tipoActivo,
-        IdTipo_it: this.formData.tipoActivoIt
-          ? Number(this.formData.tipoActivoIt)
-          : null,
+        //IdTipo_it: this.formData.tipoActivoItId,
+        IdTipo: this.formData.tipoActivoId,//
+        IdTipo_it: this.formData.tipoActivoItId,//
         Descripción: this.formData.textDescripcion,
-        IdITOT: this.formData.esITesOT ? Number(this.formData.esITesOT) : null,
-        IdEntorno: this.formData.entorno ? Number(this.formData.entorno) : null,
-        IdCategoria: this.formData.categoria
-          ? Number(this.formData.categoria)
-          : null,
-        IdUbicacion: this.formData.ubicacion
-          ? Number(this.formData.ubicacion)
-          : null,
-        IdSubUbicacion: this.formData.sububicacion
-          ? Number(this.formData.sububicacion)
-          : null,
+        IdITOT: this.formData.esITesOTId,//id
+        IdEntorno: this.formData.entornoId,//id
+        IdCategoria: this.formData.categoriaId,//id
+        IdUbicacion: this.formData.ubicacionId,//id
+        IdSubUbicacion: this.formData.sububicacionId,//id
         RACK: this.formData.rack ? Number(this.formData.rack) : null,
         POSICION: this.formData.posicion
           ? Number(this.formData.posicion)
           : null,
         UNIDAD: this.formData.unidad ? Number(this.formData.unidad) : null,
-        idEmpresa: this.formData.empresa ? Number(this.formData.empresa) : null,
+        idEmpresa: this.formData.empresaId,
         Comentarios: this.formData.comentarios,
         EsConnectis: this.formData.gestionadoProveedorOT
           ? Boolean(this.formData.gestionadoProveedorOT)
@@ -616,14 +632,10 @@ export default {
         Baja_SRV: this.formData.bajaActivo,
         Baja_Viewnext: this.formData.bajaGestion,
         Mes_Baja_Viewnext: this.formData.Mes_Baja_Viewnext,
-        IdTCriticidad: this.formData.citricidad
-          ? Number(this.formData.citricidad)
-          : null,
-        IdTEstado: this.formData.estado ? Number(this.formData.estado) : null,
+        IdTCriticidad: this.formData.citricidadId,
+        IdTEstado: this.formData.estadoId,//id
         ANOTACIONES: this.formData.anotaciones,
-        IdProv: this.formData.proveedor
-          ? Number(this.formData.proveedor)
-          : null,
+        IdProv: this.formData.proveedorId,//id
         Fecha_Compra: this.formData.fechaCompra,
         FFin_Garantia: this.formData.finGarantia,
         esPERTE: this.formData.pertet ? Boolean(this.formData.pertet) : null,
