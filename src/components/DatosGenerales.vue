@@ -682,11 +682,7 @@ export default {
         //La respuesta del servidor
         .then((response) => {
           console.log("Respuesta del servidor:", response.data);
-          if (response.data.success) {
-            alert("Datos actualizados correctamente");
-          } else {
-            alert("La actualización no se completó correctamente");
-          }
+          alert("Datos actualizados"); // Mensaje simple sin validación
         })
         .catch((error) => {
           console.error("Error detallado:", error);
