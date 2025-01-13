@@ -47,13 +47,13 @@
           <div>
             <label for="tipoActivo">Tipo Activo</label>
             <select
-              v-model="formData.tipoActivo"
+              v-model="formData.tipoActivoId"
               id="tipoActivo"
               name="tipoActivo"
             >
               <option
                 v-for="opcion in tipoActivoOpciones"
-                :key="opcion.id"
+                :key="opcion.IdTipo"
                 :value="opcion.IdTipo"
               >
                 {{ opcion.Tipo }}
@@ -64,13 +64,13 @@
           <div>
             <label for="tipoActivoIt">Tipo Activo It</label>
             <select
-              v-model="formData.tipoActivoIt"
+              v-model="formData.tipoActivoItId"
               id="tipoActivoIT"
               name="tipoActivoIT"
             >
               <option
                 v-for="opcion in tipoActivoItOpciones"
-                :key="opcion.id"
+                :key="opcion.IdTipo_it"
                 :value="opcion.IdTipo_it"
               >
                 {{ opcion.TIPO_it }}
@@ -89,10 +89,10 @@
           <!--Contenedor de es IT/OT-->
           <div>
             <label for="esITesOT">ES IT/ ES OT</label>
-            <select v-model="formData.esITesOT" id="esITesOT" name="esITesOT">
+            <select v-model="formData.esITesOTId" id="esITesOT" name="esITesOT">
               <option
                 v-for="opcion in esITesOTOpciones"
-                :key="opcion.id"
+                :key="opcion.IdITOT"
                 :value="opcion.IdITOT"
               >
                 {{ opcion.ITOT }}
@@ -102,10 +102,10 @@
           <!--Contenedor de Entorno-->
           <div>
             <label for="entorno">Entorno</label>
-            <select v-model="formData.entorno" id="entorno" name="entorno">
+            <select v-model="formData.entornoId" id="entorno" name="entorno">
               <option
                 v-for="opcion in entornoOpciones"
-                :key="opcion.id"
+                :key="opcion.IdEntorno"
                 :value="opcion.IdEntorno"
               >
                 {{ opcion.Entorno }}
@@ -116,13 +116,13 @@
           <div>
             <label for="categoria">Categoria</label>
             <select
-              v-model="formData.categoria"
+              v-model="formData.categoriaId"
               id="categoria"
               name="categoria"
             >
               <option
                 v-for="opcion in categoriaOpciones"
-                :key="opcion.id"
+                :key="opcion.IdCategoria"
                 :value="opcion.IdCategoria"
               >
                 {{ opcion.Categoria }}
@@ -146,13 +146,13 @@
           <div>
             <label for="ubicacion">Ubicacion</label>
             <select
-              v-model="formData.ubicacion"
+              v-model="formData.ubicacionId"
               id="ubicacion"
               name="ubicacion"
             >
               <option
                 v-for="option in ubicacionOpciones"
-                :key="option.id"
+                :key="option.IdUbicacion"
                 :value="option.IdUbicacion"
               >
                 {{ option.Ubicacion }}
@@ -163,13 +163,13 @@
           <div>
             <label for="sububicacion">Sububicación</label>
             <select
-              v-model="formData.sububicacion"
+              v-model="formData.sububicacionId"
               id="sububicacion"
               name="sububicacion"
             >
               <option
                 v-for="option in sububicacionOpciones"
-                :key="option.id"
+                :key="option.IdSubUbicacion"
                 :value="option.IdSubUbicacion"
               >
                 {{ option.SubUbicacion }}
@@ -213,10 +213,10 @@
           <!--Contenedor de Empres-->
           <div>
             <label for="empresa">Empresa</label>
-            <select v-model="formData.empresa" id="empresa" name="empresa">
+            <select v-model="formData.empresaId" id="empresa" name="empresa">
               <option
                 v-for="option in empresaOpciones"
-                :key="option.id"
+                :key="option.idEmpresa"
                 :value="option.idEmpresa"
               >
                 {{ option.Empresa }}
@@ -335,13 +335,13 @@
           <div>
             <label for="citricidad">Citricidad</label>
             <select
-              v-model="formData.citricidad"
+              v-model="formData.citricidadId"
               id="citricidad"
               name="citricidad"
             >
               <option
                 v-for="option in citricidadOpciones"
-                :key="option.id"
+                :key="option.IdTCriticidad"
                 :value="option.IdTCriticidad"
               >
                 {{ option.T_Criticidad }}
@@ -351,10 +351,10 @@
           <!--Contenedor del estado-->
           <div>
             <label for="estado">Estado</label>
-            <select v-model="formData.estado" id="estado" name="estado">
+            <select v-model="formData.estadoId" id="estado" name="estado">
               <option
                 v-for="option in estadoOpciones"
-                :key="option.id"
+                :key="option.IdTEstado"
                 :value="option.IdTEstado"
               >
                 {{ option.T_Estado }}
@@ -379,13 +379,13 @@
           <div>
             <label for="proveedor">Proveedor</label>
             <select
-              v-model="formData.proveedor"
+              v-model="formData.proveedorId"
               id="proveedor"
               name="proveedor"
             >
               <option
                 v-for="option in proveedorOpciones"
-                :key="option.id"
+                :key="option.IdProv"
                 :value="option.IdProv"
               >
                 {{ option.Proveedor }}
