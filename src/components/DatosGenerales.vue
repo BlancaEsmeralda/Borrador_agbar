@@ -412,8 +412,8 @@
               name="finGarantia"
             />
           </div>
-          <!--Contenedor del proveedorMant-->
-          <div>
+          <!--Contenedor del proveedorMant
+            <div>
             <label for="proveedorMant">Prov. Mant. Hardware</label>
             <select
               v-model="formData.proveedorMant"
@@ -429,6 +429,10 @@
               </option>
             </select>
           </div>
+          
+          
+          -->
+
           <!--Contenedor checkbox-item del pertet-->
           <div class="checkbox-item">
             <input
@@ -499,7 +503,7 @@ export default {
         fechaCompra: "",
         finGarantia: "",
         proveedorMantId: null, //id prov mant
-        proveedorMant: "",
+        //proveedorMant: "",
         pertet: "",
       },
       //option de los selects
@@ -514,7 +518,7 @@ export default {
       citricidadOpciones: [], // array de citricidad
       estadoOpciones: [], // array de estado
       proveedorOpciones: [], // array de proveedor
-      proveedorMantOpciones: [], // array de ..
+      //proveedorMantOpciones: [], // array de ..
     };
   },
 
@@ -597,7 +601,31 @@ export default {
         alert("Por favor, introduce un ID válido.");
         return;
       }
+      // Validación de IDs
+      const camposRequeridos = {
+        tipoActivoId: "Tipo Activo",
+        tipoActivoItId: "Tipo Activo IT",
+        esITesOTId: "IT/OT",
+        entornoId: "Entorno",
+        categoriaId: "Categoría",
+        ubicacionId: "Ubicación",
+        sububicacionId: "Sububicación",
+        //empresaId: "Empresa",
+        citricidadId: "Criticidad",
+        estadoId: "Estado",
+        proveedorId: "Proveedor",
+      };
 
+      const camposFaltantes = Object.entries(camposRequeridos)
+        .filter(([key]) => !this.formData[key])
+        .map(([, label]) => label);
+
+      if (camposFaltantes.length > 0) {
+        alert(
+          `Los siguientes campos son requeridos: ${camposFaltantes.join(", ")}`
+        );
+        return;
+      }
       //Se asigna json al vue.js
       const datosActualizados = {
         IdTipo: this.formData.tipoActivoId, //
@@ -749,7 +777,7 @@ export default {
         anotaciones: "",
         fechaCompra: "",
         finGarantia: "",
-        proveedorMant: "",
+        //proveedorMant: "",
       };
     },
   },
