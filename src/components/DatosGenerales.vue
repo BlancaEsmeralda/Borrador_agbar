@@ -54,9 +54,9 @@
               <option
                 v-for="opcion in tipoActivoOpciones"
                 :key="opcion.id"
-                :value="opcion.nombre"
+                :value="opcion.IdTipo"
               >
-                {{ opcion.nombre }}
+                {{ opcion.Tipo }}
               </option>
             </select>
           </div>
@@ -71,9 +71,9 @@
               <option
                 v-for="opcion in tipoActivoItOpciones"
                 :key="opcion.id"
-                :value="opcion.nombre"
+                :value="opcion.IdTipo_it"
               >
-                {{ opcion.nombre }}
+                {{ opcion.TIPO_it }}
               </option>
             </select>
           </div>
@@ -93,9 +93,9 @@
               <option
                 v-for="opcion in esITesOTOpciones"
                 :key="opcion.id"
-                :value="opcion.nombre"
+                :value="opcion.IdITOT"
               >
-                {{ opcion.nombre }}
+                {{ opcion.ITOT }}
               </option>
             </select>
           </div>
@@ -106,9 +106,9 @@
               <option
                 v-for="opcion in entornoOpciones"
                 :key="opcion.id"
-                :value="opcion.nombre"
+                :value="opcion.IdEntorno"
               >
-                {{ opcion.nombre }}
+                {{ opcion.Entorno }}
               </option>
             </select>
           </div>
@@ -123,9 +123,9 @@
               <option
                 v-for="opcion in categoriaOpciones"
                 :key="opcion.id"
-                :value="opcion.nombre"
+                :value="opcion.IdCategoria"
               >
-                {{ opcion.nombre }}
+                {{ opcion.Categoria }}
               </option>
             </select>
           </div>
@@ -153,9 +153,9 @@
               <option
                 v-for="option in ubicacionOpciones"
                 :key="option.id"
-                :value="option.nombre"
+                :value="option.IdUbicacion"
               >
-                {{ option.nombre }}
+                {{ option.Ubicacion }}
               </option>
             </select>
           </div>
@@ -170,9 +170,9 @@
               <option
                 v-for="option in sububicacionOpciones"
                 :key="option.id"
-                :value="option.nombre"
+                :value="option.IdSubUbicacion"
               >
-                {{ option.nombre }}
+                {{ option.SubUbicacion }}
               </option>
             </select>
           </div>
@@ -217,9 +217,9 @@
               <option
                 v-for="option in empresaOpciones"
                 :key="option.id"
-                :value="option.nombre"
+                :value="option.idEmpresa"
               >
-                {{ option.nombre }}
+                {{ option.Empresa }}
               </option>
             </select>
           </div>
@@ -342,9 +342,9 @@
               <option
                 v-for="option in citricidadOpciones"
                 :key="option.id"
-                :value="option.nombre"
+                :value="option.IdTCriticidad"
               >
-                {{ option.nombre }}
+                {{ option.T_Criticidad }}
               </option>
             </select>
           </div>
@@ -355,9 +355,9 @@
               <option
                 v-for="option in estadoOpciones"
                 :key="option.id"
-                :value="option.nombre"
+                :value="option.IdTEstado"
               >
-                {{ option.nombre }}
+                {{ option.T_Estado }}
               </option>
             </select>
           </div>
@@ -386,9 +386,9 @@
               <option
                 v-for="option in proveedorOpciones"
                 :key="option.id"
-                :value="option.nombre"
+                :value="option.IdProv"
               >
-                {{ option.nombre }}
+                {{ option.Proveedor }}
               </option>
             </select>
           </div>
@@ -600,15 +600,14 @@ export default {
 
       //Se asigna json al vue.js
       const datosActualizados = {
-        //IdTipo_it: this.formData.tipoActivoItId,
-        IdTipo: this.formData.tipoActivoId,//
-        IdTipo_it: this.formData.tipoActivoItId,//
+        IdTipo: this.formData.tipoActivoId, //
+        IdTipo_it: this.formData.tipoActivoItId, //
         Descripción: this.formData.textDescripcion,
-        IdITOT: this.formData.esITesOTId,//id
-        IdEntorno: this.formData.entornoId,//id
-        IdCategoria: this.formData.categoriaId,//id
-        IdUbicacion: this.formData.ubicacionId,//id
-        IdSubUbicacion: this.formData.sububicacionId,//id
+        IdITOT: this.formData.esITesOTId, //id
+        IdEntorno: this.formData.entornoId, //id
+        IdCategoria: this.formData.categoriaId, //id
+        IdUbicacion: this.formData.ubicacionId, //id
+        IdSubUbicacion: this.formData.sububicacionId, //id
         RACK: this.formData.rack ? Number(this.formData.rack) : null,
         POSICION: this.formData.posicion
           ? Number(this.formData.posicion)
@@ -633,9 +632,9 @@ export default {
         Baja_Viewnext: this.formData.bajaGestion,
         Mes_Baja_Viewnext: this.formData.Mes_Baja_Viewnext,
         IdTCriticidad: this.formData.citricidadId,
-        IdTEstado: this.formData.estadoId,//id
+        IdTEstado: this.formData.estadoId, //id
         ANOTACIONES: this.formData.anotaciones,
-        IdProv: this.formData.proveedorId,//id
+        IdProv: this.formData.proveedorId, //id
         Fecha_Compra: this.formData.fechaCompra,
         FFin_Garantia: this.formData.finGarantia,
         esPERTE: this.formData.pertet ? Boolean(this.formData.pertet) : null,
