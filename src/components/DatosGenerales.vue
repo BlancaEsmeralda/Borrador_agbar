@@ -47,16 +47,16 @@
           <div>
             <label for="tipoActivo">Tipo Activo</label>
             <select
-              v-model="formData.tipoActivo"
+              v-model="formData.tipoActivoId"
               id="tipoActivo"
               name="tipoActivo"
             >
               <option
                 v-for="opcion in tipoActivoOpciones"
-                :key="opcion.id"
-                :value="opcion.nombre"
+                :key="opcion.IdTipo"
+                :value="opcion.IdTipo"
               >
-                {{ opcion.nombre }}
+                {{ opcion.Tipo }}
               </option>
             </select>
           </div>
@@ -64,16 +64,16 @@
           <div>
             <label for="tipoActivoIt">Tipo Activo It</label>
             <select
-              v-model="formData.tipoActivoIt"
+              v-model="formData.tipoActivoItId"
               id="tipoActivoIT"
               name="tipoActivoIT"
             >
               <option
                 v-for="opcion in tipoActivoItOpciones"
-                :key="opcion.id"
-                :value="opcion.nombre"
+                :key="opcion.IdTipo_it"
+                :value="opcion.IdTipo_it"
               >
-                {{ opcion.nombre }}
+                {{ opcion.TIPO_it }}
               </option>
             </select>
           </div>
@@ -89,26 +89,26 @@
           <!--Contenedor de es IT/OT-->
           <div>
             <label for="esITesOT">ES IT/ ES OT</label>
-            <select v-model="formData.esITesOT" id="esITesOT" name="esITesOT">
+            <select v-model="formData.esITesOTId" id="esITesOT" name="esITesOT">
               <option
                 v-for="opcion in esITesOTOpciones"
-                :key="opcion.id"
-                :value="opcion.nombre"
+                :key="opcion.IdITOT"
+                :value="opcion.IdITOT"
               >
-                {{ opcion.nombre }}
+                {{ opcion.ITOT }}
               </option>
             </select>
           </div>
           <!--Contenedor de Entorno-->
           <div>
             <label for="entorno">Entorno</label>
-            <select v-model="formData.entorno" id="entorno" name="entorno">
+            <select v-model="formData.entornoId" id="entorno" name="entorno">
               <option
                 v-for="opcion in entornoOpciones"
-                :key="opcion.id"
-                :value="opcion.nombre"
+                :key="opcion.IdEntorno"
+                :value="opcion.IdEntorno"
               >
-                {{ opcion.nombre }}
+                {{ opcion.Entorno }}
               </option>
             </select>
           </div>
@@ -116,16 +116,16 @@
           <div>
             <label for="categoria">Categoria</label>
             <select
-              v-model="formData.categoria"
+              v-model="formData.categoriaId"
               id="categoria"
               name="categoria"
             >
               <option
                 v-for="opcion in categoriaOpciones"
-                :key="opcion.id"
-                :value="opcion.nombre"
+                :key="opcion.IdCategoria"
+                :value="opcion.IdCategoria"
               >
-                {{ opcion.nombre }}
+                {{ opcion.Categoria }}
               </option>
             </select>
           </div>
@@ -146,16 +146,16 @@
           <div>
             <label for="ubicacion">Ubicacion</label>
             <select
-              v-model="formData.ubicacion"
+              v-model="formData.ubicacionId"
               id="ubicacion"
               name="ubicacion"
             >
               <option
                 v-for="option in ubicacionOpciones"
-                :key="option.id"
-                :value="option.nombre"
+                :key="option.IdUbicacion"
+                :value="option.IdUbicacion"
               >
-                {{ option.nombre }}
+                {{ option.Ubicacion }}
               </option>
             </select>
           </div>
@@ -163,16 +163,16 @@
           <div>
             <label for="sububicacion">Sububicación</label>
             <select
-              v-model="formData.sububicacion"
+              v-model="formData.sububicacionId"
               id="sububicacion"
               name="sububicacion"
             >
               <option
                 v-for="option in sububicacionOpciones"
-                :key="option.id"
-                :value="option.nombre"
+                :key="option.IdSubUbicacion"
+                :value="option.IdSubUbicacion"
               >
-                {{ option.nombre }}
+                {{ option.SubUbicacion }}
               </option>
             </select>
           </div>
@@ -213,13 +213,13 @@
           <!--Contenedor de Empres-->
           <div>
             <label for="empresa">Empresa</label>
-            <select v-model="formData.empresa" id="empresa" name="empresa">
+            <select v-model="formData.empresaId" id="empresa" name="empresa">
               <option
                 v-for="option in empresaOpciones"
-                :key="option.id"
-                :value="option.nombre"
+                :key="option.idEmpresa"
+                :value="option.idEmpresa"
               >
-                {{ option.nombre }}
+                {{ option.Empresa }}
               </option>
             </select>
           </div>
@@ -335,29 +335,29 @@
           <div>
             <label for="citricidad">Citricidad</label>
             <select
-              v-model="formData.citricidad"
+              v-model="formData.citricidadId"
               id="citricidad"
               name="citricidad"
             >
               <option
                 v-for="option in citricidadOpciones"
-                :key="option.id"
-                :value="option.nombre"
+                :key="option.IdTCriticidad"
+                :value="option.IdTCriticidad"
               >
-                {{ option.nombre }}
+                {{ option.T_Criticidad }}
               </option>
             </select>
           </div>
           <!--Contenedor del estado-->
           <div>
             <label for="estado">Estado</label>
-            <select v-model="formData.estado" id="estado" name="estado">
+            <select v-model="formData.estadoId" id="estado" name="estado">
               <option
                 v-for="option in estadoOpciones"
-                :key="option.id"
-                :value="option.nombre"
+                :key="option.IdTEstado"
+                :value="option.IdTEstado"
               >
-                {{ option.nombre }}
+                {{ option.T_Estado }}
               </option>
             </select>
           </div>
@@ -379,16 +379,16 @@
           <div>
             <label for="proveedor">Proveedor</label>
             <select
-              v-model="formData.proveedor"
+              v-model="formData.proveedorId"
               id="proveedor"
               name="proveedor"
             >
               <option
                 v-for="option in proveedorOpciones"
-                :key="option.id"
-                :value="option.nombre"
+                :key="option.IdProv"
+                :value="option.IdProv"
               >
-                {{ option.nombre }}
+                {{ option.Proveedor }}
               </option>
             </select>
           </div>
@@ -412,8 +412,8 @@
               name="finGarantia"
             />
           </div>
-          <!--Contenedor del proveedorMant-->
-          <div>
+          <!--Contenedor del proveedorMant
+            <div>
             <label for="proveedorMant">Prov. Mant. Hardware</label>
             <select
               v-model="formData.proveedorMant"
@@ -429,6 +429,10 @@
               </option>
             </select>
           </div>
+          
+          
+          -->
+
           <!--Contenedor checkbox-item del pertet-->
           <div class="checkbox-item">
             <input
@@ -455,20 +459,27 @@ export default {
     return {
       id: "",
       formData: {
+        tipoActivoId: null, //id de activo
         tipoActivo: "",
+        tipoActivoItId: null, //id de activo_it
         tipoActivoIt: "",
         textDescripcion: "",
+        esITesOTId: null, //id de it o ot
         esITesOT: "",
-        esITesOTOpciones: "",
+        entornoId: null, //id de entorno
         entorno: "",
+        categoriaId: null, //id de categoria
         categoria: "",
         tarifaMensual: "",
+        ubicacionId: null, //id de ubicacion
         ubicacion: "",
+        sububicacionId: null, //id de sububicacion
         sububicacion: "",
         comentarios: "",
         rack: "",
         posicion: "",
         unidad: "",
+        empresaId: null, //id de empresa
         empresa: "",
         //checkboxes
         gestionadoProveedorOT: "",
@@ -482,28 +493,32 @@ export default {
         bajaActivo: "",
         bajaGestion: "",
         Mes_Baja_Viewnext: "",
+        citricidadId: null, //id de citricidad
         citricidad: "",
+        estadoId: null,
         estado: "",
         anotaciones: "",
+        proveedorId: null, //id proveedor
         proveedor: "",
         fechaCompra: "",
         finGarantia: "",
-        proveedorMant: "",
+        proveedorMantId: null, //id prov mant
+        //proveedorMant: "",
         pertet: "",
       },
       //option de los selects
-      tipoActivoOpciones: [],
-      tipoActivoItOpciones: [],
-      esITesOTOpciones: [],
-      entornoOpciones: [],
-      categoriaOpciones: [],
-      ubicacionOpciones: [],
-      sububicacionOpciones: [],
-      empresaOpciones: [],
-      citricidadOpciones: [],
-      estadoOpciones: [],
-      proveedorOpciones: [],
-      proveedorMantOpciones: [],
+      tipoActivoOpciones: [], //array de tipoActivo
+      tipoActivoItOpciones: [], // array de TIPO_it
+      esITesOTOpciones: [], // array de ITOT
+      entornoOpciones: [], //array de Entorno
+      categoriaOpciones: [], // array de Categoria
+      ubicacionOpciones: [], // array de Ubicacion
+      sububicacionOpciones: [], // array de sububicacion
+      empresaOpciones: [], // array de empresa
+      citricidadOpciones: [], // array de citricidad
+      estadoOpciones: [], // array de estado
+      proveedorOpciones: [], // array de proveedor
+      //proveedorMantOpciones: [], // array de ..
     };
   },
 
@@ -529,19 +544,27 @@ export default {
             return fecha.split("T")[0];
           };
 
-          // Asignar los datos al formulario con la pripiedad que coincide con json.
+          // Asignar los datos al formulario(variable vue.js) con la pripiedad que coincide con json.
+          this.formData.tipoActivoId = data.IdTipo; //id
           this.formData.tipoActivo = data.Tipo || "";
+          this.formData.tipoActivoItId = data.IdTipo_it; //id
           this.formData.tipoActivoIt = data.TIPO_it || "";
           this.formData.textDescripcion = data.Descripción || "";
+          this.formData.esITesOTId = data.IdITOT; //id
           this.formData.esITesOT = data.ITOT || "";
+          this.formData.entornoId = data.IdEntorno; //id
           this.formData.entorno = data.Entorno || "";
+          this.formData.categoriaId = data.IdCategoria; //id
           this.formData.categoria = data.Categoria || "";
+          this.formData.ubicacionId = data.IdUbicacion; //id
           this.formData.ubicacion = data.Ubicacion || "";
+          this.formData.sububicacionId = data.IdSubUbicacion; //id
           this.formData.sububicacion = data.SubUbicacion || "";
           this.formData.comentarios = data.Comentarios || "";
           this.formData.rack = data.RACK || "";
           this.formData.posicion = data.POSICION || "";
           this.formData.unidad = data.UNIDAD || "";
+          this.formData.empresaId = data.idEmpresa; //id de la empresa
           this.formData.empresa = data.Empresa || "";
           this.formData.gestionadoProveedorOT = Boolean(data.EsConnectis);
           this.formData.gestionadoProveedorIT = Boolean(data.EsViewnext);
@@ -553,12 +576,16 @@ export default {
           this.formData.bajaActivo = convertirFecha(data.Baja_SRV) || "";
           this.formData.bajaGestion = convertirFecha(data.Baja_Viewnext) || "";
           this.formData.Mes_Baja_Viewnext = data.Mes_Baja_Viewnext || "";
+          this.formData.citricidadId = data.IdTCriticidad; //id
           this.formData.citricidad = data.T_Criticidad || "";
+          this.formData.estadoId = data.IdTEstado; //id
           this.formData.estado = data.T_Estado || "";
           this.formData.anotaciones = data.ANOTACIONES || "";
+          this.formData.proveedorId = data.IdProv; //id
           this.formData.proveedor = data.Proveedor || "";
           this.formData.fechaCompra = convertirFecha(data.Fecha_Compra) || "";
           this.formData.finGarantia = convertirFecha(data.FFin_Garantia) || "";
+          //aqui iria el proveedor.
           this.formData.pertet = Boolean(data.esPERTE);
         })
         .catch((error) => {
@@ -574,31 +601,47 @@ export default {
         alert("Por favor, introduce un ID válido.");
         return;
       }
+      // Validación de IDs
+      const camposRequeridos = {
+        tipoActivoId: "Tipo Activo",
+        tipoActivoItId: "Tipo Activo IT",
+        esITesOTId: "IT/OT",
+        entornoId: "Entorno",
+        categoriaId: "Categoría",
+        ubicacionId: "Ubicación",
+        sububicacionId: "Sububicación",
+        //empresaId: "Empresa",
+        citricidadId: "Criticidad",
+        estadoId: "Estado",
+        proveedorId: "Proveedor",
+      };
 
-      //Las variables de seleccion de los datos
+      const camposFaltantes = Object.entries(camposRequeridos)
+        .filter(([key]) => !this.formData[key])
+        .map(([, label]) => label);
+
+      if (camposFaltantes.length > 0) {
+        alert(
+          `Los siguientes campos son requeridos: ${camposFaltantes.join(", ")}`
+        );
+        return;
+      }
+      //Se asigna json al vue.js
       const datosActualizados = {
-        IdTipo: this.formData.tipoActivo,
-        IdTipo_it: this.formData.tipoActivoIt
-          ? Number(this.formData.tipoActivoIt)
-          : null,
+        IdTipo: this.formData.tipoActivoId, //
+        IdTipo_it: this.formData.tipoActivoItId, //
         Descripción: this.formData.textDescripcion,
-        IdITOT: this.formData.esITesOT ? Number(this.formData.esITesOT) : null,
-        IdEntorno: this.formData.entorno ? Number(this.formData.entorno) : null,
-        IdCategoria: this.formData.categoria
-          ? Number(this.formData.categoria)
-          : null,
-        IdUbicacion: this.formData.ubicacion
-          ? Number(this.formData.ubicacion)
-          : null,
-        IdSubUbicacion: this.formData.sububicacion
-          ? Number(this.formData.sububicacion)
-          : null,
+        IdITOT: this.formData.esITesOTId, //id
+        IdEntorno: this.formData.entornoId, //id
+        IdCategoria: this.formData.categoriaId, //id
+        IdUbicacion: this.formData.ubicacionId, //id
+        IdSubUbicacion: this.formData.sububicacionId, //id
         RACK: this.formData.rack ? Number(this.formData.rack) : null,
         POSICION: this.formData.posicion
           ? Number(this.formData.posicion)
           : null,
         UNIDAD: this.formData.unidad ? Number(this.formData.unidad) : null,
-        idEmpresa: this.formData.empresa ? Number(this.formData.empresa) : null,
+        idEmpresa: this.formData.empresaId,
         Comentarios: this.formData.comentarios,
         EsConnectis: this.formData.gestionadoProveedorOT
           ? Boolean(this.formData.gestionadoProveedorOT)
@@ -616,14 +659,10 @@ export default {
         Baja_SRV: this.formData.bajaActivo,
         Baja_Viewnext: this.formData.bajaGestion,
         Mes_Baja_Viewnext: this.formData.Mes_Baja_Viewnext,
-        IdTCriticidad: this.formData.citricidad
-          ? Number(this.formData.citricidad)
-          : null,
-        IdTEstado: this.formData.estado ? Number(this.formData.estado) : null,
+        IdTCriticidad: this.formData.citricidadId,
+        IdTEstado: this.formData.estadoId, //id
         ANOTACIONES: this.formData.anotaciones,
-        IdProv: this.formData.proveedor
-          ? Number(this.formData.proveedor)
-          : null,
+        IdProv: this.formData.proveedorId, //id
         Fecha_Compra: this.formData.fechaCompra,
         FFin_Garantia: this.formData.finGarantia,
         esPERTE: this.formData.pertet ? Boolean(this.formData.pertet) : null,
@@ -643,11 +682,7 @@ export default {
         //La respuesta del servidor
         .then((response) => {
           console.log("Respuesta del servidor:", response.data);
-          if (response.data.success) {
-            alert("Datos actualizados correctamente");
-          } else {
-            alert("La actualización no se completó correctamente");
-          }
+          alert("Datos actualizados"); // Mensaje simple sin validación
         })
         .catch((error) => {
           console.error("Error detallado:", error);
@@ -738,7 +773,7 @@ export default {
         anotaciones: "",
         fechaCompra: "",
         finGarantia: "",
-        proveedorMant: "",
+        //proveedorMant: "",
       };
     },
   },
