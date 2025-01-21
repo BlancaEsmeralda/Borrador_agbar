@@ -19,7 +19,7 @@
         <form class="formulario_dTecnicos" @submit.prevent="buscarActivo">
           <!--Input del nombre del activo-->
           <input
-            v-model="id_seguridad"
+            v-model="id"
             type="text"
             id="id_seguridad"
             name="id_seguridad"
@@ -228,7 +228,7 @@ export default {
   name: "TecnicosDatos",
   data() {
     return {
-      id_seguridad: "",
+      id: "",
       formData: {
         //select
         modelo: "",
@@ -363,7 +363,6 @@ body {
 /* Fondo */
 .contenedor_global {
   background-color: #ffffff;
-  background-image: url("../assets/water-splash.png");
   background-repeat: no-repeat;
   background-position: bottom right;
   background-size: 100% auto;
