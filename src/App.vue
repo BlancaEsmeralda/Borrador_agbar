@@ -1,16 +1,17 @@
 <template>
-  <div class="barranavegacion">
-    <nav>
-      <!--
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> |
-      <router-link to="/datosgenerales">Datos generales</router-link> |
-      <router-link to="/datostecnicos">Datos Tecnicos</router-link>
-      -->
-    </nav>
-    <router-view />
+  <div id="app">
+    <HeaderMain />
   </div>
 </template>
+<script>
+import HeaderMain from "@/components/HeaderMain.vue";
+export default {
+  name: "App",
+  components: {
+    HeaderMain,
+  },
+};
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

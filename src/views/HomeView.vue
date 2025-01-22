@@ -1,7 +1,10 @@
 <template>
+  <div>
+    <HeaderMain class="header" />
+  </div>
   <div class="home">
     <router-link to="/datosgenerales">
-      <img alt="Vue logo" src="../assets/logo.png" />
+      <img alt="ejemplo" src="../assets/logo.png" />
     </router-link>
     <div class="contenedor_global">
       <HelloWorld
@@ -14,7 +17,6 @@
 <script>
 // @ is an alias to /src
 import HelloWorld from "@/components/HelloWorld.vue";
-
 export default {
   name: "HomeView",
   components: {
