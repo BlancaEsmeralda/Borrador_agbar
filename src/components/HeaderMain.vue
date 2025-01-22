@@ -17,17 +17,11 @@
   align-items: flex-start;
   justify-content: center;
   padding: 24px 75px;
-}
-@media (max-width: 991px) {
-  .header-wrapper {
-    padding: 0 20px;
-  }
-}
-.company-logo {
-  aspect-ratio: 3.48;
-  object-fit: contain;
-  object-position: center;
-  width: 108px;
-  max-width: 100%;
+  width: 100vw; /* Cambiado a 100vw */
+  position: relative; /* Añadido */
+  left: 0; /* Añadido */
+  right: 0; /* Añadido */
+  margin-left: 0; /* Añadido */
+  margin-right: 0; /* Añadido */
 }
 </style>

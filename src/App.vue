@@ -14,12 +14,29 @@ export default {
 };
 </script>
 <style>
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&display=swap");
+/* Reset global */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: "Raleway", sans-serif; /* Solo Raleway como fuente principal */
   text-align: center;
   color: #2c3e50;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 nav {
