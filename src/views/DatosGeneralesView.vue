@@ -1,20 +1,8 @@
 <template>
   <div>
     <!--Contenedor del logo con la ruta al home-->
-    <div class="logo">
-      <router-link to="/">
-        <img src="../assets/logo.png" alt="Logo" />
-      </router-link>
-    </div>
     <div class="contenedor_global">
-      <!--Contenedor del titulo datos generales-->
-      <div class="contenedor_titulo">
-        <h1
-          class="Titulo1 animate__animated animate__fadeInDown animate_faster"
-        >
-          Datos Generales
-        </h1>
-      </div>
+      <component-titulo-principal></component-titulo-principal>
       <!--Contenedor del formulario-->
       <div class="contenedor_formulario">
         <form class="formulario" @submit.prevent="buscarActivo">
@@ -30,19 +18,7 @@
           <!--ESTE BUTTON ES PARA HACER PRUEBAS DE CARGAR JSON ATRAVES DE UNA API-->
           <button type="submit">Pruebas conexion apii</button>
           <button @click="actualizarActivo">Actualizar Activo</button>
-          <!--Barra del menú de navegación-->
-          <div id="Pestañas">
-            <nav class="animate__animated animate__fadeInDown">
-              <router-link to="/datosgenerales">Datos Grales.</router-link>
-              <router-link to="/datostecnicos">Datos Técnicos</router-link>
-              <router-link to="/serviceoffering">Service Offerings</router-link>
-              <router-link to="/instancias">Instancias</router-link>
-              <router-link to="/comunicaciones">Comunicaciones</router-link>
-              <router-link to="/seguridad">Seguridad</router-link>
-              <router-link to="/micro">Micro</router-link>
-              <router-link to="/software">Software</router-link>
-            </nav>
-          </div>
+
           <!--Contenedor del tipo Activo-->
           <div>
             <label for="tipoActivo">Tipo Activo</label>
@@ -450,11 +426,17 @@
 </template>
 
 <script>
+import ComponentTituloPrincipal from "@/components/ComponentTituloPrincipal.vue";
 //import de la libreria de axios
 import axios from "axios";
 
 export default {
+  components: { ComponentTituloPrincipal },
   name: "ActivoGeneral",
+  //componentes importados
+  componets: {
+    ComponentTituloPrincipal,
+  },
   data() {
     return {
       id: "",
@@ -777,198 +759,11 @@ export default {
       };
     },
   },
-  /*
-   *se ejecuta después de que el componente ha sido montado en el DOM.
-   *Es decir, una vez que Vue ha renderizado el componente en la página y los elementos están disponibles en el DOM.
-   */
+
   mounted() {
-    //funcion para vargar los select una vez obtenga los datos del backend.
     this.cargarOpcionesSelects();
   },
 };
 </script>
 
-<style scoped>
-/* Estilos generales */
-body {
-  font-family: sans-serif;
-  margin: 20px;
-  background: #f3ddd3;
-}
-
-/* Estilos para el logo */
-.logo {
-  position: absolute;
-  top: 30px;
-  left: 40px;
-}
-
-.logo img {
-  width: 100%;
-  height: auto;
-}
-/* Fondo */
-.contenedor_global {
-  background-color: #ffffff;
-  background-position: bottom right;
-  background-size: 100% auto;
-}
-/* Títulos */
-.contenedor_titulo {
-  padding: 30px;
-  margin-bottom: 1px;
-}
-.Titulo1 {
-  font-size: 70px;
-  font-weight: bold;
-  text-align: center;
-  color: #ffffff;
-  background-color: #1c346c;
-  border-radius: 20px;
-  padding: 10px 20px;
-  display: inline-block;
-  margin-top: 50px;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-}
-
-.Titulo2 {
-  font-size: 30px;
-  font-weight: bold;
-  text-align: center;
-  color: #ffffff;
-  background-color: #1c346c;
-  border-radius: 20px;
-  padding: 10px 20px;
-  display: inline-block;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-  margin-bottom: 30px;
-}
-
-label {
-  font-size: 16px;
-  font-weight: bold;
-  color: #09090a;
-  background-color: #e0f1ff;
-  padding: 5px 10px;
-  border-radius: 5px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-  display: inline-block;
-}
-/* Formularios */
-.identificador {
-  padding: 20px;
-}
-.contenedor_formulario {
-  padding: 10px 50px 50px 100px;
-}
-.formulario {
-  background-color: #fff;
-  padding: 30px;
-  border-radius: 8px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
-}
-
-.formulario > div {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-bottom: 15px;
-}
-
-/* Etiquetas y campos de entrada */
-label {
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-input[type="text"],
-input[type="date"],
-select {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-
-textarea {
-  width: 100%;
-  resize: vertical;
-  height: 80px;
-  grid-column: 1 / -1;
-}
-
-/* Navegación */
-#Pestañas {
-  grid-column: 1 / -1;
-  margin-bottom: 20px;
-}
-
-nav {
-  background: #1c346c;
-  border-radius: 20px;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-
-  gap: 60px;
-}
-
-nav a {
-  font-weight: bold;
-  font-size: 20px;
-  text-decoration: none;
-  color: #eaf3f3;
-  padding: 8px 15px;
-  border-radius: 4px;
-  transition: background-color 0.3s;
-  flex-grow: 1;
-  text-align: center;
-}
-
-nav a:hover {
-  background-color: #fff;
-  color: #243c7c;
-}
-
-/* Checkboxes */
-.checkbox-container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-  grid-column: 1 / -1;
-}
-
-.checkbox-item {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.checkbox-item input[type="checkbox"] {
-  margin-right: 10px;
-}
-
-/* Campos de ancho completo */
-.full-width {
-  grid-column: 1 / -1;
-}
-
-/* Ajustes para pantallas pequeñas */
-@media (max-width: 768px) {
-  nav {
-    flex-direction: column;
-  }
-
-  nav a {
-    margin-bottom: 5px;
-  }
-
-  .formulario {
-    grid-template-columns: 1fr;
-  }
-}
-</style>
+<style scoped></style>
