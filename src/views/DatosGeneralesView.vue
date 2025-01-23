@@ -3,6 +3,7 @@
     <!--Contenedor del logo con la ruta al home-->
     <div class="contenedor_global">
       <component-titulo-principal></component-titulo-principal>
+      <component-subtitulo></component-subtitulo>
       <!--Contenedor del formulario-->
       <div class="contenedor_formulario">
         <form class="formulario" @submit.prevent="buscarActivo">
@@ -427,15 +428,17 @@
 
 <script>
 import ComponentTituloPrincipal from "@/components/ComponentTituloPrincipal.vue";
+import ComponentSubtitulo from "@/components/ComponentSubtitulo.vue";
 //import de la libreria de axios
 import axios from "axios";
 
 export default {
-  components: { ComponentTituloPrincipal },
+  components: { ComponentTituloPrincipal, ComponentSubtitulo },
   name: "ActivoGeneral",
   //componentes importados
   componets: {
     ComponentTituloPrincipal,
+    ComponentSubtitulo,
   },
   data() {
     return {
