@@ -67,6 +67,7 @@ export default {
 .asset-type-container {
   width: 100%;
   max-width: 300px;
+  margin: 12px;
 }
 
 .asset-type-label {
@@ -88,7 +89,7 @@ export default {
   height: 40px;
   padding: 8px 32px 8px 12px;
   border: 1px solid #e2e8f0;
-  border-radius: 4px;
+  border-radius: 10px;
   background-color: #fff;
   appearance: none;
   color: #4a5568;

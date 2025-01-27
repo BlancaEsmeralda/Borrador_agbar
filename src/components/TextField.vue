@@ -91,7 +91,7 @@ export default {
 
 .field-input,
 .field-textarea {
-  border-radius: 12px;
+  border-radius: 10px;
   background-color: #ffffff;
   border: 1px solid rgba(230, 230, 230, 1);
   padding: 8px 12px;

@@ -265,27 +265,15 @@
             type="date"
             v-model="formData.finGarantia"
           />
-          <!--Contenedor del proveedorMant
-              <div>
-              <label for="proveedorMant">Prov. Mant. Hardware</label>
-              <select
-                v-model="formData.proveedorMant"
-                id="proveedorMant"
-                name="proveedorMant"
-              >
-                <option
-                  v-for="option in proveedorMantOpciones"
-                  :key="option.id"
-                  :value="option.nombre"
-                >
-                  {{ option.nombre }}
-                </option>
-              </select>
-            </div>
-            
-            
-            -->
-
+          <SelectField
+            id="proveedorMant"
+            label="Proveedor Mant"
+            v-model="formData.proveedorMant"
+            :options="proveedorMant"
+            keyField=""
+            valueField=""
+            displayField=""
+          />
           <!--Contenedor checkbox-item del pertet-->
           <CheckboxField
             v-model="formData.pertet"
