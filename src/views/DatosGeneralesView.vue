@@ -1,59 +1,39 @@
 <template>
-  <div>
-    <!--Contenedor del logo con la ruta al home-->
-    <div class="contenedor_global">
-      <component-titulo-principal></component-titulo-principal>
-      <component-subtitulo></component-subtitulo>
+  <!--contenedor global de la pagina web-->
+  <div class="contendor_global">
+    <!--Titulo y subtitulo importados-->
+    <component-titulo-principal></component-titulo-principal>
+    <component-subtitulo></component-subtitulo>
+    <!--Contenedor principal-->
+    <div class="contenedor_principal">
       <!--Contenedor del formulario-->
       <div class="contenedor_formulario">
         <form class="formulario" @submit.prevent="buscarActivo">
-          <div class="id">
-            <input
-              v-model="id"
-              type="text"
-              id="id"
-              name="id"
-              placeholder="ACTIVO"
-            />
-          </div>
+          <TextField id="id" placeholder="ACTIVO" v-model="id" />
           <!--ESTE BUTTON ES PARA HACER PRUEBAS DE CARGAR JSON ATRAVES DE UNA API-->
           <button type="submit">Pruebas conexion apii</button>
           <button @click="actualizarActivo">Actualizar Activo</button>
 
           <!--Contenedor del tipo Activo-->
-          <div>
-            <label for="tipoActivo">Tipo Activo</label>
-            <select
-              v-model="formData.tipoActivoId"
-              id="tipoActivo"
-              name="tipoActivo"
-            >
-              <option
-                v-for="opcion in tipoActivoOpciones"
-                :key="opcion.IdTipo"
-                :value="opcion.IdTipo"
-              >
-                {{ opcion.Tipo }}
-              </option>
-            </select>
-          </div>
+          <SelectField
+            id="tipoActivo"
+            label="Tipo Activo"
+            v-model="formData.tipoActivoId"
+            :options="tipoActivoOpciones"
+            keyField="IdTipo"
+            valueField="IdTipo"
+            displayField="Tipo"
+          />
           <!--Contenedor del tipo Activo IT-->
-          <div>
-            <label for="tipoActivoIt">Tipo Activo It</label>
-            <select
-              v-model="formData.tipoActivoItId"
-              id="tipoActivoIT"
-              name="tipoActivoIT"
-            >
-              <option
-                v-for="opcion in tipoActivoItOpciones"
-                :key="opcion.IdTipo_it"
-                :value="opcion.IdTipo_it"
-              >
-                {{ opcion.TIPO_it }}
-              </option>
-            </select>
-          </div>
+          <SelectField
+            id="tipoActivoIT"
+            label="Tipo Activo IT"
+            v-model="formData.tipoActivoItId"
+            :options="tipoActivoItOpciones"
+            keyField="IdTipo_it"
+            valueField="IdTipo_it"
+            displayField="TIPO_it"
+          />
           <!--Contenedor del textarea con la clase largo completo-->
           <div class="full-width">
             <textarea
@@ -64,48 +44,35 @@
             ></textarea>
           </div>
           <!--Contenedor de es IT/OT-->
-          <div>
-            <label for="esITesOT">ES IT/ ES OT</label>
-            <select v-model="formData.esITesOTId" id="esITesOT" name="esITesOT">
-              <option
-                v-for="opcion in esITesOTOpciones"
-                :key="opcion.IdITOT"
-                :value="opcion.IdITOT"
-              >
-                {{ opcion.ITOT }}
-              </option>
-            </select>
-          </div>
+          <SelectField
+            id="esITesOT"
+            label="IT/OT"
+            v-model="formData.esITesOTId"
+            :options="esITesOTOpciones"
+            keyField="IdTOT"
+            valueField="IdTOT"
+            displayField="ITOT"
+          />
           <!--Contenedor de Entorno-->
-          <div>
-            <label for="entorno">Entorno</label>
-            <select v-model="formData.entornoId" id="entorno" name="entorno">
-              <option
-                v-for="opcion in entornoOpciones"
-                :key="opcion.IdEntorno"
-                :value="opcion.IdEntorno"
-              >
-                {{ opcion.Entorno }}
-              </option>
-            </select>
-          </div>
+          <SelectField
+            id="entorno"
+            label="Entorno"
+            v-model="formData.entornoId"
+            :options="entornoOpciones"
+            keyField="IdEntorno"
+            valueField="IdEntorno"
+            displayField="Entorno"
+          />
           <!--Contenedor de Categoria-->
-          <div>
-            <label for="categoria">Categoria</label>
-            <select
-              v-model="formData.categoriaId"
-              id="categoria"
-              name="categoria"
-            >
-              <option
-                v-for="opcion in categoriaOpciones"
-                :key="opcion.IdCategoria"
-                :value="opcion.IdCategoria"
-              >
-                {{ opcion.Categoria }}
-              </option>
-            </select>
-          </div>
+          <SelectField
+            id="categoria"
+            label="Categoria"
+            v-model="formData.categoriaId"
+            :options="categoriaOpciones"
+            keyField="IdCategoria"
+            valueField="IdCategoria"
+            displayField="Categoria"
+          />
           <!--Contenedor de Tarifa Mensual Servicio
             <div>
               <label for="tarifaMensual">Tarifa Mensual Servicio</label>
@@ -120,39 +87,26 @@
             -->
 
           <!--Contenedor de Ubicacion-->
-          <div>
-            <label for="ubicacion">Ubicacion</label>
-            <select
-              v-model="formData.ubicacionId"
-              id="ubicacion"
-              name="ubicacion"
-            >
-              <option
-                v-for="option in ubicacionOpciones"
-                :key="option.IdUbicacion"
-                :value="option.IdUbicacion"
-              >
-                {{ option.Ubicacion }}
-              </option>
-            </select>
-          </div>
+          <SelectField
+            id="ubicacion"
+            label="Ubicación"
+            v-model="formData.ubicacionId"
+            :options="ubicacionOpciones"
+            keyField="IdUbicacion"
+            valueField="IdUbicacion"
+            displayField="Ubicacion"
+          />
           <!--Contenedor de Sububicacion-->
-          <div>
-            <label for="sububicacion">Sububicación</label>
-            <select
-              v-model="formData.sububicacionId"
-              id="sububicacion"
-              name="sububicacion"
-            >
-              <option
-                v-for="option in sububicacionOpciones"
-                :key="option.IdSubUbicacion"
-                :value="option.IdSubUbicacion"
-              >
-                {{ option.SubUbicacion }}
-              </option>
-            </select>
-          </div>
+          <SelectField
+            id="sububicacion"
+            label="Sububicación"
+            v-model="formData.sububicacionId"
+            :options="sububicacionOpciones"
+            keyField="IdSubUbicacion"
+            valueField="IdSubUbicacion"
+            displayField="SubUbicacion"
+          />
+
           <!--Contenedor de comentarios-->
           <div class="full-width">
             <label for="comentarios">Comentarios</label>
@@ -188,18 +142,15 @@
             />
           </div>
           <!--Contenedor de Empres-->
-          <div>
-            <label for="empresa">Empresa</label>
-            <select v-model="formData.empresaId" id="empresa" name="empresa">
-              <option
-                v-for="option in empresaOpciones"
-                :key="option.idEmpresa"
-                :value="option.idEmpresa"
-              >
-                {{ option.Empresa }}
-              </option>
-            </select>
-          </div>
+          <SelectField
+            id="empresa"
+            label="Empresa"
+            v-model="formData.empresaId"
+            :options="empresaOpciones"
+            keyField="idEmpresa"
+            valueField="idEmpresa"
+            displayField="Empresa"
+          />
           <!--Contenedor de los checkboxes-->
           <div class="checkbox-container">
             <!--Contenedor del primer checkbox-item con gestionadoProveedorOT-->
@@ -325,19 +276,25 @@
               </option>
             </select>
           </div>
+          <SelectField
+            id="citricidad"
+            label="Citricidad"
+            v-model="formData.tipoActivoId"
+            :options="citricidadOpciones"
+            keyField="IdTCriticidad"
+            valueField="IdTCriticidad"
+            displayField="T_Criticidad"
+          />
           <!--Contenedor del estado-->
-          <div>
-            <label for="estado">Estado</label>
-            <select v-model="formData.estadoId" id="estado" name="estado">
-              <option
-                v-for="option in estadoOpciones"
-                :key="option.IdTEstado"
-                :value="option.IdTEstado"
-              >
-                {{ option.T_Estado }}
-              </option>
-            </select>
-          </div>
+          <SelectField
+            id="estado"
+            label="Estado"
+            v-model="formData.estadoId"
+            :options="estadoOpciones"
+            keyField="IdTEstado"
+            valueField="IdTEstado"
+            displayField="T_Estado"
+          />
           <!--Contenedor de anotaciones-->
           <div class="full-width">
             <label for="anotaciones">Anotaciones</label>
@@ -353,22 +310,15 @@
           </div>
 
           <!--Contenedor del proveedor-->
-          <div>
-            <label for="proveedor">Proveedor</label>
-            <select
-              v-model="formData.proveedorId"
-              id="proveedor"
-              name="proveedor"
-            >
-              <option
-                v-for="option in proveedorOpciones"
-                :key="option.IdProv"
-                :value="option.IdProv"
-              >
-                {{ option.Proveedor }}
-              </option>
-            </select>
-          </div>
+          <SelectField
+            id="proveedor"
+            label="Proveedor"
+            v-model="formData.proveedorId"
+            :options="proveedorOpciones"
+            keyField="IdProv"
+            valueField="IdProv"
+            displayField="Proveedor"
+          />
           <!--Contenedor del fechaCompra-->
           <div>
             <label for="fechaCompra">Fecha de Compra</label>
@@ -429,17 +379,19 @@
 <script>
 import ComponentTituloPrincipal from "@/components/ComponentTituloPrincipal.vue";
 import ComponentSubtitulo from "@/components/ComponentSubtitulo.vue";
+import SelectField from "@/components/SelectField.vue";
+import TextField from "@/components/TextField.vue";
 //import de la libreria de axios
 import axios from "axios";
 
 export default {
-  components: { ComponentTituloPrincipal, ComponentSubtitulo },
-  name: "ActivoGeneral",
-  //componentes importados
-  componets: {
+  components: {
     ComponentTituloPrincipal,
     ComponentSubtitulo,
+    SelectField,
+    TextField,
   },
+  name: "ActivoGeneral",
   data() {
     return {
       id: "",
