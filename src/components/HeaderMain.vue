@@ -17,11 +17,11 @@
   align-items: flex-start;
   justify-content: center;
   padding: 24px 75px;
-  width: 100vw; /* Cambiado a 100vw */
-  position: relative; /* Añadido */
-  left: 0; /* Añadido */
-  right: 0; /* Añadido */
-  margin-left: 0; /* Añadido */
-  margin-right: 0; /* Añadido */
+  width: 100vw;
+  position: relative;
+  left: 0;
+  right: 0;
+  margin-left: 0;
+  margin-right: 0;
 }
 </style>

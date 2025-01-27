@@ -9,7 +9,7 @@
       <!--Contenedor del formulario-->
       <div class="contenedor_formulario">
         <form class="formulario" @submit.prevent="buscarActivo">
-          <TextField id="id" placeholder="ACTIVO" v-model="id" />
+          <TextField id="id" label="" v-model="id" placeholder="Activo" />
           <!--ESTE BUTTON ES PARA HACER PRUEBAS DE CARGAR JSON ATRAVES DE UNA API-->
           <button type="submit">Pruebas conexion apii</button>
           <button @click="actualizarActivo">Actualizar Activo</button>
@@ -35,14 +35,13 @@
             displayField="TIPO_it"
           />
           <!--Contenedor del textarea con la clase largo completo-->
-          <div class="full-width">
-            <textarea
-              v-model="formData.textDescripcion"
-              id="textDescripcion"
-              name="textDescripcion"
-              placeholder="Descripción"
-            ></textarea>
-          </div>
+          <TextField
+            id="textDescripcion"
+            label=" "
+            v-model="formData.textDescripcion"
+            multiline
+            fullWidth
+          />
           <!--Contenedor de es IT/OT-->
           <SelectField
             id="esITesOT"
@@ -108,39 +107,23 @@
           />
 
           <!--Contenedor de comentarios-->
-          <div class="full-width">
-            <label for="comentarios">Comentarios</label>
-            <textarea
-              v-model="formData.comentarios"
-              id="comentarios"
-              name="comentarios"
-            ></textarea>
-          </div>
+          <TextField
+            id="comentarios"
+            label="Comentarios"
+            v-model="formData.comentarios"
+            multiline
+            fullWidth
+          />
           <!--Contenedor de Rack-->
-          <div>
-            <label for="rack">Rack</label>
-            <input v-model="formData.rack" type="text" id="rack" name="rack" />
-          </div>
+          <TextField id="rack" label="Rack" v-model="formData.rack" />
           <!--Contenedor de Posicion-->
-          <div>
-            <label for="posicion">Posicion</label>
-            <input
-              v-model="formData.posicion"
-              type="text"
-              id="posicion"
-              name="posicion"
-            />
-          </div>
+          <TextField
+            id="posicion"
+            label="Posicion"
+            v-model="formData.posicion"
+          />
           <!--Contenedor de Unidad-->
-          <div>
-            <label for="unidad">Unidad</label>
-            <input
-              v-model="formData.unidad"
-              type="text"
-              id="unidad"
-              name="unidad"
-            />
-          </div>
+          <TextField id="unidad" label="Unidad" v-model="formData.unidad" />
           <!--Contenedor de Empres-->
           <SelectField
             id="empresa"
@@ -154,128 +137,77 @@
           <!--Contenedor de los checkboxes-->
           <div class="checkbox-container">
             <!--Contenedor del primer checkbox-item con gestionadoProveedorOT-->
-            <div class="checkbox-item">
-              <input
-                v-model="formData.gestionadoProveedorOT"
-                type="checkbox"
-                id="gestionadoProveedorOT"
-                name="gestionadoProveedorOT"
-              />
-              <label for="gestionadoProveedorOT"
-                >Gestionado por Proveedor OT</label
-              >
-            </div>
+            <CheckboxField
+              v-model="formData.gestionadoProveedorOT"
+              label="Gestionado por Proveedor OT"
+              id="gestionadoProveedorOT"
+            />
             <!--Contenedor del segundo checkbox-item con gestionadoProveedorIT-->
-            <div class="checkbox-item">
-              <input
-                v-model="formData.gestionadoProveedorIT"
-                type="checkbox"
-                id="gestionadoProveedorIT"
-                name="gestionadoProveedorIT"
-              />
-              <label for="gestionadoProveedorIT"
-                >Gestionado por Proveedor IT</label
-              >
-            </div>
+            <CheckboxField
+              v-model="formData.gestionadoProveedorIT"
+              label="Gestionado por Proveeedor IT"
+              id="gestionadoProveedorIT"
+            />
             <!--Contenedor del tercer checkbox-item con esAzure-->
-            <div class="checkbox-item">
-              <input
-                v-model="formData.esAzure"
-                type="checkbox"
-                id="Esazure"
-                name="Esazure"
-              />
-              <label for="Esazure">Es Azure</label>
-            </div>
+            <CheckboxField
+              v-model="formData.esAzure"
+              label="Es azure"
+              id="Esazure"
+            />
             <!--Contenedor del tercer checkbox-item con esSeguridad-->
-            <div class="checkbox-item">
-              <input
-                v-model="formData.esSeguridad"
-                type="checkbox"
-                id="esSeguridad"
-                name="esSeguridad"
-              />
-              <label for="esSeguridad">Es de Seguridad</label>
-            </div>
+            <CheckboxField
+              v-model="formData.esSeguridad"
+              label="Es de seguridad"
+              id="esSeguridad"
+            />
           </div>
+
           <!--FECHAS ACTIVO -->
+
           <!--Contenedor del altaActivo-->
-          <div>
-            <label for="altaActivo">Alta Activo</label>
-            <input
-              v-model="formData.altaActivo"
-              type="date"
-              id="altaActivo"
-              name="altaActivo"
-            />
-          </div>
+          <TextField
+            id="altaActivo"
+            label="Alta Activo"
+            type="date"
+            v-model="formData.altaActivo"
+          />
           <!--Contenedor del altaGestion-->
-          <div>
-            <label for="altaGestion">Alta Gestión</label>
-            <input
-              v-model="formData.altaGestion"
-              type="date"
-              id="altaGestion"
-              name="altaGestion"
-            />
-          </div>
+          <TextField
+            id="altaGestion"
+            label="Alta Gestión"
+            type="date"
+            v-model="formData.altaGestion"
+          />
           <!--Contenedor del mesAltaGestion-->
-          <div>
-            <label for="mesAltaGestion">Mes alta Gestión</label>
-            <input
-              v-model="formData.mesAltaGestion"
-              type="text"
-              id="mesAltaGestion"
-              name="mesAltaGestion"
-            />
-          </div>
+          <TextField
+            id="mesAltaGestion"
+            label="Mes alta Gestión"
+            v-model="formData.mesAltaGestion"
+            placeholder=" "
+          />
           <!--Contenedor del bajaActivo-->
-          <div>
-            <label for="bajaActivo">Baja Activo</label>
-            <input
-              v-model="formData.bajaActivo"
-              type="date"
-              id="bajaActivo"
-              name="bajaActivo"
-            />
-          </div>
+          <TextField
+            id="bajaActivo"
+            label="Baja Activo"
+            type="date"
+            v-model="formData.bajaActivo"
+          />
           <!--Contenedor del bajaGestion-->
-          <div>
-            <label for="bajaGestion">Baja Gestión</label>
-            <input
-              v-model="formData.bajaGestion"
-              type="date"
-              id="bajaGestion"
-              name="bajaGestion"
-            />
-          </div>
+          <TextField
+            id="bajaGestion"
+            label="Baja Gestión"
+            type="date"
+            v-model="formData.bajaGestion"
+          />
           <!--Contenedor del bajaGestion-->
-          <div>
-            <label for="Mes_Baja_Viewnext">Mes baja Gestion</label>
-            <input
-              v-model="formData.Mes_Baja_Viewnext"
-              type="text"
-              id="Mes_Baja_Viewnext"
-              name="Mes_Baja_Viewnext"
-            />
-          </div>
+
+          <TextField
+            id="Mes_Baja_Viewnext"
+            label="Mes baja Gestión"
+            v-model="formData.Mes_Baja_Viewnext"
+            placeholder=" "
+          />
           <!--Contenedor del citricidad-->
-          <div>
-            <label for="citricidad">Citricidad</label>
-            <select
-              v-model="formData.citricidadId"
-              id="citricidad"
-              name="citricidad"
-            >
-              <option
-                v-for="option in citricidadOpciones"
-                :key="option.IdTCriticidad"
-                :value="option.IdTCriticidad"
-              >
-                {{ option.T_Criticidad }}
-              </option>
-            </select>
-          </div>
           <SelectField
             id="citricidad"
             label="Citricidad"
@@ -296,14 +228,14 @@
             displayField="T_Estado"
           />
           <!--Contenedor de anotaciones-->
-          <div class="full-width">
-            <label for="anotaciones">Anotaciones</label>
-            <textarea
-              v-model="formData.anotaciones"
-              id="anotaciones"
-              name="anotaciones"
-            ></textarea>
-          </div>
+          <TextField
+            id="anotaciones"
+            label="Anotaciones"
+            v-model="formData.anotaciones"
+            multiline
+            fullWidth
+          />
+
           <!--Contenedor del segundo titulo con la clase largo completo-->
           <div class="full-width">
             <h2 class="Titulo2">Datos Administrativos</h2>
@@ -320,25 +252,19 @@
             displayField="Proveedor"
           />
           <!--Contenedor del fechaCompra-->
-          <div>
-            <label for="fechaCompra">Fecha de Compra</label>
-            <input
-              v-model="formData.fechaCompra"
-              type="date"
-              id="fechaCompra"
-              name="fechaCompra"
-            />
-          </div>
+          <TextField
+            id="fechaCompra"
+            label="Fecha de Compra"
+            type="date"
+            v-model="formData.fechaCompra"
+          />
           <!--Contenedor del finGarantia-->
-          <div>
-            <label for="finGarantia">Fin de Garantia (Fabricante)</label>
-            <input
-              v-model="formData.finGarantia"
-              type="date"
-              id="finGarantia"
-              name="finGarantia"
-            />
-          </div>
+          <TextField
+            id="finGarantia"
+            label="Fin de Garantia(Fabricante)"
+            type="date"
+            v-model="formData.finGarantia"
+          />
           <!--Contenedor del proveedorMant
               <div>
               <label for="proveedorMant">Prov. Mant. Hardware</label>
@@ -361,15 +287,11 @@
             -->
 
           <!--Contenedor checkbox-item del pertet-->
-          <div class="checkbox-item">
-            <input
-              v-model="formData.pertet"
-              type="checkbox"
-              id="pertet"
-              name="pertet"
-            />
-            <label for="pertet">PERTET?</label>
-          </div>
+          <CheckboxField
+            v-model="formData.pertet"
+            label="Pertet?"
+            id="pertet"
+          />
         </form>
       </div>
     </div>
@@ -381,6 +303,7 @@ import ComponentTituloPrincipal from "@/components/ComponentTituloPrincipal.vue"
 import ComponentSubtitulo from "@/components/ComponentSubtitulo.vue";
 import SelectField from "@/components/SelectField.vue";
 import TextField from "@/components/TextField.vue";
+import CheckboxField from "@/components/CheckboxField.vue";
 //import de la libreria de axios
 import axios from "axios";
 
@@ -390,6 +313,7 @@ export default {
     ComponentSubtitulo,
     SelectField,
     TextField,
+    CheckboxField,
   },
   name: "ActivoGeneral",
   data() {
