@@ -36,7 +36,7 @@ export default {
 .general-data-container {
   display: flex;
   align-items: center;
-  padding: 49px 70px;
+  padding: 40px 90px;
   background: #ffffff;
   font-family: "Raleway", sans-serif;
 }

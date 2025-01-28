@@ -1,20 +1,20 @@
 <template>
-  <!--contenedor global de la pagina web-->
-  <div class="contendor_global">
-    <!--Titulo y subtitulo importados-->
-    <component-titulo-principal></component-titulo-principal>
-    <component-subtitulo></component-subtitulo>
-    <!--Contenedor principal-->
-    <div class="contenedor_principal">
-      <!--Contenedor del formulario-->
-      <div class="contenedor_formulario">
-        <form class="formulario" @submit.prevent="buscarActivo">
-          <TextField id="id" label="" v-model="id" placeholder="Activo" />
-          <!--ESTE BUTTON ES PARA HACER PRUEBAS DE CARGAR JSON ATRAVES DE UNA API-->
-          <button type="submit">Pruebas conexion apii</button>
+  <ComponentTituloPrincipal></ComponentTituloPrincipal>
+  <component-subtitulo></component-subtitulo>
+  <ContainerForm>
+    <form class="formulario" @submit.prevent="buscarActivo">
+      <!-- Sección de búsqueda -->
+      <div class="search-section">
+        <TextField id="id" label="" v-model="id" placeholder="Activo" />
+        <div class="button-group">
+          <button type="submit">Pruebas conexion api</button>
           <button @click="actualizarActivo">Actualizar Activo</button>
+        </div>
+      </div>
 
-          <!--Contenedor del tipo Activo-->
+      <!-- Primera sección: Información básica -->
+      <div class="form-section">
+        <div class="form-row">
           <SelectField
             id="tipoActivo"
             label="Tipo Activo"
@@ -23,8 +23,8 @@
             keyField="IdTipo"
             valueField="IdTipo"
             displayField="Tipo"
+            class="field-small"
           />
-          <!--Contenedor del tipo Activo IT-->
           <SelectField
             id="tipoActivoIT"
             label="Tipo Activo IT"
@@ -33,16 +33,15 @@
             keyField="IdTipo_it"
             valueField="IdTipo_it"
             displayField="TIPO_it"
+            class="field-small"
           />
-          <!--Contenedor del textarea con la clase largo completo-->
           <TextField
             id="textDescripcion"
             label=" "
             v-model="formData.textDescripcion"
             multiline
-            fullWidth
+            class="field-large"
           />
-          <!--Contenedor de es IT/OT-->
           <SelectField
             id="esITesOT"
             label="IT/OT"
@@ -51,8 +50,11 @@
             keyField="IdTOT"
             valueField="IdTOT"
             displayField="ITOT"
+            class="field-small"
           />
-          <!--Contenedor de Entorno-->
+        </div>
+
+        <div class="form-row">
           <SelectField
             id="entorno"
             label="Entorno"
@@ -61,8 +63,8 @@
             keyField="IdEntorno"
             valueField="IdEntorno"
             displayField="Entorno"
+            class="field-medium"
           />
-          <!--Contenedor de Categoria-->
           <SelectField
             id="categoria"
             label="Categoria"
@@ -71,21 +73,12 @@
             keyField="IdCategoria"
             valueField="IdCategoria"
             displayField="Categoria"
+            class="field-medium"
           />
-          <!--Contenedor de Tarifa Mensual Servicio
-            <div>
-              <label for="tarifaMensual">Tarifa Mensual Servicio</label>
-              <input
-                v-model="formData.tarifaMensual"
-                type="text"
-                id="tarifaMensual"
-                name="tarifaMensual"
-              />
-              <span>€/mes</span>
-            </div>
-            -->
+          <!--Aqui tiene eue ir la tarifa mensual servicios-->
+        </div>
 
-          <!--Contenedor de Ubicacion-->
+        <div class="form-row">
           <SelectField
             id="ubicacion"
             label="Ubicación"
@@ -94,8 +87,8 @@
             keyField="IdUbicacion"
             valueField="IdUbicacion"
             displayField="Ubicacion"
+            class="field-medium"
           />
-          <!--Contenedor de Sububicacion-->
           <SelectField
             id="sububicacion"
             label="Sububicación"
@@ -104,27 +97,27 @@
             keyField="IdSubUbicacion"
             valueField="IdSubUbicacion"
             displayField="SubUbicacion"
+            class="field-medium"
           />
 
-          <!--Contenedor de comentarios-->
           <TextField
-            id="comentarios"
-            label="Comentarios"
-            v-model="formData.comentarios"
-            multiline
-            fullWidth
+            id="rack"
+            label="Rack"
+            v-model="formData.rack"
+            class="field-small"
           />
-          <!--Contenedor de Rack-->
-          <TextField id="rack" label="Rack" v-model="formData.rack" />
-          <!--Contenedor de Posicion-->
           <TextField
             id="posicion"
             label="Posicion"
             v-model="formData.posicion"
+            class="field-small"
           />
-          <!--Contenedor de Unidad-->
-          <TextField id="unidad" label="Unidad" v-model="formData.unidad" />
-          <!--Contenedor de Empres-->
+          <TextField
+            id="unidad"
+            label="Unidad"
+            v-model="formData.unidad"
+            class="field-small"
+          />
           <SelectField
             id="empresa"
             label="Empresa"
@@ -133,157 +126,168 @@
             keyField="idEmpresa"
             valueField="idEmpresa"
             displayField="Empresa"
+            class="field-medium"
           />
-          <!--Contenedor de los checkboxes-->
-          <div class="checkbox-container">
-            <!--Contenedor del primer checkbox-item con gestionadoProveedorOT-->
-            <CheckboxField
-              v-model="formData.gestionadoProveedorOT"
-              label="Gestionado por Proveedor OT"
-              id="gestionadoProveedorOT"
-            />
-            <!--Contenedor del segundo checkbox-item con gestionadoProveedorIT-->
-            <CheckboxField
-              v-model="formData.gestionadoProveedorIT"
-              label="Gestionado por Proveeedor IT"
-              id="gestionadoProveedorIT"
-            />
-            <!--Contenedor del tercer checkbox-item con esAzure-->
-            <CheckboxField
-              v-model="formData.esAzure"
-              label="Es azure"
-              id="Esazure"
-            />
-            <!--Contenedor del tercer checkbox-item con esSeguridad-->
-            <CheckboxField
-              v-model="formData.esSeguridad"
-              label="Es de seguridad"
-              id="esSeguridad"
-            />
-          </div>
+        </div>
 
-          <!--FECHAS ACTIVO -->
+        <TextField
+          id="comentarios"
+          label="Comentarios"
+          v-model="formData.comentarios"
+          multiline
+          class="field-full"
+        />
+      </div>
 
-          <!--Contenedor del altaActivo-->
+      <!-- Sección de checkboxes -->
+      <div class="checkbox-section">
+        <CheckboxField
+          v-model="formData.gestionadoProveedorOT"
+          label="Gestionado por Proveedor OT"
+          id="gestionadoProveedorOT"
+        />
+        <CheckboxField
+          v-model="formData.gestionadoProveedorIT"
+          label="Gestionado por Proveeedor IT"
+          id="gestionadoProveedorIT"
+        />
+        <CheckboxField
+          v-model="formData.esAzure"
+          label="Es azure"
+          id="Esazure"
+        />
+        <CheckboxField
+          v-model="formData.esSeguridad"
+          label="Es de seguridad"
+          id="esSeguridad"
+        />
+      </div>
+
+      <!-- Sección de fechas -->
+      <div class="dates-section">
+        <div class="form-row">
           <TextField
             id="altaActivo"
             label="Alta Activo"
             type="date"
             v-model="formData.altaActivo"
+            class="field-medium"
           />
-          <!--Contenedor del altaGestion-->
           <TextField
             id="altaGestion"
             label="Alta Gestión"
             type="date"
             v-model="formData.altaGestion"
+            class="field-medium"
           />
-          <!--Contenedor del mesAltaGestion-->
           <TextField
             id="mesAltaGestion"
             label="Mes alta Gestión"
             v-model="formData.mesAltaGestion"
             placeholder=" "
+            class="field-medium"
           />
-          <!--Contenedor del bajaActivo-->
           <TextField
             id="bajaActivo"
             label="Baja Activo"
             type="date"
             v-model="formData.bajaActivo"
+            class="field-medium"
           />
-          <!--Contenedor del bajaGestion-->
           <TextField
             id="bajaGestion"
             label="Baja Gestión"
             type="date"
             v-model="formData.bajaGestion"
+            class="field-medium"
           />
-          <!--Contenedor del bajaGestion-->
-
           <TextField
             id="Mes_Baja_Viewnext"
             label="Mes baja Gestión"
             v-model="formData.Mes_Baja_Viewnext"
             placeholder=" "
+            class="field-medium"
           />
-          <!--Contenedor del citricidad-->
-          <SelectField
-            id="citricidad"
-            label="Citricidad"
-            v-model="formData.tipoActivoId"
-            :options="citricidadOpciones"
-            keyField="IdTCriticidad"
-            valueField="IdTCriticidad"
-            displayField="T_Criticidad"
-          />
-          <!--Contenedor del estado-->
-          <SelectField
-            id="estado"
-            label="Estado"
-            v-model="formData.estadoId"
-            :options="estadoOpciones"
-            keyField="IdTEstado"
-            valueField="IdTEstado"
-            displayField="T_Estado"
-          />
-          <!--Contenedor de anotaciones-->
-          <TextField
-            id="anotaciones"
-            label="Anotaciones"
-            v-model="formData.anotaciones"
-            multiline
-            fullWidth
-          />
-
-          <!--Contenedor del segundo titulo con la clase largo completo-->
-          <div class="full-width">
-            <h2 class="Titulo2">Datos Administrativos</h2>
-          </div>
-
-          <!--Contenedor del proveedor-->
-          <SelectField
-            id="proveedor"
-            label="Proveedor"
-            v-model="formData.proveedorId"
-            :options="proveedorOpciones"
-            keyField="IdProv"
-            valueField="IdProv"
-            displayField="Proveedor"
-          />
-          <!--Contenedor del fechaCompra-->
-          <TextField
-            id="fechaCompra"
-            label="Fecha de Compra"
-            type="date"
-            v-model="formData.fechaCompra"
-          />
-          <!--Contenedor del finGarantia-->
-          <TextField
-            id="finGarantia"
-            label="Fin de Garantia(Fabricante)"
-            type="date"
-            v-model="formData.finGarantia"
-          />
-          <SelectField
-            id="proveedorMant"
-            label="Proveedor Mant"
-            v-model="formData.proveedorMant"
-            :options="proveedorMant"
-            keyField=""
-            valueField=""
-            displayField=""
-          />
-          <!--Contenedor checkbox-item del pertet-->
-          <CheckboxField
-            v-model="formData.pertet"
-            label="Pertet?"
-            id="pertet"
-          />
-        </form>
+        </div>
       </div>
-    </div>
-  </div>
+
+      <!-- Sección de estado -->
+      <div class="form-row">
+        <SelectField
+          id="citricidad"
+          label="Citricidad"
+          v-model="formData.tipoActivoId"
+          :options="citricidadOpciones"
+          keyField="IdTCriticidad"
+          valueField="IdTCriticidad"
+          displayField="T_Criticidad"
+          class="field-medium"
+        />
+        <SelectField
+          id="estado"
+          label="Estado"
+          v-model="formData.estadoId"
+          :options="estadoOpciones"
+          keyField="IdTEstado"
+          valueField="IdTEstado"
+          displayField="T_Estado"
+          class="field-medium"
+        />
+      </div>
+
+      <TextField
+        id="anotaciones"
+        label="Anotaciones"
+        v-model="formData.anotaciones"
+        multiline
+        class="field-full"
+      />
+
+      <!-- Sección administrativa -->
+      <div class="form-row">
+        <SelectField
+          id="proveedor"
+          label="Proveedor"
+          v-model="formData.proveedorId"
+          :options="proveedorOpciones"
+          keyField="IdProv"
+          valueField="IdProv"
+          displayField="Proveedor"
+          class="field-medium"
+        />
+        <TextField
+          id="fechaCompra"
+          label="Fecha de Compra"
+          type="date"
+          v-model="formData.fechaCompra"
+          class="field-medium"
+        />
+        <TextField
+          id="finGarantia"
+          label="Fin de Garantia(Fabricante)"
+          type="date"
+          v-model="formData.finGarantia"
+          class="field-medium"
+        />
+        <SelectField
+          id="proveedorMant"
+          label="Proveedor Mant"
+          v-model="formData.proveedorMant"
+          :options="proveedorMant"
+          keyField=""
+          valueField=""
+          displayField=""
+          class="field-medium"
+        />
+        <CheckboxField
+          v-model="formData.pertet"
+          label="Pertet?"
+          id="pertet"
+          class="single-checkbox"
+        />
+      </div>
+    </form>
+  </ContainerForm>
 </template>
 
 <script>
@@ -292,6 +296,7 @@ import ComponentSubtitulo from "@/components/ComponentSubtitulo.vue";
 import SelectField from "@/components/SelectField.vue";
 import TextField from "@/components/TextField.vue";
 import CheckboxField from "@/components/CheckboxField.vue";
+import ContainerForm from "@/components/ContainerForm.vue";
 //import de la libreria de axios
 import axios from "axios";
 
@@ -302,6 +307,7 @@ export default {
     SelectField,
     TextField,
     CheckboxField,
+    ContainerForm,
   },
   name: "ActivoGeneral",
   data() {
@@ -633,4 +639,120 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.form-layout {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.form-container {
+  width: 100%;
+  max-width: 1318px;
+  margin: 31px auto;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0 8px 12px 6px rgba(0, 0, 0, 0.15), 0 4px 4px 0 rgba(0, 0, 0, 0.3);
+  padding: 24px;
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.search-section {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.button-group {
+  display: flex;
+  gap: 8px;
+}
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.field-small {
+  width: 150px;
+  flex-shrink: 0;
+}
+
+.field-medium {
+  width: 200px;
+  flex-shrink: 0;
+}
+
+.field-large {
+  flex-grow: 1;
+  min-width: 300px;
+}
+
+.field-full {
+  width: 100%;
+}
+
+.checkbox-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.dates-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.section-title {
+  font-size: 1.2em;
+  color: #333;
+  margin: 16px 0;
+}
+
+.single-checkbox {
+  margin-top: 8px;
+}
+
+button {
+  padding: 8px 16px;
+  background-color: #0056b3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #004494;
+}
+
+@media (max-width: 768px) {
+  .form-row {
+    flex-direction: column;
+  }
+
+  .field-small,
+  .field-medium,
+  .field-large {
+    width: 100%;
+  }
+
+  .checkbox-section {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
