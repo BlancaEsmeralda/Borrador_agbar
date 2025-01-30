@@ -19,7 +19,7 @@
   width: 100%;
   max-width: 1700px;
   min-height: 781px;
-  margin: 10px auto 0;
+  margin: 10px auto 20px;
   background: #fff;
   border-radius: 5px;
   box-shadow: 0 8px 12px 6px rgba(0, 0, 0, 0.15), 0 4px 4px 0 rgba(0, 0, 0, 0.3);

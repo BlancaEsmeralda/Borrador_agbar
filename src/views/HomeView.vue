@@ -3,32 +3,27 @@
     <HeaderMain class="header" />
   </div>
   <div class="home">
-    <router-link to="/datosgenerales">
-      <img alt="ejemplo" src="../assets/logo.png" />
-    </router-link>
-    <div class="contenedor_global">
-      <HelloWorld
-        msg="Mantenimiento Activos Informáticos de Aigües de Barcelona"
-      />
-    </div>
+    <component-titulo-principal class="titulo"></component-titulo-principal>
+    <container-form class="home-container"></container-form>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import ComponentTituloPrincipal from "@/components/ComponentTituloPrincipal.vue";
+import ContainerForm from "@/components/ContainerForm.vue";
 export default {
   name: "HomeView",
   components: {
-    HelloWorld,
+    ComponentTituloPrincipal,
+    ContainerForm,
   },
 };
 </script>
 <style scoped>
-/* Fondo */
-.contenedor_global {
-  background-color: #ffffff;
-  background-position: bottom right;
-  background-size: 100% auto;
+.home-container {
+  margin-bottom: 10px; /* Ajusta este valor según necesites */
+  margin-left: 10px;
+  margin-right: 100px;
 }
 </style>
