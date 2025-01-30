@@ -24,5 +24,6 @@
   border-radius: 5px;
   box-shadow: 0 8px 12px 6px rgba(0, 0, 0, 0.15), 0 4px 4px 0 rgba(0, 0, 0, 0.3);
   padding: 20px;
+  border-top: 6px solid #002f6c;
 }
 </style>

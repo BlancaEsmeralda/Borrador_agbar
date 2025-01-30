@@ -337,10 +337,10 @@ export default {
         empresaId: null, //id de empresa
         empresa: "",
         //checkboxes
-        gestionadoProveedorOT: "",
-        gestionadoProveedorIT: "",
-        esAzure: "",
-        esSeguridad: "",
+        gestionadoProveedorOT: false,
+        gestionadoProveedorIT: false,
+        esAzure: false,
+        esSeguridad: false,
         //Gestion del activo
         altaActivo: "",
         altaGestion: "",
@@ -359,7 +359,7 @@ export default {
         finGarantia: "",
         proveedorMantId: null, //id prov mant
         //proveedorMant: "",
-        pertet: "",
+        pertet: false,
       },
       //option de los selects
       tipoActivoOpciones: [], //array de tipoActivo
@@ -615,10 +615,10 @@ export default {
         posicion: "",
         unidad: "",
         empresa: "",
-        gestionadoProveedorOT: "",
-        gestionadoProveedorIT: "",
-        esAzure: "",
-        esSeguridad: "",
+        gestionadoProveedorOT: false,
+        gestionadoProveedorIT: false,
+        esAzure: false,
+        esSeguridad: false,
         altaActivo: "",
         altaGestion: "",
         mesAltaGestion: "",

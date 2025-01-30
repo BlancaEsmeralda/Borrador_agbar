@@ -28,6 +28,7 @@ export default {
     modelValue: {
       type: Boolean,
       required: true,
+      default: false,
     },
     id: {
       type: String,
@@ -69,14 +70,14 @@ export default {
   border-color: rgba(38, 116, 159, 1);
 }
 
-/* Añadimos el check mark */
+/* Ajustamos la posición del check mark */
 .checkbox-input.checkbox-checked::after {
   content: "";
   position: absolute;
-  left: 5px;
-  top: 2px;
-  width: 6px;
-  height: 10px;
+  left: 6px;
+  top: 3px;
+  width: 4px;
+  height: 8px;
   border: solid white;
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);

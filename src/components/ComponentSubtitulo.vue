@@ -7,7 +7,7 @@
     <div class="general-data-container">
       <div class="header-title" tabindex="0">
         <div class="icon-circle" role="presentation">
-          <i class="ti ti-chevron-right header-icon" aria-hidden="true"></i>
+          <icon-chevron-right class="header-icon" aria-hidden="true" />
         </div>
         <h1 id="general-data-title" class="heading">{{ title }}</h1>
       </div>
@@ -16,8 +16,13 @@
 </template>
 
 <script>
+import { IconChevronRight } from "@tabler/icons-vue";
+
 export default {
   name: "GeneralDataHeader",
+  components: {
+    IconChevronRight,
+  },
   props: {
     title: {
       type: String,

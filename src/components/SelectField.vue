@@ -12,7 +12,7 @@
         aria-label="Select asset type"
         tabindex="0"
       >
-        <option value="" selected disabled>Seleccione una opcion</option>
+        <option value="" selected disabled>Seleccione una opción</option>
         <option
           v-for="option in options"
           :key="option[keyField]"
