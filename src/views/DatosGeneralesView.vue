@@ -40,8 +40,8 @@
             label="IT/OT"
             v-model="formData.esITesOTId"
             :options="esITesOTOpciones"
-            keyField="IdTOT"
-            valueField="IdTOT"
+            keyField="IdITOT"
+            valueField="IdITOT"
             displayField="ITOT"
             class="field-small"
           />
