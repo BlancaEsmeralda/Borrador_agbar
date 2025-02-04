@@ -45,9 +45,16 @@
             <tbody>
               <tr v-for="activo in activos" :key="activo.id">
                 <td>{{ activo.inv }}</td>
-                <router-link to="/Datos-generales-view" target="_blank">
-                  <td>{{ activo.modelo }}</td>
-                </router-link>
+                <td>
+                  <!--Router link que nos abre una pestaña para los datos en detalles-->
+                  <router-link
+                    :to="'/Datos-generales-view'"
+                    target="_blank"
+                    :custom="false"
+                  >
+                    {{ activo.modelo }}
+                  </router-link>
+                </td>
                 <td>{{ activo.netbios }}</td>
                 <td>{{ activo.serial }}</td>
                 <td>{{ activo.estado }}</td>
