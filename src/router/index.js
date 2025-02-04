@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 //Import de las paginas de los componentes
 import DatosGenerales from "../components/DatosGenerales.vue";
+//Import de la vista de datos generales
+import DatosGeneralesView from "../views/DatosGeneralesView.vue";
 import DatosTecnicos from "../components/DatosTecnicos.vue";
 import ServiceOfferings from "../components/ServiceOfferings.vue";
 import MantenimientoInstancias from "../components/MantenimientoInstancias.vue";
@@ -26,11 +28,17 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
   },
-  //ruta de datos generales
+  //ruta de datos generales componente
   {
     path: "/datosgenerales",
     name: "datosgenerales",
     component: DatosGenerales,
+  },
+
+  {
+    path: "/Datos-generales-view",
+    name: "Datos-Generales-view",
+    component: DatosGeneralesView,
   },
   //ruta de datos tecnicos
   {

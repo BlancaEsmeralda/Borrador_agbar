@@ -1,23 +1,42 @@
 <template>
-  <div class="barranavegacion">
-    <nav>
-      <!--
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> |
-      <router-link to="/datosgenerales">Datos generales</router-link> |
-      <router-link to="/datostecnicos">Datos Tecnicos</router-link>
-      -->
-    </nav>
+  <div id="app">
+    <HeaderMain />
     <router-view />
   </div>
 </template>
+<script>
+import HeaderMain from "@/components/HeaderMain.vue";
+export default {
+  name: "App",
+  components: {
+    HeaderMain,
+  },
+};
+</script>
 <style>
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&display=swap");
+/* Reset global */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: "Raleway", sans-serif; /* Solo Raleway como fuente principal */
   text-align: center;
   color: #2c3e50;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 nav {
