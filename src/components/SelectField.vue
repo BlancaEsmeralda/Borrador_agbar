@@ -12,7 +12,7 @@
         aria-label="Select asset type"
         tabindex="0"
       >
-        <option value="" selected disabled>Seleccione una opción</option>
+        <option value="" selected disabled></option>
         <option
           v-for="option in options"
           :key="option[keyField]"
@@ -66,15 +66,15 @@ export default {
 <style scoped>
 .asset-type-container {
   width: 100%;
-  max-width: 300px;
-  margin: 12px;
+  max-width: 200px;
+  margin: 0;
 }
 
 .asset-type-label {
   color: rgba(38, 116, 159, 1);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 800;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
   display: block;
   font-family: "Raleway", sans-serif;
 }
@@ -88,7 +88,7 @@ export default {
   width: 100%;
   height: 40px;
   padding: 8px 32px 8px 12px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid rgba(102, 102, 102, 1);
   border-radius: 10px;
   background-color: #fff;
   appearance: none;

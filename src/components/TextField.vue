@@ -73,14 +73,15 @@ export default {
 .field-container {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 4px;
   font-family: Raleway, sans-serif;
   width: 100%;
-  max-width: 300px;
+  max-width: 200px;
+  margin: 0;
 }
 
 .field-container.full-width {
-  max-width: 802px;
+  max-width: 100%;
 }
 
 .field-label {
@@ -93,10 +94,12 @@ export default {
 .field-textarea {
   border-radius: 10px;
   background-color: #ffffff;
-  border: 1px solid rgba(230, 230, 230, 1);
+  border: 1px solid rgba(102, 102, 102, 1);
   padding: 8px 12px;
   font: 14px inherit;
   outline: none;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .field-input {

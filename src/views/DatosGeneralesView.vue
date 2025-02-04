@@ -35,13 +35,6 @@
             displayField="TIPO_it"
             class="field-small"
           />
-          <TextField
-            id="textDescripcion"
-            label=" "
-            v-model="formData.textDescripcion"
-            multiline
-            class="field-large"
-          />
           <SelectField
             id="esITesOT"
             label="IT/OT"
@@ -51,6 +44,13 @@
             valueField="IdTOT"
             displayField="ITOT"
             class="field-small"
+          />
+          <TextField
+            id="textDescripcion"
+            label=" "
+            v-model="formData.textDescripcion"
+            multiline
+            class="field-large"
           />
         </div>
 
@@ -660,6 +660,8 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 24px;
+  padding: 16px;
+  box-sizing: border-box;
 }
 
 .search-section {
@@ -680,25 +682,54 @@ export default {
 }
 
 .form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 200px); /* Columnas de tamaño fijo */
+  gap: 24px;
+  align-items: start;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 16px;
+}
+
+/* Para campos que necesitan ocupar más espacio */
+.form-row-full {
+  grid-column: 1 / -1;
+}
+
+/* Ajuste específico para los checkboxes */
+.checkbox-group {
   display: flex;
+  gap: 24px;
   flex-wrap: wrap;
-  gap: 16px;
-  align-items: flex-start;
+  padding: 16px;
+}
+
+/* Para mantener consistencia en campos de fecha */
+.date-field {
+  width: 200px;
+}
+
+/* Para campos que necesitan ser más anchos */
+.wide-field {
+  grid-column: span 2;
 }
 
 .field-small {
   width: 150px;
-  flex-shrink: 0;
+  flex: 0 0 150px;
+  box-sizing: border-box;
 }
 
 .field-medium {
   width: 200px;
-  flex-shrink: 0;
+  flex: 0 0 200px;
+  box-sizing: border-box;
 }
 
 .field-large {
-  flex-grow: 1;
+  flex: 1;
   min-width: 300px;
+  box-sizing: border-box;
 }
 
 .field-full {
@@ -754,5 +785,17 @@ button:hover {
   .checkbox-section {
     grid-template-columns: 1fr;
   }
+}
+
+:deep(.select-field),
+:deep(.text-field) {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px;
+}
+
+:deep(.input-container) {
+  width: 100%;
+  box-sizing: border-box;
 }
 </style>

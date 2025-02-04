@@ -26,7 +26,7 @@ export default {
 }
 
 .maintenance-title {
-  padding: 20px 70px 10px;
+  padding: 20px 70px 20px;
   color: rgba(0, 47, 108, 1);
   text-align: center;
   letter-spacing: -0.01em;

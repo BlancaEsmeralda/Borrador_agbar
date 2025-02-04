@@ -48,13 +48,12 @@ export default {
   flex-direction: column;
   gap: 8px;
   width: 100%;
-  max-width: 400px;
+  max-width: 350px;
 }
 
 .search-label {
-  font-size: 1.2rem;
-  color: #0066b2;
-  font-weight: 500;
+  color: #007fb2;
+  font-weight: 700;
 }
 
 .search-container {
