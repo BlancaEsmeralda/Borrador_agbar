@@ -526,7 +526,7 @@ export default {
       console.log("Datos enviados:", datosActualizados);
       axios
         .put(
-          `http://localhost:3001/api/datos-generales/activos/${this.id}`,
+          `http://localhost:3001/api/datos-generales/${this.id}`,
           datosActualizados,
           {
             headers: {

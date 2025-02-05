@@ -9,13 +9,27 @@
         <ComponentSearch
           v-model="searchFilters.numeroSerie"
           label="Numero de serie"
+          filterKey="numeroSerie"
+          @search="handleSearch"
         />
-        <ComponentSearch v-model="searchFilters.tag" label="TAG" />
+        <ComponentSearch
+          v-model="searchFilters.tag"
+          label="TAG"
+          filterKey="tag"
+          @search="handleSearch"
+        />
         <ComponentSearch
           v-model="searchFilters.loginUsuario"
           label="Login Usuario"
+          filterKey="loginUsuario"
+          @search="handleSearch"
         />
-        <ComponentSearch v-model="searchFilters.netbios" label="NETBIOS" />
+        <ComponentSearch
+          v-model="searchFilters.netbios"
+          label="NETBIOS"
+          filterKey="netbios"
+          @search="handleSearch"
+        />
       </div>
 
       <container-form class="home-container">
@@ -44,7 +58,7 @@
             </thead>
             <tbody>
               <tr v-for="activo in activos" :key="activo.id">
-                <td>{{ activo.inv }}</td>
+                <td>{{ activo.NumInventario }}</td>
                 <td>
                   <!--Router link que nos abre una pestaña para los datos en detalles-->
                   <router-link
@@ -52,24 +66,24 @@
                     target="_blank"
                     :custom="false"
                   >
-                    {{ activo.modelo }}
+                    {{ activo.Modelo }}
                   </router-link>
                 </td>
-                <td>{{ activo.netbios }}</td>
-                <td>{{ activo.serial }}</td>
-                <td>{{ activo.estado }}</td>
-                <td>{{ activo.desactivadoAd }}</td>
-                <td>{{ activo.so }}</td>
-                <td>{{ activo.usuario }}</td>
-                <td>{{ activo.manager }}</td>
-                <td>{{ activo.itot }}</td>
-                <td>{{ activo.ubicacion }}</td>
-                <td>{{ activo.administrador }}</td>
+                <td>{{ activo.nombreNetBIOS }}</td>
+                <td>{{ activo.NumeroSerie }}</td>
+                <td>{{ activo.Estado }}</td>
+                <td>{{ activo.esDesactivadoAD }}</td>
+                <td>{{ activo.SistemaOperativo }}</td>
+                <td>{{ activo.Usuario }}</td>
+                <td>{{ activo.Manager }}</td>
+                <td>{{ activo.ITOT }}</td>
+                <td>{{ activo.Ubicacion }}</td>
+                <td>{{ activo.esUsuAdmin }}</td>
                 <td>{{ activo.critico }}</td>
-                <td>{{ activo.anioCompra }}</td>
-                <td>{{ activo.ipNat }}</td>
-                <td>{{ activo.ipPrincipal }}</td>
-                <td>{{ activo.comentarios }}</td>
+                <td>{{ activo.FechaCompra }}</td>
+                <td>{{ activo.IP }}</td>
+                <!--<td>{{ activo.ipPrincipal }}</td>-->
+                <td>{{ activo.Comentarios }}</td>
               </tr>
             </tbody>
           </table>
@@ -87,12 +101,14 @@ import axios from "axios";
 
 export default {
   name: "HomeView",
+  // Registramos los componentes tituloprincipal, el contenedor, el componente de busqueda.
   components: {
     ComponentTituloPrincipal,
     ContainerForm,
     ComponentSearch,
   },
   data() {
+    // Objeto que almacena los valores de todos los filtros
     return {
       searchFilters: {
         numeroSerie: "",
@@ -100,126 +116,48 @@ export default {
         loginUsuario: "",
         netbios: "",
       },
-      activos: [
-        // Datos de ejemplo
-        {
-          id: 1,
-          inv: "INV001",
-          modelo: "HP EliteBook",
-          netbios: "PC001",
-          serial: "SER123456",
-          estado: "Activo",
-          desactivadoAd: "No",
-          so: "Windows 10",
-          usuario: "usuario1",
-          manager: "manager1",
-          itot: "IT001",
-          ubicacion: "Oficina 101",
-          administrador: "admin1",
-          critico: "Sí",
-          anioCompra: "2023",
-          ipNat: "192.168.1.1",
-          ipPrincipal: "10.0.0.1",
-          comentarios: "Equipo principal",
-        },
-        // Datos de ejemplo
-        {
-          id: 2,
-          inv: "INV002",
-          modelo: "HP EliteBook2",
-          netbios: "PC002",
-          serial: "SER123452",
-          estado: "Activo",
-          desactivadoAd: "No",
-          so: "Windows 10",
-          usuario: "usuario2",
-          manager: "manager2",
-          itot: "IT002",
-          ubicacion: "Oficina 102",
-          administrador: "admin2",
-          critico: "Sí",
-          anioCompra: "2022",
-          ipNat: "192.168.1.2",
-          ipPrincipal: "10.0.0.2",
-          comentarios: "Equipo principal",
-        },
-        // Datos de ejemplo
-        {
-          id: 3,
-          inv: "INV003",
-          modelo: "HP EliteBook3",
-          netbios: "PC003",
-          serial: "SER123453",
-          estado: "Activo",
-          desactivadoAd: "No",
-          so: "Windows 10",
-          usuario: "usuario3",
-          manager: "manager3",
-          itot: "IT003",
-          ubicacion: "Oficina 103",
-          administrador: "admin3",
-          critico: "Sí",
-          anioCompra: "2023",
-          ipNat: "192.168.1.3",
-          ipPrincipal: "10.0.0.3",
-          comentarios: "Equipo principal",
-        },
-        // Puedes agregar más registros de ejemplo aquí
-        {
-          id: 4,
-          inv: "INV004",
-          modelo: "HP EliteBook4",
-          netbios: "PC004",
-          serial: "SER123454",
-          estado: "Activo",
-          desactivadoAd: "No",
-          so: "Windows 10",
-          usuario: "usuario4",
-          manager: "manager4",
-          itot: "IT004",
-          ubicacion: "Oficina 104",
-          administrador: "admin4",
-          critico: "Sí",
-          anioCompra: "2024",
-          ipNat: "192.168.1.4",
-          ipPrincipal: "10.0.0.4",
-          comentarios: "Equipo principal",
-        },
-        {
-          id: 5,
-          inv: "INV005",
-          modelo: "Lenovo",
-          netbios: "PC005",
-          serial: "SER123455",
-          estado: "Activo",
-          desactivadoAd: "No",
-          so: "Windows 10",
-          usuario: "usuario5",
-          manager: "manager5",
-          itot: "IT005",
-          ubicacion: "Oficina 105",
-          administrador: "admin5",
-          critico: "Sí",
-          anioCompra: "2025",
-          ipNat: "192.168.1.5",
-          ipPrincipal: "10.0.0.5",
-          comentarios: "Equipo principal",
-        },
-      ],
+      activos: [],
     };
   },
   methods: {
+    // Maneja el evento de búsqueda emitido por ComponentSearch
+    handleSearch({ key, value }) {
+      // Actualiza el valor del filtro correspondiente
+      this.searchFilters[key] = value;
+      // Ejecuta la búsqueda con los nuevos filtros
+      this.buscarActivos();
+    },
+
     async buscarActivos() {
       try {
-        const response = await axios.get("tu-api/activos", {
-          params: this.searchFilters,
-        });
+        // Crea un objeto solo con los filtros que tienen valor
+        const filtros = Object.entries(this.searchFilters).reduce(
+          (acc, [key, value]) => {
+            if (value) acc[key] = value;
+            return acc;
+          },
+          {}
+        );
+        // Realiza la petición HTTP al backend con los filtros
+        const response = await axios.get(
+          "http://localhost:3001/api/filtros/numeroSerie",
+          {
+            params: filtros,
+          }
+        );
+        // Actualiza el array de activos con la respuesta
         this.activos = response.data;
       } catch (error) {
         console.error("Error al obtener activos:", error);
       }
     },
   },
+  // Se ejecuta cuando el componente se monta en el DOM
+  mounted() {
+    // Realiza una búsqueda inicial para cargar todos los activos
+    this.buscarActivos();
+  },
+  // Observa cambios en los filtros
   watch: {
     searchFilters: {
       handler() {
@@ -230,7 +168,7 @@ export default {
   },
 };
 </script>
-
+<!--Estilos de la view Menu-->
 <style scoped>
 .content-wrapper {
   padding: 15px 75px;

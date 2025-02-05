@@ -21,22 +21,31 @@ import { IconSearch } from "@tabler/icons-vue";
 export default {
   name: "ComponentSearch",
   components: {
-    IconSearch,
+    IconSearch, //importacion del icono de búsqueda
   },
+  // Props que recibe el componente desde el padre
   props: {
     label: {
       type: String,
-      required: true,
+      required: true, // Etiqueta que se mostrará en el campo de búsqueda
+    },
+    filterKey: {
+      type: String,
+      required: true, // Identificador único para cada filtro (numeroSerie, tag, etc.)
     },
   },
   data() {
     return {
-      searchText: "",
+      searchText: "", // Almacena el texto ingresado en el campo de búsqueda
     };
   },
   methods: {
     handleSearch() {
-      alert("Has buscado correctamente");
+      // Emite un evento 'search' al componente padre con la clave y valor del filtro
+      this.$emit("search", {
+        key: this.filterKey,
+        value: this.searchText,
+      });
     },
   },
 };
