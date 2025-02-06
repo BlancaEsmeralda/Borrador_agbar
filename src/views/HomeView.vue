@@ -192,20 +192,23 @@ export default {
   background: #fff;
   border-radius: 5px;
   padding: 15px;
-  height: 400px;
-  overflow: hidden;
+  min-height: 400px;
+  max-height: 80vh;
+  overflow: visible;
 }
 
 .table-wrapper {
   width: 100%;
-  height: 100%;
-  overflow: auto;
+  max-height: calc(80vh - 30px);
+  overflow-y: auto;
+  overflow-x: auto;
 }
 
 table {
   min-width: 1500px;
   border-collapse: collapse;
   white-space: nowrap;
+  width: 100%;
 }
 
 th,
