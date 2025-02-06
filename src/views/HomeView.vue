@@ -57,12 +57,13 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="activo in activos" :key="activo.id">
+              <tr v-for="activo in activos" :key="activo.IdActivo">
+                <!--Este es el id objeto pero no el id del campo-->
                 <td>{{ activo.NumInventario }}</td>
                 <td>
                   <!--Router link que nos abre una pestaña para los datos en detalles-->
                   <router-link
-                    :to="'/Datos-generales-view'"
+                    :to="`/Datos-generales-view/${activo.IdActivo}`"
                     target="_blank"
                     :custom="false"
                   >
@@ -127,7 +128,7 @@ export default {
       // Ejecuta la búsqueda con los nuevos filtros
       this.buscarActivos();
     },
-
+    //Funcion de buscar el activo
     async buscarActivos() {
       try {
         // Crea un objeto solo con los filtros que tienen valor
@@ -147,6 +148,8 @@ export default {
         );
         // Actualiza el array de activos con la respuesta
         this.activos = response.data;
+        //Chivato de la respuesta del backend
+        console.log("Datos recibidos del backend:", this.activos);
       } catch (error) {
         console.error("Error al obtener activos:", error);
       }

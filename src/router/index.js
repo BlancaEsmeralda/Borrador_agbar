@@ -3,7 +3,6 @@ import HomeView from "../views/HomeView.vue";
 //Import de las paginas de los componentes
 import DatosGenerales from "../components/DatosGenerales.vue";
 //Import de la vista de datos generales
-import DatosGeneralesView from "../views/DatosGeneralesView.vue";
 import DatosTecnicos from "../components/DatosTecnicos.vue";
 import ServiceOfferings from "../components/ServiceOfferings.vue";
 import MantenimientoInstancias from "../components/MantenimientoInstancias.vue";
@@ -36,9 +35,9 @@ const routes = [
   },
 
   {
-    path: "/Datos-generales-view",
-    name: "Datos-Generales-view",
-    component: DatosGeneralesView,
+    path: "/Datos-generales-view/:id",
+    name: "datos-generales",
+    component: () => import("../views/DatosGeneralesView.vue"),
   },
   //ruta de datos tecnicos
   {

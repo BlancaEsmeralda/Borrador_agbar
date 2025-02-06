@@ -7,7 +7,8 @@
       <div class="search-section">
         <TextField id="id" label="" v-model="id" placeholder="Activo" />
         <div class="button-group">
-          <button type="submit">Pruebas conexion api</button>
+          <!--Botones de prueba de obtene los datos y de actualizar-->
+          <button @click="buscarActivo">Pruebas conexion api</button>
           <button @click="actualizarActivo">Actualizar Activo</button>
         </div>
       </div>
@@ -309,7 +310,7 @@ export default {
     CheckboxField,
     ContainerForm,
   },
-  name: "ActivoGeneral",
+  name: "DatosGeneralesView",
   data() {
     return {
       id: "",
@@ -376,7 +377,9 @@ export default {
       //proveedorMantOpciones: [], // array de ..
     };
   },
-
+  created() {
+    this.id = this.$route.params.id;
+  },
   methods: {
     //--- Método para buscar un activo (GET) ---
 
@@ -449,7 +452,7 @@ export default {
           this.limpiarCampos();
         });
     },
-
+    //funcion para actualuzar los campos del activo
     actualizarActivo() {
       console.log("Valores del formulario:", this.formData);
       if (!this.id) {
