@@ -27,7 +27,7 @@
           </div>
           <!--contenedor de la barra de navegacion-->
           <div id="Pestañas">
-            <nav class="animate__animated animate__fadeInDown animate_faster">
+            <nav class="">
               <!--Enlaces de las diferentes pestañas de la pagina-->
               <router-link to="/datosgenerales">Datos Grales.</router-link>
               <router-link to="/datostecnicos">Datos Técnicos</router-link>

@@ -16,6 +16,7 @@
 </template>
 
 <script>
+//importamos paquetes de iconos
 import { IconSearch } from "@tabler/icons-vue";
 
 export default {
