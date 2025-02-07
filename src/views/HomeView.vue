@@ -139,16 +139,33 @@ export default {
           },
           {}
         );
+
+        // Determina qué endpoint usar basado en los filtros activos
+        let endpoint = "numeroSerie"; // default endpoint
+        let params = {};
+
+        if (filtros.numeroSerie) {
+          endpoint = "numeroSerie";
+          params = { numeroSerie: filtros.numeroSerie };
+        } else if (filtros.tag) {
+          endpoint = "numeroInventario";
+          params = { NumInventario: filtros.tag };
+        } else if (filtros.loginUsuario) {
+          endpoint = "loginUsuario";
+          params = { Usuario: filtros.loginUsuario };
+        } else if (filtros.netbios) {
+          endpoint = "nombreNetbios";
+          params = { nombreNetBIOS: filtros.netbios };
+        }
+
         // Realiza la petición HTTP al backend con los filtros
         const response = await axios.get(
-          "http://localhost:3001/api/filtros/numeroSerie",
-          {
-            params: filtros,
-          }
+          `http://localhost:3001/api/filtros/${endpoint}`,
+          { params }
         );
+
         // Actualiza el array de activos con la respuesta
         this.activos = response.data;
-        //Chivato de la respuesta del backend
         console.log("Datos recibidos del backend:", this.activos);
       } catch (error) {
         console.error("Error al obtener activos:", error);
