@@ -557,7 +557,7 @@ export default {
         FFin_Garantia: this.formData.finGarantia,
         esPERTE: this.formData.pertet ? Boolean(this.formData.pertet) : null,
       };
-
+      //muestra por consola los datos actualizados
       console.log("Datos enviados:", datosActualizados);
       axios
         .put(
