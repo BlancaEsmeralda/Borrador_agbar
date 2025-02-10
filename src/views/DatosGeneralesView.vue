@@ -8,7 +8,6 @@
         <TextField id="id" label="" v-model="id" placeholder="Activo" />
         <div class="button-group">
           <!--Botones de prueba de obtene los datos y de actualizar-->
-          <button @click="buscarActivo">Pruebas conexion api</button>
           <button @click="actualizarActivo">Actualizar Activo</button>
         </div>
       </div>
