@@ -377,80 +377,113 @@ export default {
       //proveedorMantOpciones: [], // array de ..
     };
   },
+  /**
+   * Hook del ciclo de vida que se ejecuta cuando el componente se crea
+   * Verifica si hay un ID en los parámetros de la ruta y carga los datos del activo
+   */
   created() {
     this.id = this.$route.params.id;
+    if (this.id) {
+      this.buscarActivo();
+    }
+  },
+  /**
+   * Observador que detecta cambios en el ID de la ruta
+   * Si el ID cambia y es diferente al actual, actualiza el ID local y recarga los datos
+   */
+  watch: {
+    "$route.params.id": {
+      handler(newId) {
+        if (newId && newId !== this.id) {
+          this.id = newId;
+          this.buscarActivo();
+        }
+      },
+    },
   },
   methods: {
-    //--- Método para buscar un activo (GET) ---
-
-    buscarActivo() {
+    /**
+     * Método asíncrono que busca y carga los datos de un activo específico
+     * Realiza una petición HTTP GET al backend y actualiza el formulario con los datos recibidos
+     * @throws {Error} Si no hay datos disponibles para el ID proporcionado
+     */
+    async buscarActivo() {
+      // Validación inicial: verifica si existe un ID para buscar
       if (!this.id) {
-        alert("Por favor, introduce un ID válido.");
+        console.warn("No hay ID disponible para buscar");
         return;
       }
-      axios
-        //Peticion a la api con el endpoint
-        .get(`http://localhost:3001/api/datos-generales/${this.id}`)
-        .then((response) => {
-          //La respuesta viene en forma de array.
-          const data = response.data[0];
-          console.log("JSON recibido:", response.data);
 
-          //funcion fecha que transforma la fecha al formato dd/mm/yy
-          const convertirFecha = (fecha) => {
-            if (!fecha) return "";
-            return fecha.split("T")[0];
-          };
+      try {
+        // Realiza la petición HTTP al backend
+        const response = await axios.get(
+          `http://localhost:3001/api/datos-generales/${this.id}`
+        );
+        const data = response.data[0];
 
-          // Asignar los datos al formulario(variable vue.js) con la pripiedad que coincide con json.
-          this.formData.tipoActivoId = data.IdTipo; //id
-          this.formData.tipoActivo = data.Tipo || "";
-          this.formData.tipoActivoItId = data.IdTipo_it; //id
-          this.formData.tipoActivoIt = data.TIPO_it || "";
-          this.formData.textDescripcion = data.Descripción || "";
-          this.formData.esITesOTId = data.IdITOT; //id
-          this.formData.esITesOT = data.ITOT || "";
-          this.formData.entornoId = data.IdEntorno; //id
-          this.formData.entorno = data.Entorno || "";
-          this.formData.categoriaId = data.IdCategoria; //id
-          this.formData.categoria = data.Categoria || "";
-          this.formData.ubicacionId = data.IdUbicacion; //id
-          this.formData.ubicacion = data.Ubicacion || "";
-          this.formData.sububicacionId = data.IdSubUbicacion; //id
-          this.formData.sububicacion = data.SubUbicacion || "";
-          this.formData.comentarios = data.Comentarios || "";
-          this.formData.rack = data.RACK || "";
-          this.formData.posicion = data.POSICION || "";
-          this.formData.unidad = data.UNIDAD || "";
-          this.formData.empresaId = data.idEmpresa; //id de la empresa
-          this.formData.empresa = data.Empresa || "";
-          this.formData.gestionadoProveedorOT = Boolean(data.EsConnectis);
-          this.formData.gestionadoProveedorIT = Boolean(data.EsViewnext);
-          this.formData.esAzure = Boolean(data.EsAzure);
-          this.formData.esSeguridad = Boolean(data.EsSeguridad);
-          this.formData.altaActivo = convertirFecha(data.Alta_SRV) || "";
-          this.formData.altaGestion = convertirFecha(data.Alta_Viewnext) || "";
-          this.formData.mesAltaGestion = data.Mes_Alta_Viewnext || "";
-          this.formData.bajaActivo = convertirFecha(data.Baja_SRV) || "";
-          this.formData.bajaGestion = convertirFecha(data.Baja_Viewnext) || "";
-          this.formData.Mes_Baja_Viewnext = data.Mes_Baja_Viewnext || "";
-          this.formData.citricidadId = data.IdTCriticidad; //id
-          this.formData.citricidad = data.T_Criticidad || "";
-          this.formData.estadoId = data.IdTEstado; //id
-          this.formData.estado = data.T_Estado || "";
-          this.formData.anotaciones = data.ANOTACIONES || "";
-          this.formData.proveedorId = data.IdProv; //id
-          this.formData.proveedor = data.Proveedor || "";
-          this.formData.fechaCompra = convertirFecha(data.Fecha_Compra) || "";
-          this.formData.finGarantia = convertirFecha(data.FFin_Garantia) || "";
-          //aqui iria el proveedor.
-          this.formData.pertet = Boolean(data.esPERTE);
-        })
-        .catch((error) => {
-          console.error("Error al obtener la información:", error);
-          alert("No se encontró información para este ID.");
-          this.limpiarCampos();
-        });
+        // Verifica si se encontraron datos
+        if (!data) {
+          throw new Error("No se encontraron datos para este ID");
+        }
+
+        /**
+         * Función auxiliar que convierte fechas del formato ISO a formato yyyy-mm-dd
+         * @param {string} fecha - Fecha en formato ISO
+         * @returns {string} Fecha en formato yyyy-mm-dd o cadena vacía si no hay fecha
+         */
+        const convertirFecha = (fecha) => {
+          if (!fecha) return "";
+          return fecha.split("T")[0];
+        };
+
+        // Asignación de datos al formulario
+        // Cada propiedad se asigna con su correspondiente valor del backend
+        this.formData.tipoActivoId = data.IdTipo;
+        this.formData.tipoActivo = data.Tipo || "";
+        this.formData.tipoActivoItId = data.IdTipo_it;
+        this.formData.tipoActivoIt = data.TIPO_it || "";
+        this.formData.textDescripcion = data.Descripción || "";
+        this.formData.esITesOTId = data.IdITOT;
+        this.formData.esITesOT = data.ITOT || "";
+        this.formData.entornoId = data.IdEntorno;
+        this.formData.entorno = data.Entorno || "";
+        this.formData.categoriaId = data.IdCategoria;
+        this.formData.categoria = data.Categoria || "";
+        this.formData.ubicacionId = data.IdUbicacion;
+        this.formData.ubicacion = data.Ubicacion || "";
+        this.formData.sububicacionId = data.IdSubUbicacion;
+        this.formData.sububicacion = data.SubUbicacion || "";
+        this.formData.comentarios = data.Comentarios || "";
+        this.formData.rack = data.RACK || "";
+        this.formData.posicion = data.POSICION || "";
+        this.formData.unidad = data.UNIDAD || "";
+        this.formData.empresaId = data.idEmpresa;
+        this.formData.empresa = data.Empresa || "";
+        this.formData.gestionadoProveedorOT = Boolean(data.EsConnectis);
+        this.formData.gestionadoProveedorIT = Boolean(data.EsViewnext);
+        this.formData.esAzure = Boolean(data.EsAzure);
+        this.formData.esSeguridad = Boolean(data.EsSeguridad);
+        this.formData.altaActivo = convertirFecha(data.Alta_SRV) || "";
+        this.formData.altaGestion = convertirFecha(data.Alta_Viewnext) || "";
+        this.formData.mesAltaGestion = data.Mes_Alta_Viewnext || "";
+        this.formData.bajaActivo = convertirFecha(data.Baja_SRV) || "";
+        this.formData.bajaGestion = convertirFecha(data.Baja_Viewnext) || "";
+        this.formData.Mes_Baja_Viewnext = data.Mes_Baja_Viewnext || "";
+        this.formData.citricidadId = data.IdTCriticidad;
+        this.formData.citricidad = data.T_Criticidad || "";
+        this.formData.estadoId = data.IdTEstado;
+        this.formData.estado = data.T_Estado || "";
+        this.formData.anotaciones = data.ANOTACIONES || "";
+        this.formData.proveedorId = data.IdProv;
+        this.formData.proveedor = data.Proveedor || "";
+        this.formData.fechaCompra = convertirFecha(data.Fecha_Compra) || "";
+        this.formData.finGarantia = convertirFecha(data.FFin_Garantia) || "";
+        this.formData.pertet = Boolean(data.esPERTE);
+      } catch (error) {
+        // Manejo de errores: registra el error y limpia el formulario
+        console.error("Error al obtener la información:", error);
+        this.limpiarCampos();
+      }
     },
     //funcion para actualuzar los campos del activo
     actualizarActivo() {
