@@ -328,7 +328,7 @@ export default {
         tarifaMensual: "",
         ubicacionId: null, //id de ubicacion
         ubicacion: "",
-        sububicacionId: null, //id de sububicacion
+        sububicacionId: null, //id de sububicación
         sububicacion: "",
         comentarios: "",
         rack: "",
