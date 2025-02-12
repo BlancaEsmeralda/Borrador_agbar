@@ -1,14 +1,21 @@
 <template>
   <ComponentTituloPrincipal></ComponentTituloPrincipal>
   <component-subtitulo></component-subtitulo>
-
+  <!--Conedor de navegacion-->
   <div class="navigation-buttons">
-    <component-button @click="irAEdicion">Editar Activo</component-button>
+    <!--Bottion para volver a la vista principal(lectura)-->
+    <component-button @click="volverAVistaLectura"
+      >Volver a Vista Lectura</component-button
+    >
+    <!--Botton para  guardar los combios-->
+    <component-button @click="actualizarActivo"></component-button>
   </div>
+  <!--Componente container Form que tiene todo el contenedor-->
   <ContainerForm>
-    <form class="formulario">
+    <form class="formulario" @submit.prevent="buscarActivo">
       <!-- Sección de búsqueda -->
       <div class="search-section">
+        <!--Este es texto del id del activo-->
         <TextField id="id" label="" v-model="id" placeholder="Activo" />
       </div>
 
@@ -291,7 +298,7 @@
 </template>
 
 <script>
-//import de los componentes
+//Importaciones de los componentes
 import ComponentTituloPrincipal from "@/components/ComponentTituloPrincipal.vue";
 import ComponentSubtitulo from "@/components/ComponentSubtitulo.vue";
 import SelectField from "@/components/SelectField.vue";
@@ -299,10 +306,10 @@ import TextField from "@/components/TextField.vue";
 import CheckboxField from "@/components/CheckboxField.vue";
 import ContainerForm from "@/components/ContainerForm.vue";
 import ComponentButton from "@/components/ComponentButton.vue";
-//import de la libreria de axios
 import axios from "axios";
 
 export default {
+  name: "DatosGeneralesActualizarView",
   components: {
     ComponentTituloPrincipal,
     ComponentSubtitulo,
@@ -312,7 +319,6 @@ export default {
     ContainerForm,
     ComponentButton,
   },
-  name: "DatosGeneralesView",
   data() {
     return {
       id: "",
@@ -379,203 +385,206 @@ export default {
       //proveedorMantOpciones: [], // array de ..
     };
   },
-  /**
-   * Hook del ciclo de vida que se ejecuta cuando el componente se crea
-   * Verifica si hay un ID en los parámetros de la ruta y carga los datos del activo
-   */
-  created() {
-    this.id = this.$route.params.id;
-    if (this.id) {
-      this.buscarActivo();
-    }
-  },
-  /**
-   * Observador que detecta cambios en el ID de la ruta
-   * Si el ID cambia y es diferente al actual, actualiza el ID local y recarga los datos
-   */
-  watch: {
-    "$route.params.id": {
-      handler(newId) {
-        if (newId && newId !== this.id) {
-          this.id = newId;
-          this.buscarActivo();
-        }
-      },
-    },
-  },
   methods: {
-    irAEdicion() {
-      this.$router.push(`/datos-generales/editar/${this.id}`);
+    volverAVistaLectura() {
+      this.$router.push(`/datos-generales/${this.id}`);
     },
-    /**
-     * Método asíncrono que busca y carga los datos de un activo específico
-     * Realiza una petición HTTP GET al backend y actualiza el formulario con los datos recibidos
-     * @throws {Error} Si no hay datos disponibles para el ID proporcionado
-     */
-    async buscarActivo() {
-      // Validación inicial: verifica si existe un ID para buscar
-      if (!this.id) {
-        console.warn("No hay ID disponible para buscar");
-        return;
-      }
-
+    async cargarOpcionesSelects() {
       try {
-        // Realiza la petición HTTP al backend
+        const [
+          tipoActivoRes,
+          tipoActivoItRes,
+          itotRes,
+          entornoRes,
+          categoriaRes,
+          ubicacionRes,
+          sububicacionRes,
+          empresaRes,
+          criticidadRes,
+          estadoRes,
+          proveedorRes,
+        ] = await Promise.all([
+          axios.get("http://localhost:3001/api/selects-general/tipo-activo"),
+          axios.get("http://localhost:3001/api/selects-general/tipo-activo-it"),
+          axios.get("http://localhost:3001/api/selects-general/itot"),
+          axios.get("http://localhost:3001/api/selects-general/entorno"),
+          axios.get("http://localhost:3001/api/selects-general/categoria"),
+          axios.get("http://localhost:3001/api/selects-general/ubicacion"),
+          axios.get("http://localhost:3001/api/selects-general/sububicacion"),
+          axios.get("http://localhost:3001/api/selects-general/empresa"),
+          axios.get("http://localhost:3001/api/selects-general/criticidad"),
+          axios.get("http://localhost:3001/api/selects-general/estado"),
+          axios.get("http://localhost:3001/api/selects-general/proveedor"),
+        ]);
+
+        this.tipoActivoOpciones = tipoActivoRes.data;
+        this.tipoActivoItOpciones = tipoActivoItRes.data;
+        this.esITesOTOpciones = itotRes.data;
+        this.entornoOpciones = entornoRes.data;
+        this.categoriaOpciones = categoriaRes.data;
+        this.ubicacionOpciones = ubicacionRes.data;
+        this.sububicacionOpciones = sububicacionRes.data;
+        this.empresaOpciones = empresaRes.data;
+        this.citricidadOpciones = criticidadRes.data;
+        this.estadoOpciones = estadoRes.data;
+        this.proveedorOpciones = proveedorRes.data;
+      } catch (error) {
+        console.error("Error al cargar las opciones:", error);
+      }
+    },
+    async buscarActivo() {
+      try {
         const response = await axios.get(
           `http://localhost:3001/api/datos-generales/${this.id}`
         );
-        const data = response.data[0];
-
-        // Verifica si se encontraron datos
-        if (!data) {
-          throw new Error("No se encontraron datos para este ID");
-        }
-
-        /**
-         * Función auxiliar que convierte fechas del formato ISO a formato yyyy-mm-dd
-         * @param {string} fecha - Fecha en formato ISO
-         * @returns {string} Fecha en formato yyyy-mm-dd o cadena vacía si no hay fecha
-         */
-        const convertirFecha = (fecha) => {
-          if (!fecha) return "";
-          return fecha.split("T")[0];
+        const datos = response.data;
+        // Actualizar el formData con los datos recibidos
+        this.formData = {
+          tipoActivoId: datos.IdTipo,
+          tipoActivoItId: datos.IdTipo_it,
+          textDescripcion: datos.Descripción,
+          esITesOTId: datos.IdITOT,
+          entornoId: datos.IdEntorno,
+          categoriaId: datos.IdCategoria,
+          ubicacionId: datos.IdUbicacion,
+          sububicacionId: datos.IdSubUbicacion,
+          rack: datos.RACK,
+          posicion: datos.POSICION,
+          unidad: datos.UNIDAD,
+          empresaId: datos.idEmpresa,
+          comentarios: datos.Comentarios,
+          gestionadoProveedorOT: datos.EsConnectis,
+          gestionadoProveedorIT: datos.EsViewnext,
+          esAzure: datos.EsAzure,
+          esSeguridad: datos.EsSeguridad,
+          altaActivo: datos.Alta_SRV,
+          altaGestion: datos.Alta_Viewnext,
+          mesAltaGestion: datos.Mes_Alta_Viewnext,
+          bajaActivo: datos.Baja_SRV,
+          bajaGestion: datos.Baja_Viewnext,
+          Mes_Baja_Viewnext: datos.Mes_Baja_Viewnext,
+          citricidadId: datos.IdTCriticidad,
+          estadoId: datos.IdTEstado,
+          anotaciones: datos.ANOTACIONES,
+          proveedorId: datos.IdProv,
+          fechaCompra: datos.Fecha_Compra,
+          finGarantia: datos.FFin_Garantia,
+          pertet: datos.esPERTE,
         };
-
-        // Asignación de datos al formulario
-        // Cada propiedad se asigna con su correspondiente valor del backend
-        this.formData.tipoActivoId = data.IdTipo;
-        this.formData.tipoActivo = data.Tipo || "";
-        this.formData.tipoActivoItId = data.IdTipo_it;
-        this.formData.tipoActivoIt = data.TIPO_it || "";
-        this.formData.textDescripcion = data.Descripción || "";
-        this.formData.esITesOTId = data.IdITOT;
-        this.formData.esITesOT = data.ITOT || "";
-        this.formData.entornoId = data.IdEntorno;
-        this.formData.entorno = data.Entorno || "";
-        this.formData.categoriaId = data.IdCategoria;
-        this.formData.categoria = data.Categoria || "";
-        this.formData.ubicacionId = data.IdUbicacion;
-        this.formData.ubicacion = data.Ubicacion || "";
-        this.formData.sububicacionId = data.IdSubUbicacion;
-        this.formData.sububicacion = data.SubUbicacion || "";
-        this.formData.comentarios = data.Comentarios || "";
-        this.formData.rack = data.RACK || "";
-        this.formData.posicion = data.POSICION || "";
-        this.formData.unidad = data.UNIDAD || "";
-        this.formData.empresaId = data.idEmpresa;
-        this.formData.empresa = data.Empresa || "";
-        this.formData.gestionadoProveedorOT = Boolean(data.EsConnectis);
-        this.formData.gestionadoProveedorIT = Boolean(data.EsViewnext);
-        this.formData.esAzure = Boolean(data.EsAzure);
-        this.formData.esSeguridad = Boolean(data.EsSeguridad);
-        this.formData.altaActivo = convertirFecha(data.Alta_SRV) || "";
-        this.formData.altaGestion = convertirFecha(data.Alta_Viewnext) || "";
-        this.formData.mesAltaGestion = data.Mes_Alta_Viewnext || "";
-        this.formData.bajaActivo = convertirFecha(data.Baja_SRV) || "";
-        this.formData.bajaGestion = convertirFecha(data.Baja_Viewnext) || "";
-        this.formData.Mes_Baja_Viewnext = data.Mes_Baja_Viewnext || "";
-        this.formData.citricidadId = data.IdTCriticidad;
-        this.formData.citricidad = data.T_Criticidad || "";
-        this.formData.estadoId = data.IdTEstado;
-        this.formData.estado = data.T_Estado || "";
-        this.formData.anotaciones = data.ANOTACIONES || "";
-        this.formData.proveedorId = data.IdProv;
-        this.formData.proveedor = data.Proveedor || "";
-        this.formData.fechaCompra = convertirFecha(data.Fecha_Compra) || "";
-        this.formData.finGarantia = convertirFecha(data.FFin_Garantia) || "";
-        this.formData.pertet = Boolean(data.esPERTE);
       } catch (error) {
-        // Manejo de errores: registra el error y limpia el formulario
-        console.error("Error al obtener la información:", error);
-        this.limpiarCampos();
+        console.error("Error al buscar activo:", error);
+        alert("Error al buscar el activo");
       }
     },
-    //FUNCION CARGA LOS SELECTS
-    cargarOpcionesSelects() {
-      //nos permite manejar de manera concurrente las solicitudes
-      Promise.all([
-        axios.get("http://localhost:3001/api/selects-general/tipo-activo"),
-        axios.get("http://localhost:3001/api/selects-general/tipo-activo-it"),
-        axios.get("http://localhost:3001/api/selects-general/itot"),
-        axios.get("http://localhost:3001/api/selects-general/entorno"),
-        axios.get("http://localhost:3001/api/selects-general/categoria"),
-        axios.get("http://localhost:3001/api/selects-general/ubicacion"),
-        axios.get("http://localhost:3001/api/selects-general/sububicacion"),
-        axios.get("http://localhost:3001/api/selects-general/empresa"),
-        axios.get("http://localhost:3001/api/selects-general/criticidad"),
-        axios.get("http://localhost:3001/api/selects-general/estado"),
-        axios.get("http://localhost:3001/api/selects-general/proveedor"),
-      ])
-        //Maneja las respuestas de las solicitudese en le mismo oreden
-        .then(
-          ([
-            tipoActivoRes,
-            tipoActivoItRes,
-            itotRes,
-            entornoRes,
-            categoriaRes,
-            ubicacionRes,
-            sububicacionRes,
-            empresaRes,
-            criticidadRes,
-            estadoRes,
-            proveedorRes,
-          ]) => {
-            this.tipoActivoOpciones = tipoActivoRes.data;
-            this.tipoActivoItOpciones = tipoActivoItRes.data;
-            this.esITesOTOpciones = itotRes.data;
-            this.entornoOpciones = entornoRes.data;
-            this.categoriaOpciones = categoriaRes.data;
-            this.ubicacionOpciones = ubicacionRes.data;
-            this.sububicacionOpciones = sububicacionRes.data;
-            this.empresaOpciones = empresaRes.data;
-            this.citricidadOpciones = criticidadRes.data;
-            this.estadoOpciones = estadoRes.data;
-            this.proveedorOpciones = proveedorRes.data;
+    actualizarActivo() {
+      /*Aqui tengo que aañdir una validacion de si quiere hacer los cambios o no*/
+      /*Una vez a realizado los cambios volver al DatosGenralesView*/
+      if (!this.id) {
+        alert("No hay un ID de activo válido.");
+        return;
+      }
+
+      /*Validación de IDs
+      const camposRequeridos = {
+        tipoActivoId: "Tipo Activo",
+        tipoActivoItId: "Tipo Activo IT",
+        esITesOTId: "IT/OT",
+        entornoId: "Entorno",
+        categoriaId: "Categoría",
+        ubicacionId: "Ubicación",
+        sububicacionId: "Sububicación",
+        //empresaId: "Empresa",
+        citricidadId: "Criticidad",
+        estadoId: "Estado",
+        proveedorId: "Proveedor",
+      };
+
+      const camposFaltantes = Object.entries(camposRequeridos)
+        .filter(([key]) => !this.formData[key])
+        .map(([, label]) => label);
+
+      if (camposFaltantes.length > 0) {
+        alert(
+          `Los siguientes campos son requeridos: ${camposFaltantes.join(", ")}`
+        );
+        return;
+      }*/
+
+      //Se asigna json al vue.js
+      const datosActualizados = {
+        IdTipo: this.formData.tipoActivoId, //
+        IdTipo_it: this.formData.tipoActivoItId, //
+        Descripción: this.formData.textDescripcion,
+        IdITOT: this.formData.esITesOTId, //id
+        IdEntorno: this.formData.entornoId, //id
+        IdCategoria: this.formData.categoriaId, //id
+        IdUbicacion: this.formData.ubicacionId, //id
+        IdSubUbicacion: this.formData.sububicacionId, //id
+        RACK: this.formData.rack ? Number(this.formData.rack) : null,
+        POSICION: this.formData.posicion
+          ? Number(this.formData.posicion)
+          : null,
+        UNIDAD: this.formData.unidad ? Number(this.formData.unidad) : null,
+        idEmpresa: this.formData.empresaId,
+        Comentarios: this.formData.comentarios,
+        EsConnectis: this.formData.gestionadoProveedorOT
+          ? Boolean(this.formData.gestionadoProveedorOT)
+          : null,
+        EsViewnext: this.formData.gestionadoProveedorIT
+          ? Boolean(this.formData.gestionadoProveedorIT)
+          : null,
+        EsAzure: this.formData.esAzure ? Boolean(this.formData.esAzure) : null,
+        EsSeguridad: this.formData.esSeguridad
+          ? Boolean(this.formData.esSeguridad)
+          : null,
+        Alta_SRV: this.formData.altaActivo,
+        Alta_Viewnext: this.formData.altaGestion,
+        Mes_Alta_Viewnext: this.formData.mesAltaGestion,
+        Baja_SRV: this.formData.bajaActivo,
+        Baja_Viewnext: this.formData.bajaGestion,
+        Mes_Baja_Viewnext: this.formData.Mes_Baja_Viewnext,
+        IdTCriticidad: this.formData.citricidadId,
+        IdTEstado: this.formData.estadoId, //id
+        ANOTACIONES: this.formData.anotaciones,
+        IdProv: this.formData.proveedorId, //id
+        Fecha_Compra: this.formData.fechaCompra,
+        FFin_Garantia: this.formData.finGarantia,
+        esPERTE: this.formData.pertet ? Boolean(this.formData.pertet) : null,
+      };
+      //muestra por consola los datos actualizados
+      console.log("Datos enviados:", datosActualizados);
+      axios
+        .put(
+          `http://localhost:3001/api/datos-generales/${this.id}`,
+          datosActualizados,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
           }
         )
+        //La respuesta del servidor
+        .then((response) => {
+          console.log("Respuesta del servidor:", response.data);
+          alert("Datos actualizados"); // Mensaje simple sin validación
+        })
         .catch((error) => {
-          console.error("Error al obtener las opciones:", error);
+          console.error("Error detallado:", error);
+          alert(
+            `Error al actualizar: ${
+              error.response?.data?.message || error.message
+            }`
+          );
         });
-    },
-
-    //FUNCION PARA LIMPIAR LOS CAMPOS
-    limpiarCampos() {
-      this.formData = {
-        tipoActivo: "",
-        tipoActivoIt: "",
-        textDescripcion: "",
-        esITesOTOpciones: "",
-        entorno: "",
-        categoria: "",
-        tarifaMensual: "",
-        ubicacion: "",
-        sububicacion: "",
-        comentarios: "",
-        rack: "",
-        posicion: "",
-        unidad: "",
-        empresa: "",
-        gestionadoProveedorOT: false,
-        gestionadoProveedorIT: false,
-        esAzure: false,
-        esSeguridad: false,
-        altaActivo: "",
-        altaGestion: "",
-        mesAltaGestion: "",
-        bajaActivo: "",
-        bajaGestion: "",
-        citricidad: "",
-        anotaciones: "",
-        fechaCompra: "",
-        finGarantia: "",
-        //proveedorMant: "",
-      };
     },
   },
 
-  mounted() {
-    this.cargarOpcionesSelects();
+  async created() {
+    this.id = this.$route.params.id;
+    if (this.id) {
+      await this.cargarOpcionesSelects();
+      await this.buscarActivo();
+    }
   },
 };
 </script>
@@ -584,14 +593,15 @@ export default {
 /*Navegacion de bottones*/
 .navigation-buttons {
   display: flex;
-  justify-content: end;
+  justify-content: space-between;
   padding: 16px;
   margin-bottom: 20px;
   width: 100%;
   max-width: 1700px;
   margin: 10px auto 10px;
 }
-/*Disposición de bottones de  navegación*/
+
+/*disposicion del contenedor*/
 .form-layout {
   display: flex;
   justify-content: center;
@@ -620,6 +630,11 @@ export default {
   display: flex;
   gap: 16px;
   align-items: center;
+}
+
+.button-group {
+  display: flex;
+  gap: 8px;
 }
 
 .form-section {
@@ -705,6 +720,19 @@ export default {
   margin-top: 8px;
 }
 
+button {
+  padding: 8px 16px;
+  background-color: #0056b3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #004494;
+}
+
 @media (max-width: 768px) {
   .form-row {
     flex-direction: column;
@@ -719,6 +747,13 @@ export default {
   .checkbox-section {
     grid-template-columns: 1fr;
   }
+}
+
+:deep(.select-field),
+:deep(.text-field) {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px;
 }
 
 :deep(.input-container) {

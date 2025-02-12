@@ -63,7 +63,7 @@
                 <td>
                   <!--Router link que nos abre una pestaña para los datos en detalles-->
                   <router-link
-                    :to="`/Datos-generales-view/${activo.IdActivo}`"
+                    :to="`/datos-generales/${activo.IdActivo}`"
                     target="_blank"
                     :custom="false"
                   >

@@ -35,9 +35,14 @@ const routes = [
   },
 
   {
-    path: "/Datos-generales-view/:id",
-    name: "datos-generales",
+    path: "/datos-generales/:id",
+    name: "DatosGenerales",
     component: () => import("../views/DatosGeneralesView.vue"),
+  },
+  {
+    path: "/datos-generales/editar/:id",
+    name: "DatosGeneralesActualizar",
+    component: () => import("../views/DatosGeneralesActualizarView.vue"),
   },
   //ruta de datos tecnicos
   {
