@@ -437,47 +437,70 @@ export default {
       }
     },
     async buscarActivo() {
+      if (!this.id) {
+        alert("Por favor, introduce un ID válido.");
+        return;
+      }
+
       try {
         const response = await axios.get(
           `http://localhost:3001/api/datos-generales/${this.id}`
         );
-        const datos = response.data;
-        // Actualizar el formData con los datos recibidos
+        const data = response.data[0];
+        console.log("JSON recibido:", response.data);
+
+        const convertirFecha = (fecha) => {
+          if (!fecha) return "";
+          return fecha.split("T")[0];
+        };
+
+        // Asignar los datos al formulario
         this.formData = {
-          tipoActivoId: datos.IdTipo,
-          tipoActivoItId: datos.IdTipo_it,
-          textDescripcion: datos.Descripción,
-          esITesOTId: datos.IdITOT,
-          entornoId: datos.IdEntorno,
-          categoriaId: datos.IdCategoria,
-          ubicacionId: datos.IdUbicacion,
-          sububicacionId: datos.IdSubUbicacion,
-          rack: datos.RACK,
-          posicion: datos.POSICION,
-          unidad: datos.UNIDAD,
-          empresaId: datos.idEmpresa,
-          comentarios: datos.Comentarios,
-          gestionadoProveedorOT: datos.EsConnectis,
-          gestionadoProveedorIT: datos.EsViewnext,
-          esAzure: datos.EsAzure,
-          esSeguridad: datos.EsSeguridad,
-          altaActivo: datos.Alta_SRV,
-          altaGestion: datos.Alta_Viewnext,
-          mesAltaGestion: datos.Mes_Alta_Viewnext,
-          bajaActivo: datos.Baja_SRV,
-          bajaGestion: datos.Baja_Viewnext,
-          Mes_Baja_Viewnext: datos.Mes_Baja_Viewnext,
-          citricidadId: datos.IdTCriticidad,
-          estadoId: datos.IdTEstado,
-          anotaciones: datos.ANOTACIONES,
-          proveedorId: datos.IdProv,
-          fechaCompra: datos.Fecha_Compra,
-          finGarantia: datos.FFin_Garantia,
-          pertet: datos.esPERTE,
+          tipoActivoId: data.IdTipo,
+          tipoActivo: data.Tipo || "",
+          tipoActivoItId: data.IdTipo_it,
+          tipoActivoIt: data.TIPO_it || "",
+          textDescripcion: data.Descripción || "",
+          esITesOTId: data.IdITOT,
+          esITesOT: data.ITOT || "",
+          entornoId: data.IdEntorno,
+          entorno: data.Entorno || "",
+          categoriaId: data.IdCategoria,
+          categoria: data.Categoria || "",
+          ubicacionId: data.IdUbicacion,
+          ubicacion: data.Ubicacion || "",
+          sububicacionId: data.IdSubUbicacion,
+          sububicacion: data.SubUbicacion || "",
+          comentarios: data.Comentarios || "",
+          rack: data.RACK || "",
+          posicion: data.POSICION || "",
+          unidad: data.UNIDAD || "",
+          empresaId: data.idEmpresa,
+          empresa: data.Empresa || "",
+          gestionadoProveedorOT: Boolean(data.EsConnectis),
+          gestionadoProveedorIT: Boolean(data.EsViewnext),
+          esAzure: Boolean(data.EsAzure),
+          esSeguridad: Boolean(data.EsSeguridad),
+          altaActivo: convertirFecha(data.Alta_SRV),
+          altaGestion: convertirFecha(data.Alta_Viewnext),
+          mesAltaGestion: data.Mes_Alta_Viewnext || "",
+          bajaActivo: convertirFecha(data.Baja_SRV),
+          bajaGestion: convertirFecha(data.Baja_Viewnext),
+          Mes_Baja_Viewnext: data.Mes_Baja_Viewnext || "",
+          citricidadId: data.IdTCriticidad,
+          citricidad: data.T_Criticidad || "",
+          estadoId: data.IdTEstado,
+          estado: data.T_Estado || "",
+          anotaciones: data.ANOTACIONES || "",
+          proveedorId: data.IdProv,
+          proveedor: data.Proveedor || "",
+          fechaCompra: convertirFecha(data.Fecha_Compra),
+          finGarantia: convertirFecha(data.FFin_Garantia),
+          pertet: Boolean(data.esPERTE),
         };
       } catch (error) {
-        console.error("Error al buscar activo:", error);
-        alert("Error al buscar el activo");
+        console.error("Error al obtener la información:", error);
+        alert("No se encontró información para este ID.");
       }
     },
     actualizarActivo() {
