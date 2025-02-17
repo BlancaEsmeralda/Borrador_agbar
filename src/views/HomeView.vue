@@ -13,21 +13,21 @@
           @search="handleSearch"
         />
         <ComponentSearch
-          v-model="searchFilters.tag"
+          v-model="searchFilters.NumInventario"
           label="TAG"
-          filterKey="tag"
+          filterKey="NumInventario"
           @search="handleSearch"
         />
         <ComponentSearch
-          v-model="searchFilters.loginUsuario"
-          label="Login Usuario"
-          filterKey="loginUsuario"
+          v-model="searchFilters.Usuario"
+          label="Usuario"
+          filterKey="Usuario"
           @search="handleSearch"
         />
         <ComponentSearch
-          v-model="searchFilters.netbios"
+          v-model="searchFilters.nombreNetBIOS"
           label="NETBIOS"
-          filterKey="netbios"
+          filterKey="nombreNetBIOS"
           @search="handleSearch"
         />
       </div>
@@ -52,7 +52,6 @@
                 <th>Crítico</th>
                 <th>Año de compra</th>
                 <th>IP NAT</th>
-                <th>IP Principal</th>
                 <th>Comentarios</th>
               </tr>
             </thead>
@@ -63,7 +62,7 @@
                 <td>
                   <!--Router link que nos abre una pestaña para los datos en detalles-->
                   <router-link
-                    :to="`/Datos-generales-view/${activo.IdActivo}`"
+                    :to="`/datos-generales/${activo.IdActivo}`"
                     target="_blank"
                     :custom="false"
                   >
@@ -83,7 +82,6 @@
                 <td>{{ activo.critico }}</td>
                 <td>{{ activo.FechaCompra }}</td>
                 <td>{{ activo.IP }}</td>
-                <!--<td>{{ activo.ipPrincipal }}</td>-->
                 <td>{{ activo.Comentarios }}</td>
               </tr>
             </tbody>
@@ -92,12 +90,15 @@
       </container-form>
     </div>
   </div>
+  <!--Componente de pie de pagina-->
+  <component-footer></component-footer>
 </template>
 
 <script>
 import ComponentTituloPrincipal from "@/components/ComponentTituloPrincipal.vue";
 import ContainerForm from "@/components/ContainerForm.vue";
 import ComponentSearch from "@/components/ComponentSearch.vue";
+import ComponentFooter from "@/components/ComponentFooter.vue";
 import axios from "axios";
 
 export default {
@@ -107,15 +108,16 @@ export default {
     ComponentTituloPrincipal,
     ContainerForm,
     ComponentSearch,
+    ComponentFooter,
   },
   data() {
     // Objeto que almacena los valores de todos los filtros
     return {
       searchFilters: {
         numeroSerie: "",
-        tag: "",
-        loginUsuario: "",
-        netbios: "",
+        NumInventario: "",
+        Usuario: "",
+        nombreNetBIOS: "",
       },
       activos: [],
     };
@@ -131,37 +133,23 @@ export default {
     //Funcion de buscar el activo
     async buscarActivos() {
       try {
-        // Crea un objeto solo con los filtros que tienen valor
-        const filtros = Object.entries(this.searchFilters).reduce(
-          (acc, [key, value]) => {
-            if (value) acc[key] = value;
-            return acc;
-          },
-          {}
-        );
+        const params = new URLSearchParams();
 
-        // Determina qué endpoint usar basado en los filtros activos
-        let endpoint = "numeroSerie"; // default endpoint
-        let params = {};
-
-        if (filtros.numeroSerie) {
-          endpoint = "numeroSerie";
-          params = { numeroSerie: filtros.numeroSerie };
-        } else if (filtros.tag) {
-          endpoint = "numeroInventario";
-          params = { NumInventario: filtros.tag };
-        } else if (filtros.loginUsuario) {
-          endpoint = "loginUsuario";
-          params = { Usuario: filtros.loginUsuario };
-        } else if (filtros.netbios) {
-          endpoint = "nombreNetbios";
-          params = { nombreNetBIOS: filtros.netbios };
+        if (this.searchFilters.numeroSerie) {
+          params.append("numeroSerie", this.searchFilters.numeroSerie);
+        }
+        if (this.searchFilters.NumInventario) {
+          params.append("NumInventario", this.searchFilters.NumInventario);
+        }
+        if (this.searchFilters.Usuario) {
+          params.append("Usuario", this.searchFilters.Usuario);
+        }
+        if (this.searchFilters.nombreNetBIOS) {
+          params.append("nombreNetBIOS", this.searchFilters.nombreNetBIOS);
         }
 
-        // Realiza la petición HTTP al backend con los filtros
         const response = await axios.get(
-          `http://localhost:3001/api/filtros/${endpoint}`,
-          { params }
+          `http://localhost:3001/api/filtros/combinado?${params.toString()}`
         );
 
         // Actualiza el array de activos con la respuesta
@@ -176,15 +164,6 @@ export default {
   mounted() {
     // Realiza una búsqueda inicial para cargar todos los activos
     this.buscarActivos();
-  },
-  // Observa cambios en los filtros
-  watch: {
-    searchFilters: {
-      handler() {
-        this.buscarActivos();
-      },
-      deep: true,
-    },
   },
 };
 </script>

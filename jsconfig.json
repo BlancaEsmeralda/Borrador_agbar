@@ -15,5 +15,15 @@
       "dom.iterable",
       "scripthost"
     ]
-  }
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/FormularioActivoDG.vue"
+  ],
+  "include": [
+    "src/**/*.js",
+    "src/**/*.vue",
+    "src/**/*.json"
+  ]
 }

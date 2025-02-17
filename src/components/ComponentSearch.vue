@@ -5,50 +5,49 @@
       <input
         type="text"
         class="search-input"
+        :value="modelValue"
+        @input="$emit('update:modelValue', $event.target.value)"
         @keyup.enter="handleSearch"
-        v-model="searchText"
+        placeholder="Buscar..."
       />
       <button class="search-button" @click="handleSearch">
-        <IconSearch class="search-icon" />
+        <IconSearch class="search-icon" color="white" />
       </button>
     </div>
   </div>
 </template>
 
 <script>
-//importamos paquetes de iconos
 import { IconSearch } from "@tabler/icons-vue";
 
 export default {
   name: "ComponentSearch",
   components: {
-    IconSearch, //importacion del icono de búsqueda
+    IconSearch,
   },
-  // Props que recibe el componente desde el padre
   props: {
     label: {
       type: String,
-      required: true, // Etiqueta que se mostrará en el campo de búsqueda
+      required: true,
     },
     filterKey: {
       type: String,
-      required: true, // Identificador único para cada filtro (numeroSerie, tag, etc.)
+      required: true,
     },
-  },
-  data() {
-    return {
-      searchText: "", // Almacena el texto ingresado en el campo de búsqueda
-    };
+    modelValue: {
+      type: String,
+      default: "",
+    },
   },
   methods: {
     handleSearch() {
-      // Emite un evento 'search' al componente padre con la clave y valor del filtro
       this.$emit("search", {
         key: this.filterKey,
-        value: this.searchText,
+        value: this.modelValue,
       });
     },
   },
+  emits: ["update:modelValue", "search"],
 };
 </script>
 
@@ -95,6 +94,10 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.search-button:hover {
+  background: #005299;
 }
 
 .search-icon {
