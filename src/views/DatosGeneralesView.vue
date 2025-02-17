@@ -492,7 +492,6 @@ export default {
         this.limpiarCampos();
       }
     },
-<<<<<<< HEAD
     //funcion para actualuzar los campos del activo
     actualizarActivo() {
       console.log("Valores del formulario:", this.formData);
@@ -593,8 +592,6 @@ export default {
         });
     },
 
-=======
->>>>>>> lecturayescrituraPru
     //FUNCION CARGA LOS SELECTS
     cargarOpcionesSelects() {
       //nos permite manejar de manera concurrente las solicitudes
