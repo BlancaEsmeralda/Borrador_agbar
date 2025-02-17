@@ -52,7 +52,6 @@
                 <th>Crítico</th>
                 <th>Año de compra</th>
                 <th>IP NAT</th>
-                <th>IP Principal</th>
                 <th>Comentarios</th>
               </tr>
             </thead>
@@ -83,7 +82,6 @@
                 <td>{{ activo.critico }}</td>
                 <td>{{ activo.FechaCompra }}</td>
                 <td>{{ activo.IP }}</td>
-                <!--<td>{{ activo.ipPrincipal }}</td>-->
                 <td>{{ activo.Comentarios }}</td>
               </tr>
             </tbody>

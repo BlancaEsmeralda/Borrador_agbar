@@ -295,6 +295,8 @@
       </div>
     </form>
   </ContainerForm>
+  <!--Componente del pie de pagina-->
+  <component-footer></component-footer>
 </template>
 
 <script>
@@ -306,6 +308,7 @@ import TextField from "@/components/TextField.vue";
 import CheckboxField from "@/components/CheckboxField.vue";
 import ContainerForm from "@/components/ContainerForm.vue";
 import ComponentButton from "@/components/ComponentButton.vue";
+import ComponentFooter from "@/components/ComponentFooter.vue";
 import axios from "axios";
 
 export default {
@@ -318,6 +321,7 @@ export default {
     CheckboxField,
     ContainerForm,
     ComponentButton,
+    ComponentFooter,
   },
   data() {
     return {

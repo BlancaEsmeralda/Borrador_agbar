@@ -9,9 +9,8 @@
     <form class="formulario">
       <!-- Sección de búsqueda -->
       <div class="search-section">
-        <TextField id="id" label="" v-model="id" placeholder="Activo" />
+        <TextField id="id" label="" v-model="id" placeholder="" />
       </div>
-
       <!-- Primera sección: Información básica -->
       <div class="form-section">
         <div class="form-row">
@@ -288,6 +287,7 @@
       </div>
     </form>
   </ContainerForm>
+  <component-footer></component-footer>
 </template>
 
 <script>
@@ -299,6 +299,7 @@ import TextField from "@/components/TextField.vue";
 import CheckboxField from "@/components/CheckboxField.vue";
 import ContainerForm from "@/components/ContainerForm.vue";
 import ComponentButton from "@/components/ComponentButton.vue";
+import ComponentFooter from "@/components/ComponentFooter.vue";
 //import de la libreria de axios
 import axios from "axios";
 
@@ -311,6 +312,7 @@ export default {
     CheckboxField,
     ContainerForm,
     ComponentButton,
+    ComponentFooter,
   },
   name: "DatosGeneralesView",
   data() {
